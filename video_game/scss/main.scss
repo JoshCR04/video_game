@@ -1,9 +1,14 @@
 $ff-menu: "Queen & Country", sans serif;
+$ff-credits: "Bahnschrift", sans serif;
 
 $fw-light: 300;
+$fw-regular: 400;
 
+$fs-md: 1.875rem; //30
+$fs-xmd: 2.5rem; //40
 $fs-xxmd: 3.125rem; //50
 $fs-lg: 3.75rem; //60
+$fs-xxl: 5rem;//80
 
 $clr-white: hsl(0, 0%, 100%);
 $clr-blue: hsl(185, 67%, 7%);
@@ -67,7 +72,7 @@ a:hover {
   width: 80%;
   max-width: 90rem;
   margin: auto;
-  padding: 5.2rem;
+  padding: 4.3rem;
   background-color: $clr-blue;
   text-align: center;
   position: relative;
@@ -80,7 +85,7 @@ a:hover {
 
 .controls-title {
   font-family: $ff-menu;
-  font-size: $fs-lg;
+  font-size: $fs-xxl;
   color: $clr-white;
   font-weight: $fw-light;
   margin-bottom: 1rem;
@@ -91,6 +96,7 @@ a:hover {
   position: absolute;
   left: 0;
   margin-left: 1rem;
+  margin-top: 1.5rem;
   background: none;
   border: none;
   color: $clr-white;
@@ -117,4 +123,25 @@ a:hover {
 .controls-panel {
   max-width: 100%;
   height: max-content;
+}
+
+.credits {
+  color: $clr-white;
+  font-family: $ff-credits;
+  font-size: $fs-xmd;
+  font-weight: $fw-light;
+}
+
+.credits-footer{
+  font-family: $ff-menu;
+  font-size: $fs-lg;
+  color: $clr-white;
+  font-weight: $fw-light;
+  margin-bottom: 1rem;
+  margin-top: 5.9rem;
+}
+
+.credits-container {
+  align-items: center;
+  margin-top: 6rem;
 }
