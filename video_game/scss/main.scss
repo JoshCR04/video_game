@@ -8,7 +8,7 @@ $fs-md: 1.875rem; //30
 $fs-xmd: 2.5rem; //40
 $fs-xxmd: 3.125rem; //50
 $fs-lg: 3.75rem; //60
-$fs-xxl: 5rem;//80
+$fs-xxl: 5rem; //80
 
 $clr-white: hsl(0, 0%, 100%);
 $clr-blue: hsl(185, 67%, 7%);
@@ -132,7 +132,7 @@ a:hover {
   font-weight: $fw-light;
 }
 
-.credits-footer{
+.credits-footer {
   font-family: $ff-menu;
   font-size: $fs-lg;
   color: $clr-white;
@@ -145,3 +145,5 @@ a:hover {
   align-items: center;
   margin-top: 6rem;
 }
+
+
