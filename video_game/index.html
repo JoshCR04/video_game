@@ -1,53 +1,154 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Video Game Site</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main.css">
-  <meta name="description" content="">
+  <meta name="description" content="A video game site offering play, ranking, and credits">
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
+  <meta property="og:title" content="Video Game Site">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourwebsite.com">
+  <meta property="og:image" content="./img/banner.png">
+  <meta property="og:image:alt" content="Video game banner">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
-
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Federant&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap"
+    rel="stylesheet">
 </head>
 
-<body class="fondo">
-
-
-  <header>
-
-    <img class="logo" src="./img/logo.png" alt="Game Logo" />
-
+<body>
+  <!-- Header Section -->
+  <header class="header-footer">
+    <img src="./img/logo_final_1.png" alt="Game logo" class="logo-header" />
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
+      <a href="login.html"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
+      <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
+      <a href="#"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
+      <a href="#"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
+    </nav>
   </header>
 
-  <nav>
-    <ul class="menu-section">
-      <li class="buttons">
-        <a href="#">start adventure</a>
-      </li>
-      <li class="buttons">
-        <a href="controls.html">controls</a>
-      </li>
-      <li class="buttons">
-        <a href="credits.html">credits</a>
-      </li>
-    </ul>
-  </nav>
+  <!-- Main Content Section -->
+  <main>
+    <!-- Banner Section -->
+    <div class="banner">
+      <img src="./img/baner.png" alt="Promotional banner" class="banner-image" />
+    </div>
+    <section class="instructions-section">
+      <h2 class="instructions-title">Instructions</h2>
+      <div class="instructions-cards">
+        <div class="instruction-card">
+          <figure>
+            <img class="img-cards" src="./img/controls.png" alt="Controls image">
+          </figure>
+          <div class="text-box">
+            <div class="title-tarjeta">Keys</div>
+            <figcaption>With the A key you go to the left, with the W key you jump, with the S key you go to the right
+              and with the left mouse click you attack.
+              If you have previously collected the mushroom, you will have the opportunity for three powerful attacks.
+            </figcaption>
+          </div>
+        </div>
 
+        <div class="instruction-card">
+          <div class="image-container">
+            <div class="small-image">
+              <img src="./img/bicho_card.png" alt="bicho_card image">
+            </div>
+            <div class="small-image">
+              <img src="./img/monstruo_card.png" alt="monstruo_card image">
+            </div>
+            <div class="small-image">
+              <img src="./img/bruja_card.png" alt="bruja_card image">
+            </div>
+          </div>
+          <div class="text-box">
+            <div class="title-tarjeta">Kill the enemies</div>
+            <figcaption>Throughout the video game you will encounter different
+              enemies. The abysses must clearly be avoided, the witches will launch a powerful but slow attack, the
+              monsters are highly resistant and you can knock down the flying bugs with one blow. Finish them!
+            </figcaption>
+          </div>
+        </div>
 
+        <div class="instruction-card">
+          <figure>
+            <img class="img-cards image-container-key" src="./img/llave.png" alt="Key image">
+          </figure>
+          <div class="text-box">
+            <div class="title-tarjeta">Find the key</div>
+            <figcaption>You must travel this evil world in search of a powerful key
+              with the ability to open the great door of Zalrath castle and thus give it the end it deserves.
+              You will also find other items that will restore life or give special power.
+            </figcaption>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="history-section">
+      <div class="history-container">
+        <div class="title-tarjeta">History</div> Eldric, a young adventurer of unknown origin, harbors an ancient power
+        in his blood of which he is barely
+        aware. Since childhood, he has felt a strange attraction to a mythical sword that, according to ancient
+        prophets, only he can wield. This weapon, lost in the legends of ancient times, is the key to liberating a
+        kingdom that has fallen under the dark veil of evil and despair.
+        <br>
+        <br> The kingdom of Astralis, once a land of prosperity and beauty, has been corrupted by dark magic that
+        emanates
+        from its depths. Nature has withered, the once fertile fields and forests now lie barren, and the creatures that
+        were once allies of humans have turned into twisted beasts sowing chaos. The skies are perpetually darkened by
+        magical storms, and the people live in constant fear and despair, trapped in a nightmare from which they cannot
+        awaken.
+        <br>
+        <br> The origin of all this evil seems to trace back to a legendary sorcerer, a wizard known as Zalrath, whose
+        power
+        has grown to such an extent that he controls every corner of the kingdom from his imposing castle. It is said
+        that Zalrath, along with his most loyal guardians—a group of beings as ancient and dark as the very curse that
+        afflicts Astralis— has spent centuries absorbing the life essence of every living creature to prolong his life
+        and increase his power. With each passing day, more souls are consumed, and his control over reality grows
+        stronger.
+        <br>
+        <br> Guided by a prophecy that speaks of a warrior destined to wield the lost sword, Eldric embarks on a
+        solitary
+        mission. Armed only with his courage and the mysterious power flowing through his veins, he ventures into lands
+        plagued by monsters and sinister enemies, determined to find the key before it's too late.
+      </div>
+
+      <div class="pj-container"><img src="./img/Eldric.png" alt="Eldric image"></div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="header-footer">
+    <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />
+    <nav class="nav-links-footer" aria-label="Footer navigation">
+      <a href="https://github.com/JoshCR04/video_game"><img class="icons-footer" src="./img/Github.png"
+          alt="GitHub icon"></a>
+      <a href="tel:+50689098222"><img class="icons-footer" src="./img/Phone.png" alt="Phone icon"></a>
+      <a href="#"><img class="icons-footer" src="./img/Facebook.png" alt="Facebook icon"></a>
+      <a href="#"><img class="icons-footer" src="./img/Instagram.png" alt="Instagram icon"></a>
+      <a href="mailto:joshuacerdascr@gmail.com"><img class="icons-footer" src="./img/Mail.png" alt="Mail icon"></a>
+    </nav>
+  </footer>
 </body>
 
 </html>

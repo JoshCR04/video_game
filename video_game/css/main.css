@@ -1,32 +1,117 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo de la página */
 .fondo {
   background: url(../img/fondo.jpg) no-repeat;
   background-size: cover;
 }
 
-.logo {
-  display: table;
-  margin: auto;
-  margin-top: 8rem;
-  margin-bottom: 4rem;
+/* Header y footer */
+.header-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(189, 7%, 19%);
+  padding: 2rem 5rem;
+  position: relative;
 }
 
+/* Navegación de enlaces */
+.nav-links,
+.nav-links-footer {
+  display: flex;
+  gap: 1rem;
+}
+.nav-links a,
+.nav-links-footer a {
+  display: flex;
+  align-items: center;
+  color: hsl(0, 0%, 100%);
+  font-family: "Federant", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover,
+.nav-links-footer a:hover {
+  text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  gap: 3rem;
+}
+
+/* Íconos */
+.icons {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  transition: filter 0.3s ease;
+}
+
+.icons-footer {
+  width: 32px;
+  height: 32px;
+  margin-right: 1px;
+  transition: filter 0.3s ease;
+}
+
+/* Hover para iconos */
+nav a:hover .icons,
+nav a:hover .icons-footer {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Logo en el header */
+.logo-header {
+  width: 140px;
+  height: auto;
+}
+
+/* Logo en el footer */
+.logo-footer {
+  width: 83px;
+  height: auto;
+  margin-left: 28px;
+}
+
+.logo_menu {
+  display: table;
+  margin: 8rem auto 4rem;
+}
+
+/* Banner principal */
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos generales para los enlaces */
 a {
   font-family: "Queen & Country", sans serif;
   font-size: 3.125rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
   text-decoration: none;
-  margin: 0;
   transition: all 0.3s ease;
 }
-
 a:hover {
-  text-shadow: 0 0 10px rgba(115, 236, 245, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
   font-size: 3.625rem;
 }
 
+/* Títulos */
 .title {
-  font-family: "Queen & Country", sans serif;
+  font-family: "Federant", serif;
   font-size: 3.125rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
@@ -41,6 +126,7 @@ a:hover {
   text-align: center;
 }
 
+/* Sección del menú */
 .menu-section {
   text-align: center;
   margin-top: 4rem;
@@ -53,6 +139,7 @@ a:hover {
   margin-bottom: 2rem;
 }
 
+/* Panel principal */
 .panel {
   width: 80%;
   max-width: 90rem;
@@ -63,20 +150,22 @@ a:hover {
   position: relative;
 }
 
+/* Sección de navegación */
 .nav-section {
   text-align: center;
   position: relative;
 }
 
+/* Título de controles */
 .controls-title {
   font-family: "Queen & Country", sans serif;
   font-size: 5rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
-  margin-bottom: 1rem;
-  margin-top: 0.1rem;
+  margin: 0.1rem 0 1rem;
 }
 
+/* Botón de regreso */
 .back-button {
   position: absolute;
   left: 0;
@@ -88,18 +177,19 @@ a:hover {
   font-family: "Queen & Country", sans serif;
   font-size: 3.75rem;
 }
-
 .back-button a {
   color: hsl(0, 0%, 100%);
   text-decoration: none;
 }
 
+/* Divisor */
 .divider {
   border: none;
   border-top: 0.4rem solid hsl(0, 0%, 100%);
   margin: 1rem 0;
 }
 
+/* Contenedor de imágenes */
 .image-container {
   text-align: center;
   padding-top: 1rem;
@@ -110,6 +200,7 @@ a:hover {
   height: max-content;
 }
 
+/* Créditos */
 .credits {
   color: hsl(0, 0%, 100%);
   font-family: "Bahnschrift", sans serif;
@@ -117,18 +208,216 @@ a:hover {
   font-weight: 300;
 }
 
+/* Créditos en el footer */
 .credits-footer {
   font-family: "Queen & Country", sans serif;
   font-size: 3.75rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
-  margin-bottom: 1rem;
-  margin-top: 5.9rem;
+  margin: 5.9rem 0 1rem;
 }
 
 .credits-container {
   align-items: center;
   margin-top: 6rem;
+}
+
+/* Tarjetas */
+.instructions-section {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.instructions-title {
+  color: hsl(0, 0%, 0%);
+  font-family: "Karantina", system-ui;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+
+.instructions-cards {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.instruction-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: hsl(193, 13%, 28%);
+  border: 1px solid hsl(0, 0%, 47%);
+  width: 34rem;
+  text-align: center;
+}
+
+figure {
+  margin: 0;
+}
+
+.img-cards {
+  max-width: 50%;
+  height: auto;
+  margin: 5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-box {
+  background-color: hsl(195, 15%, 22%);
+  border: 0.1px solid hsl(0, 0%, 47%);
+  margin-top: 2rem;
+  padding-top: 3rem;
+  padding: 2rem;
+  height: 15rem;
+}
+
+.text-box figcaption {
+  text-align: left;
+  font-family: "Neuton", serif;
+  font-size: 1rem;
+  color: hsl(0, 0%, 100%);
+  margin: 0;
+}
+
+.title-tarjeta {
+  text-align: left;
+  padding-bottom: 1rem;
+  font-family: "Federant", serif;
+  font-size: 2.5rem;
+  color: hsl(0, 0%, 100%);
+}
+
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 12rem;
+}
+
+.image-container-key {
+  max-width: 50%;
+  height: auto;
+  margin-top: 12rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-image {
+  width: 30%;
+}
+
+.small-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.history-section {
+  background-color: hsl(191, 18%, 30%);
+  padding: 6rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.history-container {
+  font-family: "Neuton", serif;
+  font-size: 1rem;
+  color: hsl(0, 0%, 100%);
+  text-align: left;
+  width: 34rem;
+}
+
+.pj-container {
+  max-width: 50%;
+  height: auto;
+  margin-left: 47rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+}
+
+.Log_Ran_Cred {
+  background-image: url("../img/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  background-color: hsl(193, 13%, 28%);
+  padding: 1rem;
+  width: 40rem;
+  text-align: center;
+}
+
+.card-title {
+  font-family: "Karantina", system-ui;
+  font-size: 2.5rem;
+  color: hsl(0, 0%, 100%);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.card-content {
+  background-color: hsl(191, 25%, 38%);
+  font-family: "Karantina", system-ui;
+  font-size: 2.5rem;
+  color: hsl(0, 0%, 100%);
+  padding: 2rem;
+  padding-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.75rem 0;
+  border: 1px solid hsl(0, 0%, 100%);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.login-button {
+  background-color: hsl(194, 23%, 62%);
+  color: hsl(0, 0%, 100%);
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.875rem;
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
+}
+
+.register-link {
+  font-family: "Karantina", system-ui;
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.875rem;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=main.css.map */
