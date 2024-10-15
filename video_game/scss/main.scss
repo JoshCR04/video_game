@@ -444,6 +444,14 @@ input[type="password"] {
   font-family: $ff-primary;
   margin-top: 1rem;
 }
+.register-link {
+  font-family: $ff-primary;
+  margin-top: 1rem;
+  font-size: $fs-md;
+  color: $clr-white;
+  text-align: center;
+  text-decoration: none;
+}
 
 .ranking-content {
   background-color: $clr-light-blue;
@@ -484,4 +492,20 @@ input[type="password"] {
 .points {
   text-align: right;
   min-width: 50px;
+}
+
+.credits-title {
+  font-family: $ff-primary;
+  font-size: $fs-md;
+  color: $clr-white;
+  text-align: center;
+}
+
+.credits-text {
+  font-family: $ff-primary;
+  font-size: $fs-md;
+  font-weight: $fw-light;
+  color: $clr-white;
+  margin-bottom: 2rem;
+  text-align: center;
 }

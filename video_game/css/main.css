@@ -410,6 +410,15 @@ input[type=password] {
   margin-top: 1rem;
 }
 
+.register-link {
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
+  font-size: 1.875rem;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+  text-decoration: none;
+}
+
 .ranking-content {
   background-color: hsl(191, 25%, 38%);
   font-family: "Karantina", system-ui;
@@ -449,6 +458,22 @@ input[type=password] {
 .points {
   text-align: right;
   min-width: 50px;
+}
+
+.credits-title {
+  font-family: "Karantina", system-ui;
+  font-size: 1.875rem;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+}
+
+.credits-text {
+  font-family: "Karantina", system-ui;
+  font-size: 1.875rem;
+  font-weight: 300;
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 /*# sourceMappingURL=main.css.map */
