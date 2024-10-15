@@ -445,12 +445,43 @@ input[type="password"] {
   margin-top: 1rem;
 }
 
-.register-link {
+.ranking-content {
+  background-color: $clr-light-blue;
   font-family: $ff-primary;
-  display: block;
-  margin-top: 1rem;
-  font-size: $fs-md;
+  font-size: $fs-sm;
   color: $clr-white;
+  padding-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 3rem;
   text-align: center;
-  text-decoration: none;
+  min-height: 300px;
+}
+
+.ranking-list {
+  font-family: $ff-text;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ranking-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: $clr-white;
+  font-weight: bold;
+}
+
+.ranking-list li:nth-child(even) {
+  background-color: lighten($clr-tarjet, 10%);
+}
+
+.user {
+  text-align: left;
+}
+
+.points {
+  text-align: right;
+  min-width: 50px;
 }
