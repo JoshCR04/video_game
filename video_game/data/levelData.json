@@ -1,0 +1,42 @@
+{
+   "world": {
+      "width": 1900,
+      "height": 1000
+   },
+   "player": {
+      "x": 190,
+      "y": 535
+   },
+   "platforms": [
+      {
+         "x": 72,
+         "y": 450,
+         "tiles": 6,
+         "key": "block"
+      },
+      {
+         "x": 0,
+         "y": 330,
+         "tiles": 8,
+         "key": "block"
+      },
+      {
+         "x": 200,
+         "y": 210,
+         "tiles": 8,
+         "key": "block"
+      },
+      {
+         "x": 0,
+         "y": 90,
+         "tiles": 7,
+         "key": "block"
+      },
+      {
+         "x": 0,
+         "y": 565,
+         "tiles": 1,
+         "key": "ground"
+      }
+   ]
+ }

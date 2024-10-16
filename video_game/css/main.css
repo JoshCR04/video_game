@@ -7,7 +7,7 @@
 
 /* Fondo de la página */
 .fondo {
-  background: url(../img/fondo.png) no-repeat center center fixed;
+  background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -411,22 +411,33 @@ input[type=password] {
   min-height: 300px;
 }
 
-.ranking-list {
-  font-family: "Neuton", serif;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
 }
 
-.ranking-list li {
-  display: flex;
-  justify-content: space-between;
+th {
+  font-weight: 400;
+  font-size: 2.5rem;
   padding: 10px;
-  color: hsl(0, 0%, 100%);
-  font-weight: bold;
+  text-align: center;
 }
 
-.ranking-list li:nth-child(even) {
+td {
+  font-family: "Neuton", serif;
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: hsl(191, 25%, 38%);
+  color: hsl(0, 0%, 100%);
+}
+
+tr:nth-child(even) {
   background-color: #54686d;
 }
 
