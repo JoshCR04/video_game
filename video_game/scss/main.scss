@@ -1,5 +1,3 @@
-$ff-menu: "Queen & Country", sans serif;
-$ff-credits: "Bahnschrift", sans serif;
 $ff-secondary: "Federant", serif;
 $ff-primary: "Karantina", system-ui;
 $ff-text: "Neuton", serif;
@@ -17,7 +15,6 @@ $fs-xxl: 5rem; // 80px
 $banner-height: 800px;
 
 $clr-white: hsl(0, 0%, 100%);
-$clr-blue: hsl(185, 67%, 7%);
 $clr-black: hsl(0, 0%, 0%);
 $clr-tarjet: hsl(193, 13%, 28%);
 $clr-history-section: hsl(191, 18%, 30%);
@@ -38,9 +35,16 @@ $clr-shadow-3: hsla(0, 0%, 100%, 0.4);
 
 /* Fondo de la página */
 .fondo {
-  background: url(../img/fondo.jpg) no-repeat;
+  background: url(../img/fondo.png) no-repeat center center fixed;
   background-size: cover;
+  width: 100vw; 
+  height: 100vh; 
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
+
 
 /* Header y footer */
 .header-footer {
@@ -129,7 +133,7 @@ nav a:hover .icons-footer {
 
 /* Estilos generales para los enlaces */
 a {
-  font-family: $ff-menu;
+  font-family: $ff-secondary;
   font-size: $fs-xxmd;
   color: $clr-white;
   font-weight: $fw-light;
@@ -152,14 +156,6 @@ a {
   text-align: center;
 }
 
-.controls-title {
-  font-family: $ff-menu;
-  font-size: $fs-lg;
-  color: $clr-white;
-  font-weight: $fw-light;
-  text-align: center;
-}
-
 /* Sección del menú */
 .menu-section {
   text-align: center;
@@ -174,14 +170,20 @@ a {
 }
 
 /* Panel principal */
+
 .panel {
-  width: 80%;
+  width: 100%;
   max-width: 90rem;
   margin: auto;
   padding: 4.3rem;
-  background-color: $clr-blue;
+  background-color: $clr-header-footer;
   text-align: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
 }
 
 /* Sección de navegación */
@@ -192,8 +194,8 @@ a {
 
 /* Título de controles */
 .controls-title {
-  font-family: $ff-menu;
-  font-size: $fs-xxl;
+  font-family: $ff-secondary;
+  font-size: $fs-md;
   color: $clr-white;
   font-weight: $fw-light;
   margin: 0.1rem 0 1rem;
@@ -203,15 +205,18 @@ a {
 .back-button {
   position: absolute;
   left: 0;
-  margin-left: 1rem;
-  margin-top: 1.5rem;
+  margin: 0.1rem 0 1rem;
   background: none;
   border: none;
   color: $clr-white;
-  font-family: $ff-menu;
-  font-size: $fs-lg;
+  font-family: $ff-secondary;
+  font-size: $fs-md;
+  font-weight: $fw-light;
 
   a {
+    font-family: $ff-secondary;
+    font-size: $fs-md;
+    font-weight: $fw-light;
     color: $clr-white;
     text-decoration: none;
   }
@@ -225,36 +230,10 @@ a {
 }
 
 /* Contenedor de imágenes */
-.image-container {
-  text-align: center;
-  padding-top: 1rem;
-}
 
 .controls-panel {
-  max-width: 100%;
+  max-width: 30%;
   height: max-content;
-}
-
-/* Créditos */
-.credits {
-  color: $clr-white;
-  font-family: $ff-credits;
-  font-size: $fs-xmd;
-  font-weight: $fw-light;
-}
-
-/* Créditos en el footer */
-.credits-footer {
-  font-family: $ff-menu;
-  font-size: $fs-lg;
-  color: $clr-white;
-  font-weight: $fw-light;
-  margin: 5.9rem 0 1rem;
-}
-
-.credits-container {
-  align-items: center;
-  margin-top: 6rem;
 }
 
 /* Tarjetas */
@@ -327,7 +306,7 @@ figure {
 
 .image-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-left: 2rem;
   margin-right: 2rem;
   margin-top: 12rem;

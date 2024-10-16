@@ -7,8 +7,14 @@
 
 /* Fondo de la página */
 .fondo {
-  background: url(../img/fondo.jpg) no-repeat;
+  background: url(../img/fondo.png) no-repeat center center fixed;
   background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header y footer */
@@ -97,7 +103,7 @@ nav a:hover .icons-footer {
 
 /* Estilos generales para los enlaces */
 a {
-  font-family: "Queen & Country", sans serif;
+  font-family: "Federant", serif;
   font-size: 3.125rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
@@ -118,14 +124,6 @@ a:hover {
   text-align: center;
 }
 
-.controls-title {
-  font-family: "Queen & Country", sans serif;
-  font-size: 3.75rem;
-  color: hsl(0, 0%, 100%);
-  font-weight: 300;
-  text-align: center;
-}
-
 /* Sección del menú */
 .menu-section {
   text-align: center;
@@ -141,13 +139,18 @@ a:hover {
 
 /* Panel principal */
 .panel {
-  width: 80%;
+  width: 100%;
   max-width: 90rem;
   margin: auto;
   padding: 4.3rem;
-  background-color: hsl(185, 67%, 7%);
+  background-color: hsl(189, 7%, 19%);
   text-align: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
 }
 
 /* Sección de navegación */
@@ -158,8 +161,8 @@ a:hover {
 
 /* Título de controles */
 .controls-title {
-  font-family: "Queen & Country", sans serif;
-  font-size: 5rem;
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
   color: hsl(0, 0%, 100%);
   font-weight: 300;
   margin: 0.1rem 0 1rem;
@@ -169,15 +172,18 @@ a:hover {
 .back-button {
   position: absolute;
   left: 0;
-  margin-left: 1rem;
-  margin-top: 1.5rem;
+  margin: 0.1rem 0 1rem;
   background: none;
   border: none;
   color: hsl(0, 0%, 100%);
-  font-family: "Queen & Country", sans serif;
-  font-size: 3.75rem;
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
+  font-weight: 300;
 }
 .back-button a {
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
+  font-weight: 300;
   color: hsl(0, 0%, 100%);
   text-decoration: none;
 }
@@ -190,36 +196,9 @@ a:hover {
 }
 
 /* Contenedor de imágenes */
-.image-container {
-  text-align: center;
-  padding-top: 1rem;
-}
-
 .controls-panel {
-  max-width: 100%;
+  max-width: 30%;
   height: max-content;
-}
-
-/* Créditos */
-.credits {
-  color: hsl(0, 0%, 100%);
-  font-family: "Bahnschrift", sans serif;
-  font-size: 2.5rem;
-  font-weight: 300;
-}
-
-/* Créditos en el footer */
-.credits-footer {
-  font-family: "Queen & Country", sans serif;
-  font-size: 3.75rem;
-  color: hsl(0, 0%, 100%);
-  font-weight: 300;
-  margin: 5.9rem 0 1rem;
-}
-
-.credits-container {
-  align-items: center;
-  margin-top: 6rem;
 }
 
 /* Tarjetas */
@@ -292,7 +271,7 @@ figure {
 
 .image-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-left: 2rem;
   margin-right: 2rem;
   margin-top: 12rem;
