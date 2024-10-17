@@ -387,6 +387,11 @@ input[type=password] {
   font-size: 1.875rem;
   font-family: "Karantina", system-ui;
   margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #a7c0c8;
 }
 
 .register-link {
