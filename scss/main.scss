@@ -28,7 +28,8 @@ $clr-header-footer: hsl(189, 7%, 19%);
 $clr-shadow-1: hsla(184, 86%, 71%, 0.8);
 $clr-shadow-2: hsla(0, 0%, 100%, 0.6);
 $clr-shadow-3: hsla(0, 0%, 100%, 0.4);
-
+$clr-menu-desplegable: hsl(185, 8%, 27%);
+$clr-linea-menu: hsl(185, 16%, 43%);
 * {
   margin: 0;
   padding: 0;
@@ -505,6 +506,22 @@ tr:nth-child(even) {
   text-align: center;
 }
 
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+}
+
 /* Ajustes para celulares pequeños */
 @media (max-width: 576px) {
   .header-footer {
@@ -528,12 +545,64 @@ tr:nth-child(even) {
     object-fit: cover;
   }
 
-  .nav-links {
-    display: none;
-  }
-
   .menu-icon {
     display: block;
+    margin: 1rem;
+    margin-right: 2rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $clr-menu-desplegable;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    background-color: $clr-menu-desplegable;
+  }
+
+  .nav-links a {
+    margin-top: 1.3rem;
+    font-size: $fs-sm;
+    padding: 0.5rem 0 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: $clr-linea-menu;
+    width: 70%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links img.icons {
+    margin-right: 0.5rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-links img {
+    width: 24px;
+    height: 24px;
   }
 
   .pj-container {
@@ -599,26 +668,18 @@ tr:nth-child(even) {
     height: auto;
     box-sizing: border-box;
   }
+
   .instruction-card:nth-of-type(2) .image-container {
     margin-left: 1px;
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
+
   .img-cards {
     max-width: 80%;
     height: auto;
     margin: 0 auto;
     padding: 1rem;
-  }
-
-  .text-box {
-    background-color: $clr-tarjet-text;
-    border: 0.1px solid $clr-tarjet-border;
-    margin-top: 1rem;
-    padding: 1rem;
-    height: auto;
-    overflow: visible;
-    box-sizing: border-box;
   }
 
   .text-box figcaption {
@@ -673,12 +734,6 @@ tr:nth-child(even) {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-  }
-
-  .banner-image {
-    width: 100%;
-    max-height: 100%;
-    object-fit: cover;
   }
 
   .footer {

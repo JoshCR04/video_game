@@ -471,6 +471,22 @@ tr:nth-child(even) {
   text-align: center;
 }
 
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+}
+
 /* Ajustes para celulares pequeños */
 @media (max-width: 576px) {
   .header-footer {
@@ -491,11 +507,58 @@ tr:nth-child(even) {
     height: 40vh;
     object-fit: cover;
   }
-  .nav-links {
-    display: none;
-  }
   .menu-icon {
     display: block;
+    margin: 1rem;
+    margin-right: 2rem;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: hsl(185, 8%, 27%);
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    background-color: hsl(185, 8%, 27%);
+  }
+  .nav-links a {
+    margin-top: 1.3rem;
+    font-size: 1rem;
+    padding: 0.5rem 0 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: hsl(185, 16%, 43%);
+    width: 70%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-links img.icons {
+    margin-right: 0.5rem;
+    width: 20px;
+    height: 20px;
+  }
+  .nav-links img {
+    width: 24px;
+    height: 24px;
   }
   .pj-container {
     max-width: 70%;
@@ -565,15 +628,6 @@ tr:nth-child(even) {
     margin: 0 auto;
     padding: 1rem;
   }
-  .text-box {
-    background-color: hsl(195, 15%, 22%);
-    border: 0.1px solid hsl(0, 0%, 47%);
-    margin-top: 1rem;
-    padding: 1rem;
-    height: auto;
-    overflow: visible;
-    box-sizing: border-box;
-  }
   .text-box figcaption {
     text-align: left;
     font-family: "Neuton", serif;
@@ -622,11 +676,6 @@ tr:nth-child(even) {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-  }
-  .banner-image {
-    width: 100%;
-    max-height: 100%;
-    object-fit: cover;
   }
   .footer {
     display: flex;
