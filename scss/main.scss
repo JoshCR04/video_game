@@ -5,6 +5,8 @@ $ff-text: "Neuton", serif;
 $fw-light: 300;
 $fw-regular: 400;
 
+$fs-xxs: 0.5rem;
+$fs-xs: 0.8rem;
 $fs-sm: 1rem; // 16px
 $fs-md: 1.875rem; // 30px
 $fs-xmd: 2.5rem; // 40px
@@ -501,4 +503,204 @@ tr:nth-child(even) {
   color: $clr-white;
   margin-bottom: 2rem;
   text-align: center;
+}
+
+/* Ajustes para celulares pequeños */
+@media (max-width: 576px) {
+  .header-footer {
+    padding: 0.1rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .logo-header {
+    width: 80%;
+    max-width: 9rem;
+    margin: 0;
+    padding: 1rem;
+    display: block;
+    height: auto;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .pj-container {
+    max-width: 70%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    order: -1;
+    transform: scaleX(-1);
+  }
+
+  .pj-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .text-box {
+    background-color: $clr-tarjet-text;
+    border: 0.1px solid $clr-tarjet-border;
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .instructions-section {
+    text-align: center;
+    margin: 5rem 0;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .instructions-title {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .instructions-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .instruction-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $clr-tarjet;
+    border: 1px solid $clr-tarjet-border;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    height: auto;
+    box-sizing: border-box;
+  }
+  .instruction-card:nth-of-type(2) .image-container {
+    margin-left: 1px;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .img-cards {
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .text-box {
+    background-color: $clr-tarjet-text;
+    border: 0.1px solid $clr-tarjet-border;
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  .text-box figcaption {
+    text-align: left;
+    font-family: $ff-text;
+    font-size: $fs-sm;
+    color: $clr-white;
+    margin: 0;
+    white-space: normal;
+  }
+
+  .history-section {
+    background-color: $clr-history-section;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .history-container {
+    font-family: $ff-text;
+    font-size: $fs-sm;
+    color: $clr-white;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+    padding-bottom: 7rem;
+    box-sizing: border-box;
+  }
+
+  .history-text {
+    width: 90%;
+    max-width: 250px;
+    background-color: $clr-tarjet-text;
+    border: 1px solid $clr-tarjet-border;
+    padding: 2rem;
+    box-sizing: border-box;
+    margin: 1rem auto;
+    overflow: visible;
+    white-space: normal;
+    color: $clr-white;
+    font-family: $ff-text;
+    font-size: $fs-sm;
+  }
+
+  .image-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .banner-image {
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .footer img.logo-footer {
+    max-width: 70px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-icon {
+    margin: 0 0.5rem;
+  }
 }
