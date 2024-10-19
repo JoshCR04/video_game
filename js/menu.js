@@ -1,9 +1,17 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const menuIcon = document.querySelector('.menu-icon');
+function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
+    const content = document.querySelector('.content');
+    const footer = document.querySelector('.footer');
 
-    menuIcon.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-});
 
+    navLinks.classList.toggle('active');
+
+
+    if (navLinks.classList.contains('active')) {
+        content.classList.add('hidden');
+        footer.classList.add('hidden');
+    } else {
+        content.classList.remove('hidden');
+        footer.classList.remove('hidden');
+    }
+}
