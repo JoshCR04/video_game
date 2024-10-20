@@ -537,7 +537,7 @@ tr:nth-child(even) {
   display: none;
 }
 
-@media only screen and (max-width: 900px) and (orientation: landscape) {
+@media (max-width: 900px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }
@@ -921,6 +921,7 @@ tr:nth-child(even) {
   }
   .orientation-message {
     font-family: $ff-secondary;
+    font-size: $fs-md;
     margin: 0;
     text-align: center;
     padding: 1rem;
@@ -1304,7 +1305,7 @@ tr:nth-child(even) {
   }
 }
 
-@media only screen and (max-width: 1023px) and (orientation: landscape) {
+@media (max-width: 1024px) and (min-width: 901px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }
@@ -1340,35 +1341,37 @@ tr:nth-child(even) {
   }
 }
 
-@media only screen and (max-width: 1440px) {
+
+
+@media (max-width: 1700px) and (min-width: 1025px) {
   /* Tarjetas */
   .instructions-section {
-    margin: 3rem 0; 
+    margin: 3rem 0;
   }
 
   .instructions-title {
-    margin-bottom: 3rem; 
+    margin-bottom: 3rem;
   }
 
   .instructions-cards {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem; 
+    gap: 1.5rem;
   }
 
   .instruction-card {
-    width: 30%; 
+    width: 30%;
     max-width: 34rem;
   }
 
   .img-cards {
-    max-width: 60%; 
-    margin: 2rem; 
+    max-width: 60%;
+    margin: 2rem;
   }
 
   .text-box {
-    height: auto; 
+    height: auto;
     padding: 1rem;
     height: 20rem;
   }
@@ -1378,24 +1381,23 @@ tr:nth-child(even) {
   }
 
   .title-tarjeta {
-    font-size: $fs-lg; 
+    font-size: $fs-lg;
   }
 
   .image-container,
   .image-container-key {
-    margin-top: 6rem; 
-    max-width: 100%; 
+    margin-top: 6rem;
+    max-width: 100%;
   }
 
   .small-image {
     width: 40%;
   }
 
- 
   .pj-container {
-    max-width: 80%; 
-    margin-left: 24rem; 
-    margin-right: auto; 
+    max-width: 80%;
+    margin-left: 24rem;
+    margin-right: auto;
     display: flex;
     margin-top: 3rem;
   }
@@ -1425,5 +1427,4 @@ tr:nth-child(even) {
     margin-bottom: 1rem;
     padding: 0;
   }
-
 }

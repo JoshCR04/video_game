@@ -497,7 +497,7 @@ tr:nth-child(even) {
   display: none;
 }
 
-@media only screen and (max-width: 900px) and (orientation: landscape) {
+@media (max-width: 900px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }
@@ -826,6 +826,7 @@ tr:nth-child(even) {
   }
   .orientation-message {
     font-family: "Federant", serif;
+    font-size: 1.875rem;
     margin: 0;
     text-align: center;
     padding: 1rem;
@@ -1159,7 +1160,7 @@ tr:nth-child(even) {
     z-index: 1000;
   }
 }
-@media only screen and (max-width: 1023px) and (orientation: landscape) {
+@media (max-width: 1024px) and (min-width: 901px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }
@@ -1188,7 +1189,7 @@ tr:nth-child(even) {
     display: none;
   }
 }
-@media only screen and (max-width: 1440px) {
+@media (max-width: 1700px) and (min-width: 1025px) {
   /* Tarjetas */
   .instructions-section {
     margin: 3rem 0;
