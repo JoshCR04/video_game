@@ -397,7 +397,7 @@ input[type=password] {
 }
 
 .login-button:hover {
-  background-color: #a7c0c8;
+  background-color: hsl(194, 23%, 72%);
 }
 
 .register-link {
@@ -449,7 +449,7 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #54686d;
+  background-color: hsl(193, 13%, 38%);
 }
 
 .user {
@@ -494,52 +494,35 @@ tr:nth-child(even) {
 }
 
 .orientation-message {
-  font-family: "Federant", serif;
-  padding: 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 0%, 0%, 0.3);
-  color: hsl(0, 0%, 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.orientation-message h1 {
-  font-size: 2rem; /* Ajusta el tamaño según sea necesario */
-  margin: 0;
-  text-align: center; /* Centra el texto */
+  display: none;
 }
 
 @media only screen and (max-width: 900px) and (orientation: landscape) {
   .fondo {
-    height: 100vh; /* Asegúrate de que cubre toda la altura */
+    height: 100vh;
   }
   .logo_menu {
-    margin: 1rem auto 0; /* Ajuste adicional en márgenes */
+    margin: 1rem auto 0;
     margin-bottom: 0.5rem;
     padding-bottom: 0;
-    width: 50%; /* Reduce el ancho en pantallas grandes */
+    width: 50%;
   }
   .menu-section {
-    margin-top: 0; /* Menos espacio en la parte superior */
+    margin-top: 0;
   }
   .buttons {
-    margin-bottom: 0; /* Menos espacio entre botones */
+    margin-bottom: 0;
   }
   .buttons a {
-    font-size: 1.5625rem; /* Tamaño de fuente reducido */
+    font-size: 1.5625rem;
     margin-bottom: 0.1rem;
-    padding: 0; /* Ajuste de padding */
+    padding: 0;
   }
   .buttons:nth-child(2) {
-    /* Selecciona el segundo botón (controls) */
-    display: none; /* Oculta el botón en pantallas pequeñas */
+    display: none;
+  }
+  .orientation-message {
+    display: none;
   }
 }
 /* Ajustes para celulares pequeños */
@@ -830,7 +813,7 @@ tr:nth-child(even) {
     font-size: 1.5625rem;
   }
   tr:nth-child(even) {
-    background-color: #495a5f;
+    background-color: hsl(193, 13%, 33%);
   }
   table,
   th,
@@ -840,6 +823,24 @@ tr:nth-child(even) {
   .logo_menu,
   .buttons {
     display: none;
+  }
+  .orientation-message {
+    font-family: "Federant", serif;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 0%, 0.3);
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
   }
 }
 

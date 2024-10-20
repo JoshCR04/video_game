@@ -919,4 +919,22 @@ tr:nth-child(even) {
   .buttons {
     display: none;
   }
+  .orientation-message {
+    font-family: $ff-secondary;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $clr-aviso-rotar;
+    color: $clr-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
 }
