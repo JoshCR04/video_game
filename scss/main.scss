@@ -1310,33 +1310,120 @@ tr:nth-child(even) {
   }
 
   .logo_menu {
-    margin: 1rem auto 0; 
+    margin: 1rem auto 0;
     margin-top: 11rem;
-    margin-bottom:1rem;
-    padding-bottom: 0; 
-    width: 80%; 
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    width: 80%;
   }
 
   .menu-section {
-    margin-top: 0; 
+    margin-top: 0;
   }
 
   .buttons {
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 
   .buttons a {
-    font-size: $fs-xmd; 
-    margin-bottom: 1rem; 
+    font-size: $fs-xmd;
+    margin-bottom: 1rem;
     padding: 0;
   }
 
   .buttons:nth-child(2) {
-    display: none; 
+    display: none;
   }
 
   .orientation-message {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  /* Tarjetas */
+  .instructions-section {
+    margin: 3rem 0; 
+  }
+
+  .instructions-title {
+    margin-bottom: 3rem; 
+  }
+
+  .instructions-cards {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 1.5rem; 
+  }
+
+  .instruction-card {
+    width: 30%; 
+    max-width: 34rem;
+  }
+
+  .img-cards {
+    max-width: 60%; 
+    margin: 2rem; 
+  }
+
+  .text-box {
+    height: auto; 
+    padding: 1rem;
+    height: 20rem;
+  }
+
+  .text-box figcaption {
+    font-size: $fs-xs;
+  }
+
+  .title-tarjeta {
+    font-size: $fs-lg; 
+  }
+
+  .image-container,
+  .image-container-key {
+    margin-top: 6rem; 
+    max-width: 100%; 
+  }
+
+  .small-image {
+    width: 40%;
+  }
+
+ 
+  .pj-container {
+    max-width: 80%; 
+    margin-left: 24rem; 
+    margin-right: auto; 
+    display: flex;
+    margin-top: 3rem;
+  }
+
+  .fondo {
+    height: 100vh;
+  }
+
+  .logo_menu {
+    margin: 1rem auto 0;
+    margin-top: 7rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    width: 70%;
+  }
+
+  .menu-section {
+    margin-top: 0;
+  }
+
+  .buttons {
+    margin-bottom: 0;
+  }
+
+  .buttons a {
+    font-size: $fs-xmd;
+    margin-bottom: 1rem;
+    padding: 0;
   }
 
 }
