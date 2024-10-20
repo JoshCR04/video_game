@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* Fondo de la página */
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
@@ -15,6 +14,30 @@
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+.logo_menu {
+  display: table;
+  margin: 8rem auto 4rem; /* Reducido para que sea más pequeño */
+  width: 70%; /* Tamaño reducido */
+}
+
+.menu-section {
+  text-align: center;
+  margin-top: 2rem; /* Reducido para que sea más compacto */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem; /* Reducido para que sea más pequeño */
+}
+
+.buttons a {
+  margin-top: 2rem;
+  font-size: 2.5rem; /* Tamaño de fuente reducido */
+  padding: 0.5rem 1rem; /* Padding reducido para que los botones sean más pequeños */
 }
 
 /* Header y footer */
@@ -89,11 +112,6 @@ nav a:hover .icons-footer {
   margin-left: 28px;
 }
 
-.logo_menu {
-  display: table;
-  margin: 8rem auto 4rem;
-}
-
 /* Banner principal */
 .banner-image {
   width: 100%;
@@ -122,19 +140,6 @@ a:hover {
   color: hsl(0, 0%, 100%);
   font-weight: 300;
   text-align: center;
-}
-
-/* Sección del menú */
-.menu-section {
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
 }
 
 /* Panel principal */
@@ -488,6 +493,55 @@ tr:nth-child(even) {
   color: white;
 }
 
+.orientation-message {
+  font-family: "Federant", serif;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.orientation-message h1 {
+  font-size: 2rem; /* Ajusta el tamaño según sea necesario */
+  margin: 0;
+  text-align: center; /* Centra el texto */
+}
+
+@media only screen and (max-width: 900px) and (orientation: landscape) {
+  .fondo {
+    height: 100vh; /* Asegúrate de que cubre toda la altura */
+  }
+  .logo_menu {
+    margin: 1rem auto 0; /* Ajuste adicional en márgenes */
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    width: 50%; /* Reduce el ancho en pantallas grandes */
+  }
+  .menu-section {
+    margin-top: 0; /* Menos espacio en la parte superior */
+  }
+  .buttons {
+    margin-bottom: 0; /* Menos espacio entre botones */
+  }
+  .buttons a {
+    font-size: 1.5625rem; /* Tamaño de fuente reducido */
+    margin-bottom: 0.1rem;
+    padding: 0; /* Ajuste de padding */
+  }
+  .buttons:nth-child(2) {
+    /* Selecciona el segundo botón (controls) */
+    display: none; /* Oculta el botón en pantallas pequeñas */
+  }
+}
 /* Ajustes para celulares pequeños */
 @media (max-width: 576px) {
   .header-footer {
@@ -508,17 +562,17 @@ tr:nth-child(even) {
     height: 40vh;
     object-fit: cover;
   }
-  .menu-icon {
-    display: block;
-    margin: 1rem;
-    margin-right: 2rem;
-  }
   .content {
     display: block;
     transition: opacity 0.3s ease;
   }
   .content.hidden {
     display: none;
+  }
+  .menu-icon {
+    display: block;
+    margin: 1rem;
+    margin-right: 2rem;
   }
   .nav-links {
     display: none;
@@ -764,10 +818,12 @@ tr:nth-child(even) {
     width: 90%;
     font-size: 0.8rem;
   }
-  th, td {
+  th,
+  td {
     padding: 0.5rem;
   }
-  .user, .points {
+  .user,
+  .points {
     text-align: center;
   }
   th {
@@ -776,8 +832,14 @@ tr:nth-child(even) {
   tr:nth-child(even) {
     background-color: #495a5f;
   }
-  table, th, td {
+  table,
+  th,
+  td {
     box-sizing: border-box;
+  }
+  .logo_menu,
+  .buttons {
+    display: none;
   }
 }
 

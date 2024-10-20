@@ -196,3 +196,4 @@ let config = {
 
 // Creación del juego
 let game = new Phaser.Game(config);
+

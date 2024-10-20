@@ -32,13 +32,15 @@ $clr-shadow-2: hsla(0, 0%, 100%, 0.6);
 $clr-shadow-3: hsla(0, 0%, 100%, 0.4);
 $clr-menu-desplegable: hsl(185, 8%, 27%);
 $clr-linea-menu: hsl(185, 16%, 43%);
+$clr-aviso-rotar: hsla(0, 0%, 0%, 0.3);
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Fondo de la página */
+//menu juego
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
@@ -48,6 +50,30 @@ $clr-linea-menu: hsl(185, 16%, 43%);
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+.logo_menu {
+  display: table;
+  margin: 8rem auto 4rem; /* Reducido para que sea más pequeño */
+  width: 70%; /* Tamaño reducido */
+}
+
+.menu-section {
+  text-align: center;
+  margin-top: 2rem; /* Reducido para que sea más compacto */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem; /* Reducido para que sea más pequeño */
+}
+
+.buttons a {
+  margin-top: 2rem;
+  font-size: $fs-xmd; /* Tamaño de fuente reducido */
+  padding: 0.5rem 1rem; /* Padding reducido para que los botones sean más pequeños */
 }
 
 /* Header y footer */
@@ -123,11 +149,6 @@ nav a:hover .icons-footer {
   margin-left: 28px;
 }
 
-.logo_menu {
-  display: table;
-  margin: 8rem auto 4rem;
-}
-
 /* Banner principal */
 .banner-image {
   width: 100%;
@@ -158,19 +179,6 @@ a {
   color: $clr-white;
   font-weight: $fw-light;
   text-align: center;
-}
-
-/* Sección del menú */
-.menu-section {
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
 }
 
 /* Panel principal */
@@ -525,9 +533,44 @@ tr:nth-child(even) {
   text-decoration: none;
   color: white;
 }
+.orientation-message {
+  display: none;
+}
 
+@media only screen and (max-width: 900px) and (orientation: landscape) {
+  .fondo {
+    height: 100vh;
+  }
 
+  .logo_menu {
+    margin: 1rem auto 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    width: 50%;
+  }
 
+  .menu-section {
+    margin-top: 0;
+  }
+
+  .buttons {
+    margin-bottom: 0;
+  }
+
+  .buttons a {
+    font-size: $fs-m;
+    margin-bottom: 0.1rem;
+    padding: 0;
+  }
+
+  .buttons:nth-child(2) {
+    display: none;
+  }
+
+  .orientation-message {
+    display: none;
+  }
+}
 
 /* Ajustes para celulares pequeños */
 @media (max-width: 576px) {
@@ -552,12 +595,6 @@ tr:nth-child(even) {
     object-fit: cover;
   }
 
-  .menu-icon {
-    display: block;
-    margin: 1rem;
-    margin-right: 2rem;
-  }
-
   .content {
     display: block;
     transition: opacity 0.3s ease;
@@ -565,6 +602,12 @@ tr:nth-child(even) {
 
   .content.hidden {
     display: none;
+  }
+
+  .menu-icon {
+    display: block;
+    margin: 1rem;
+    margin-right: 2rem;
   }
 
   .nav-links {
@@ -824,8 +867,8 @@ tr:nth-child(even) {
   }
 
   .login-button {
-    padding: 0.5rem; 
-    font-size: $fs-md; 
+    padding: 0.5rem;
+    font-size: $fs-md;
   }
 
   .register-link {
@@ -833,8 +876,8 @@ tr:nth-child(even) {
   }
 
   .ranking-content {
-    padding: 1rem; 
-    min-height: auto; 
+    padding: 1rem;
+    min-height: auto;
   }
 
   .ranking-content {
@@ -844,29 +887,36 @@ tr:nth-child(even) {
   }
 
   table {
-    width: 90%; 
-    font-size: $fs-xs; 
+    width: 90%;
+    font-size: $fs-xs;
   }
 
-  th, td {
-    padding: 0.5rem; 
+  th,
+  td {
+    padding: 0.5rem;
   }
 
-  .user, .points {
+  .user,
+  .points {
     text-align: center;
   }
 
-
-  th{
-    font-size: $fs-m; 
+  th {
+    font-size: $fs-m;
   }
 
   tr:nth-child(even) {
-    background-color: lighten($clr-tarjet, 5%); 
+    background-color: lighten($clr-tarjet, 5%);
   }
 
-  
-  table, th, td {
-    box-sizing: border-box; 
+  table,
+  th,
+  td {
+    box-sizing: border-box;
+  }
+
+  .logo_menu,
+  .buttons {
+    display: none;
   }
 }

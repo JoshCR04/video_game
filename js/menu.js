@@ -15,3 +15,6 @@ function toggleMenu() {
         footer.classList.remove('hidden');
     }
 }
+
+
+
