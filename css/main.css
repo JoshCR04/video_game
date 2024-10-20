@@ -18,26 +18,26 @@
 
 .logo_menu {
   display: table;
-  margin: 8rem auto 4rem; /* Reducido para que sea más pequeño */
-  width: 70%; /* Tamaño reducido */
+  margin: 8rem auto 4rem;
+  width: 70%;
 }
 
 .menu-section {
   text-align: center;
-  margin-top: 2rem; /* Reducido para que sea más compacto */
+  margin-top: 2rem;
 }
 
 .buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem; /* Reducido para que sea más pequeño */
+  margin-bottom: 1rem;
 }
 
 .buttons a {
   margin-top: 2rem;
-  font-size: 2.5rem; /* Tamaño de fuente reducido */
-  padding: 0.5rem 1rem; /* Padding reducido para que los botones sean más pequeños */
+  font-size: 2.5rem;
+  padding: 0.5rem 1rem;
 }
 
 /* Header y footer */
@@ -302,9 +302,9 @@ figure {
 
 .history-section {
   background-color: hsl(191, 18%, 30%);
-  padding: 6rem;
+  padding: 4rem;
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .history-container {
@@ -312,16 +312,20 @@ figure {
   font-size: 1rem;
   color: hsl(0, 0%, 100%);
   text-align: left;
-  width: 34rem;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  margin-left: 1.5rem;
+  padding: 0;
 }
 
 .pj-container {
   max-width: 50%;
   height: auto;
-  margin-left: 47rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin: 2rem auto;
+  margin-right: 10rem;
   display: flex;
+  justify-content: center;
 }
 
 .Log_Ran_Cred {
@@ -497,34 +501,6 @@ tr:nth-child(even) {
   display: none;
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
-  .fondo {
-    height: 100vh;
-  }
-  .logo_menu {
-    margin: 1rem auto 0;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0;
-    width: 50%;
-  }
-  .menu-section {
-    margin-top: 0;
-  }
-  .buttons {
-    margin-bottom: 0;
-  }
-  .buttons a {
-    font-size: 1.5625rem;
-    margin-bottom: 0.1rem;
-    padding: 0;
-  }
-  .buttons:nth-child(2) {
-    display: none;
-  }
-  .orientation-message {
-    display: none;
-  }
-}
 /* Ajustes para celulares pequeños */
 @media (max-width: 576px) {
   .header-footer {
@@ -1158,6 +1134,34 @@ tr:nth-child(even) {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+  }
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  .fondo {
+    height: 100vh;
+  }
+  .logo_menu {
+    margin: 1rem auto 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    width: 50%;
+  }
+  .menu-section {
+    margin-top: 0;
+  }
+  .buttons {
+    margin-bottom: 0;
+  }
+  .buttons a {
+    font-size: 1.5625rem;
+    margin-bottom: 0.1rem;
+    padding: 0;
+  }
+  .buttons:nth-child(2) {
+    display: none;
+  }
+  .orientation-message {
+    display: none;
   }
 }
 @media (max-width: 1024px) and (min-width: 901px) and (orientation: landscape) {

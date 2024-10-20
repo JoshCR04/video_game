@@ -54,26 +54,26 @@ $clr-aviso-rotar: hsla(0, 0%, 0%, 0.3);
 
 .logo_menu {
   display: table;
-  margin: 8rem auto 4rem; /* Reducido para que sea más pequeño */
-  width: 70%; /* Tamaño reducido */
+  margin: 8rem auto 4rem;
+  width: 70%;
 }
 
 .menu-section {
   text-align: center;
-  margin-top: 2rem; /* Reducido para que sea más compacto */
+  margin-top: 2rem;
 }
 
 .buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem; /* Reducido para que sea más pequeño */
+  margin-bottom: 1rem;
 }
 
 .buttons a {
   margin-top: 2rem;
-  font-size: $fs-xmd; /* Tamaño de fuente reducido */
-  padding: 0.5rem 1rem; /* Padding reducido para que los botones sean más pequeños */
+  font-size: $fs-xmd;
+  padding: 0.5rem 1rem;
 }
 
 /* Header y footer */
@@ -90,7 +90,7 @@ $clr-aviso-rotar: hsla(0, 0%, 0%, 0.3);
 .nav-links,
 .nav-links-footer {
   display: flex;
-  gap: 1rem; // Ajusta el espacio según la sección
+  gap: 1rem;
 
   a {
     display: flex;
@@ -343,10 +343,9 @@ figure {
 
 .history-section {
   background-color: $clr-history-section;
-  padding: 6rem;
+  padding: 4rem;
   display: flex;
-
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .history-container {
@@ -354,16 +353,20 @@ figure {
   font-size: $fs-sm;
   color: $clr-white;
   text-align: left;
-  width: 34rem;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  margin-left: 1.5rem;
+  padding: 0;
 }
 
 .pj-container {
   max-width: 50%;
   height: auto;
-  margin-left: 47rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin: 2rem auto;
+  margin-right: 10rem;
   display: flex;
+  justify-content: center;
 }
 
 .Log_Ran_Cred {
@@ -535,41 +538,6 @@ tr:nth-child(even) {
 }
 .orientation-message {
   display: none;
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-  .fondo {
-    height: 100vh;
-  }
-
-  .logo_menu {
-    margin: 1rem auto 0;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0;
-    width: 50%;
-  }
-
-  .menu-section {
-    margin-top: 0;
-  }
-
-  .buttons {
-    margin-bottom: 0;
-  }
-
-  .buttons a {
-    font-size: $fs-m;
-    margin-bottom: 0.1rem;
-    padding: 0;
-  }
-
-  .buttons:nth-child(2) {
-    display: none;
-  }
-
-  .orientation-message {
-    display: none;
-  }
 }
 
 /* Ajustes para celulares pequeños */
@@ -1305,6 +1273,41 @@ tr:nth-child(even) {
   }
 }
 
+@media (max-width: 900px) and (orientation: landscape) {
+  .fondo {
+    height: 100vh;
+  }
+
+  .logo_menu {
+    margin: 1rem auto 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    width: 50%;
+  }
+
+  .menu-section {
+    margin-top: 0;
+  }
+
+  .buttons {
+    margin-bottom: 0;
+  }
+
+  .buttons a {
+    font-size: $fs-m;
+    margin-bottom: 0.1rem;
+    padding: 0;
+  }
+
+  .buttons:nth-child(2) {
+    display: none;
+  }
+
+  .orientation-message {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) and (min-width: 901px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
@@ -1340,8 +1343,6 @@ tr:nth-child(even) {
     display: none;
   }
 }
-
-
 
 @media (max-width: 1700px) and (min-width: 1025px) {
   /* Tarjetas */
