@@ -938,3 +938,405 @@ tr:nth-child(even) {
     z-index: 1000;
   }
 }
+
+/* Ajustes para pantallas con ancho máximo de 768px */
+@media (max-width: 768px) {
+  .header-footer {
+    padding: 0.2rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .logo-header {
+    width: 70%;
+    max-width: 11rem;
+    margin: 0;
+    padding: 1rem;
+    display: block;
+    height: auto;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
+
+  .content {
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  .content.hidden {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+    margin: 1rem;
+    margin-right: 2rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $clr-menu-desplegable;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 165px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 165px);
+    background-color: $clr-menu-desplegable;
+  }
+
+  .nav-links a {
+    margin-top: 1.5rem;
+    font-size: $fs-m;
+    padding: 0.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: "";
+    display: block;
+    height: 0.0625rem;
+    background-color: $clr-linea-menu;
+    width: 75%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links img.icons {
+    margin-right: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .nav-links img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .pj-container {
+    max-width: 75%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    order: -1;
+    transform: scaleX(-1);
+  }
+
+  .pj-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .text-box {
+    background-color: $clr-tarjet-text;
+    border: 0.0625rem solid $clr-tarjet-border;
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .instructions-section {
+    text-align: center;
+    margin: 5rem 0;
+    margin-top: 1.5rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .instructions-title {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .title-tarjeta {
+    font-size: $fs-m;
+    font-weight: $fw-bold;
+  }
+
+  .instructions-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .instruction-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $clr-tarjet;
+    border: 1px solid $clr-tarjet-border;
+    width: 90%;
+    max-width: 22rem;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+  .instruction-card:nth-of-type(2) .image-container {
+    margin-left: 0.0625rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .img-cards {
+    max-width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .text-box figcaption {
+    text-align: left;
+    font-family: $ff-text;
+    font-size: $fs-sm;
+    color: $clr-white;
+    margin: 0;
+    white-space: normal;
+  }
+
+  .history-section {
+    background-color: $clr-history-section;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .history-container {
+    font-family: $ff-text;
+    font-size: $fs-sm;
+    color: $clr-white;
+    text-align: left;
+    width: 100%;
+    max-width: 40rem;
+    padding: 1.5rem;
+    padding-bottom: 7.5rem;
+    box-sizing: border-box;
+  }
+
+  .history-text {
+    width: 90%;
+    max-width: 17.5rem;
+    background-color: $clr-tarjet-text;
+    border: 1px solid $clr-tarjet-border;
+    padding: 2.25rem;
+    box-sizing: border-box;
+    margin: 1.25rem auto;
+    overflow: visible;
+    white-space: normal;
+    color: $clr-white;
+    font-family: $ff-text;
+  }
+
+  .image-container {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0;
+  }
+
+  .footer img.logo-footer {
+    max-width: 5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-left: 0.75rem;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-icon {
+    margin: 0 0.75rem;
+  }
+
+  .Log_Ran_Cred {
+    height: auto;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-title {
+    margin: 2.5rem;
+  }
+
+  .card-content {
+    margin: 0;
+    padding: 1.5rem;
+  }
+
+  .card {
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    padding: 0;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.875rem;
+    margin-bottom: 0;
+    border: 1px solid $clr-white;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .login-button {
+    padding: 0.625rem;
+    font-size: $fs-md;
+  }
+
+  .register-link {
+    font-size: $fs-md;
+  }
+
+  .ranking-content {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+
+  .ranking-content {
+    padding: 0.75rem;
+    margin: 0;
+    min-height: auto;
+  }
+
+  table {
+    width: 95%;
+    font-size: $fs-sm;
+  }
+
+  th,
+  td {
+    padding: 0.75rem;
+  }
+
+  .user,
+  .points {
+    text-align: center;
+  }
+
+  th {
+    font-size: $fs-md;
+  }
+
+  tr:nth-child(even) {
+    background-color: lighten($clr-tarjet, 5%);
+  }
+
+  table,
+  th,
+  td {
+    box-sizing: border-box;
+  }
+
+  .logo_menu,
+  .buttons {
+    display: none;
+  }
+
+  .orientation-message {
+    font-family: $ff-secondary;
+    margin: 0;
+    text-align: center;
+    padding: 1.25rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $clr-aviso-rotar;
+    color: $clr-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+
+@media only screen and (max-width: 1023px) and (orientation: landscape) {
+  .fondo {
+    height: 100vh;
+  }
+
+  .logo_menu {
+    margin: 1rem auto 0; 
+    margin-top: 11rem;
+    margin-bottom:1rem;
+    padding-bottom: 0; 
+    width: 80%; 
+  }
+
+  .menu-section {
+    margin-top: 0; 
+  }
+
+  .buttons {
+    margin-bottom: 0; 
+  }
+
+  .buttons a {
+    font-size: $fs-xmd; 
+    margin-bottom: 1rem; 
+    padding: 0;
+  }
+
+  .buttons:nth-child(2) {
+    display: none; 
+  }
+
+  .orientation-message {
+    display: none;
+  }
+
+}
