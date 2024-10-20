@@ -956,6 +956,7 @@ tr:nth-child(even) {
     padding: 1rem;
     text-align: center;
     box-sizing: border-box;
+    margin: 0 auto;
   }
 
   .nav-links.active {
@@ -971,12 +972,13 @@ tr:nth-child(even) {
 
   .nav-links a {
     margin-top: 1.5rem;
-    font-size: $fs-m;
+    font-size: $fs-sm;
     padding: 0.5rem 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    text-align: center;
   }
 
   .nav-links a::after {
@@ -994,8 +996,8 @@ tr:nth-child(even) {
 
   .nav-links img.icons {
     margin-right: 0.75rem;
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .nav-links img {
@@ -1428,4 +1430,3 @@ tr:nth-child(even) {
     padding: 0;
   }
 }
-
