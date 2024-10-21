@@ -19,9 +19,11 @@
     padding: 1rem 0;
   }
   @include respond-to($tablet) {
-    padding: 0.2rem;
     margin: auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
   }
 }
 
@@ -34,5 +36,11 @@
     margin-top: 1rem;
     margin-bottom: 3rem;
     margin-left: 0.5rem;
+  }
+  @include respond-to($tablet) {
+    max-width: 5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-left: 0.75rem;
   }
 }

@@ -13,7 +13,10 @@
     padding: 1rem;
     margin-bottom: 1rem;
   }
-
+  @include respond-to($tablet) {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
   @include respond-to($large-desktop) {
     margin-bottom: 3rem;
   }
@@ -31,7 +34,13 @@
     gap: 2rem;
     padding: 0 1rem;
   }
-
+  @include respond-to($tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
   @include respond-to($large-desktop) {
     display: flex;
     flex-wrap: wrap;
@@ -67,7 +76,25 @@
       padding-bottom: 4rem;
     }
   }
-
+  @include respond-to($tablet) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $clr-tarjet;
+    border: 1px solid $clr-tarjet-border;
+    width: 90%;
+    max-width: 22rem;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    height: auto;
+    box-sizing: border-box;
+    &:nth-of-type(2) .image-container {
+      margin-left: 0.0625rem;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
   @include respond-to($large-desktop) {
     width: 30%;
     max-width: 34rem;
@@ -86,7 +113,12 @@
     margin: 0 auto;
     padding: 1rem;
   }
-
+  @include respond-to($tablet) {
+    max-width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+  }
   @include respond-to($large-desktop) {
     max-width: 60%;
     margin: 2rem;
@@ -103,6 +135,24 @@
   @include respond-to($phone) {
     background-color: $clr-tarjet-text;
     border: 0.00625rem solid $clr-tarjet-border;
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+    box-sizing: border-box;
+    figcaption {
+      text-align: left;
+      font-family: $ff-text;
+      font-size: $fs-sm;
+      color: $clr-white;
+      margin: 0;
+      white-space: normal;
+    }
+  }
+  @include respond-to($tablet) {
+    background-color: $clr-tarjet-text;
+    border: 0.0625rem solid $clr-tarjet-border;
     margin-top: 1rem;
     padding: 1rem;
     height: auto;
@@ -147,7 +197,10 @@
     font-size: $fs-m;
     font-weight: $fw-bold;
   }
-
+  @include respond-to($tablet) {
+    font-size: $fs-m;
+    font-weight: $fw-bold;
+  }
   @include respond-to($large-desktop) {
     font-size: $fs-lg;
   }
@@ -164,7 +217,11 @@
     display: flex;
     justify-content: center;
   }
-
+  @include respond-to($tablet) {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
   @include respond-to($large-desktop) {
     margin-top: 6rem;
     max-width: 100%;
@@ -182,6 +239,10 @@
     flex-direction: column;
     align-items: center;
   }
+  @include respond-to($tablet) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .card {
@@ -196,6 +257,13 @@
     margin-bottom: 3rem;
     padding: 0;
   }
+
+  @include respond-to($tablet) {
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    padding: 0;
+  }
 }
 
 .card-title {
@@ -208,6 +276,9 @@
 
   @include respond-to($phone) {
     margin: 2rem;
+  }
+  @include respond-to($tablet) {
+    margin: 2.5rem;
   }
 }
 
@@ -226,5 +297,9 @@
   @include respond-to($phone) {
     margin: 0;
     padding: 1rem;
+  }
+  @include respond-to($tablet) {
+    margin: 2rem;
+    padding: 1.5rem;
   }
 }

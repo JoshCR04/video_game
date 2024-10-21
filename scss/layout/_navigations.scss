@@ -26,6 +26,10 @@
   @include respond-to($phone) {
     padding-bottom: 1rem;
   }
+
+  @include respond-to($phone-tablet-portrait-landscape) {
+    font-size: $fs-sm;
+  }
 }
 /*menu hamburguesa*/
 .menu-icon {
@@ -36,6 +40,15 @@
     display: block;
     margin: 1rem;
     margin-right: 2rem;
+  }
+  @include respond-to($tablet) {
+    display: block;
+    z-index: 1000;
+    margin-right: 2rem;
+  }
+  img {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
@@ -103,6 +116,66 @@
     img {
       width: 1.5rem;
       height: 1.5rem;
+    }
+  }
+
+  @include respond-to($tablet) {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $clr-menu-desplegable;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    &.active {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 183px;
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - 183px);
+      background-color: $clr-menu-desplegable;
+    }
+
+    a {
+      margin-top: 1.5rem;
+      font-size: $fs-m;
+      padding: 0.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+
+      &::after {
+        content: "";
+        display: block;
+        height: 0.0625rem;
+        background-color: $clr-linea-menu;
+        width: 75%;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    img.icons {
+      margin-right: 0.75rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    img {
+      width: 1.75rem;
+      height: 1.75rem;
     }
   }
 }

@@ -103,7 +103,13 @@ button:focus {
     margin-bottom: 1rem;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .instructions-title {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .instructions-title {
     margin-bottom: 3rem;
   }
@@ -124,7 +130,16 @@ button:focus {
     padding: 0 1rem;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .instructions-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .instructions-cards {
     display: flex;
     flex-wrap: wrap;
@@ -163,7 +178,28 @@ button:focus {
     padding-bottom: 4rem;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .instruction-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: hsl(193, 13%, 28%);
+    border: 1px solid hsl(0, 0%, 47%);
+    width: 90%;
+    max-width: 22rem;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    height: auto;
+    box-sizing: border-box;
+  }
+  .instruction-card:nth-of-type(2) .image-container {
+    margin-left: 0.0625rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .instruction-card {
     width: 30%;
     max-width: 34rem;
@@ -185,7 +221,15 @@ button:focus {
     padding: 1rem;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .img-cards {
+    max-width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .img-cards {
     max-width: 60%;
     margin: 2rem;
@@ -220,7 +264,27 @@ button:focus {
     white-space: normal;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .text-box {
+    background-color: hsl(195, 15%, 22%);
+    border: 0.0625rem solid hsl(0, 0%, 47%);
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  .text-box figcaption {
+    text-align: left;
+    font-family: "Neuton", serif;
+    font-size: 1rem;
+    color: hsl(0, 0%, 100%);
+    margin: 0;
+    white-space: normal;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .text-box {
     height: auto;
     padding: 1rem;
@@ -235,7 +299,7 @@ button:focus {
   color: hsl(0, 0%, 100%);
   margin: 0;
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
   .text-box figcaption {
     font-size: 0.8rem;
   }
@@ -254,7 +318,13 @@ button:focus {
     font-weight: 700;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .title-tarjeta {
+    font-size: 1.5625rem;
+    font-weight: 700;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .title-tarjeta {
     font-size: 3.75rem;
   }
@@ -274,7 +344,14 @@ button:focus {
     justify-content: center;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .image-container {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .image-container {
     margin-top: 6rem;
     max-width: 100%;
@@ -288,6 +365,12 @@ button:focus {
   width: 100%;
 }
 @media only screen and (max-width: 576px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -308,6 +391,14 @@ button:focus {
     padding: 0;
   }
 }
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .card {
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    padding: 0;
+  }
+}
 
 .card-title {
   font-family: "Karantina", system-ui;
@@ -320,6 +411,11 @@ button:focus {
 @media only screen and (max-width: 576px) {
   .card-title {
     margin: 2rem;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .card-title {
+    margin: 2.5rem;
   }
 }
 
@@ -341,12 +437,25 @@ button:focus {
     padding: 1rem;
   }
 }
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .card-content {
+    margin: 2rem;
+    padding: 1.5rem;
+  }
+}
 
 .icons {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
   transition: filter 0.3s ease;
+}
+@media only screen and (max-width: 1024px) {
+  .icons {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+  }
 }
 
 .icons-footer {
@@ -361,6 +470,39 @@ button:focus {
     justify-content: center;
     margin: 0 0.5rem;
   }
+}
+.icons-footer .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(189, 7%, 19%);
+  padding: 1rem 2rem;
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .icons-footer .header {
+    padding: 1rem;
+    flex-direction: row;
+  }
+}
+.icons-footer .logo {
+  width: 150px;
+}
+.icons-footer .logo img {
+  width: 100%;
+}
+.icons-footer .menu-icon {
+  display: block;
+  cursor: pointer;
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .icons-footer .menu-icon {
+    display: block;
+    z-index: 1000;
+  }
+}
+.icons-footer .menu-icon img {
+  width: 2rem;
+  height: 2rem;
 }
 
 nav a:hover .icons,
@@ -392,7 +534,16 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .instructions-section {
+    text-align: center;
+    margin: 5rem 0;
+    margin-top: 1.5rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .instructions-section {
     margin: 3rem 0;
   }
@@ -413,11 +564,19 @@ input[type=password] {
     text-align: center;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
   .header {
-    padding: 0.2rem;
     margin: auto;
     text-align: center;
+    flex-direction: row;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .header {
+    padding: 0.1rem;
+    margin: auto;
+    text-align: center;
+    padding-right: 2rem;
   }
 }
 
@@ -428,6 +587,16 @@ input[type=password] {
 @media only screen and (max-width: 576px) {
   .logo-header {
     width: 80%;
+    max-width: 9rem;
+    margin: 0;
+    padding: 1rem;
+    display: block;
+    height: auto;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .logo-header {
+    width: 90%;
     max-width: 9rem;
     margin: 0;
     padding: 1rem;
@@ -455,11 +624,13 @@ input[type=password] {
     padding: 1rem 0;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
   .footer {
-    padding: 0.2rem;
     margin: auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
   }
 }
 
@@ -474,6 +645,14 @@ input[type=password] {
     margin-top: 1rem;
     margin-bottom: 3rem;
     margin-left: 0.5rem;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .logo-footer {
+    max-width: 5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-left: 0.75rem;
   }
 }
 
@@ -504,6 +683,12 @@ input[type=password] {
     padding-bottom: 1rem;
   }
 }
+@media only screen and (max-width: 1024px) {
+  .nav-links,
+  .nav-links-footer {
+    font-size: 1rem;
+  }
+}
 
 /*menu hamburguesa*/
 .menu-icon {
@@ -516,6 +701,17 @@ input[type=password] {
     margin: 1rem;
     margin-right: 2rem;
   }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    z-index: 1000;
+    margin-right: 2rem;
+  }
+}
+.menu-icon img {
+  width: 3rem;
+  height: 3rem;
 }
 
 .nav-links {
@@ -577,6 +773,62 @@ input[type=password] {
   .nav-links img {
     width: 1.5rem;
     height: 1.5rem;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: hsl(185, 8%, 27%);
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 183px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 183px);
+    background-color: hsl(185, 8%, 27%);
+  }
+  .nav-links a {
+    margin-top: 1.5rem;
+    font-size: 1.5625rem;
+    padding: 0.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+  }
+  .nav-links a::after {
+    content: "";
+    display: block;
+    height: 0.0625rem;
+    background-color: hsl(185, 16%, 43%);
+    width: 75%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-links img.icons {
+    margin-right: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  .nav-links img {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
 
@@ -651,7 +903,7 @@ input[type=password] {
     object-fit: cover;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
   .banner-image {
     width: 100%;
     height: 50vh;
@@ -666,7 +918,7 @@ input[type=password] {
   align-items: center;
   justify-content: center;
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
   .image-container-key {
     margin-top: 6rem;
     max-width: 100%;
@@ -676,7 +928,7 @@ input[type=password] {
 .small-image {
   width: 30%;
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
   .small-image {
     width: 40%;
   }
@@ -695,6 +947,19 @@ input[type=password] {
   justify-content: space-between;
 }
 @media only screen and (max-width: 576px) {
+  .history-section {
+    background-color: hsl(191, 18%, 30%);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
   .history-section {
     background-color: hsl(191, 18%, 30%);
     padding: 0;
@@ -730,6 +995,19 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .history-container {
+    font-family: "Neuton", serif;
+    font-size: 1rem;
+    color: hsl(0, 0%, 100%);
+    text-align: left;
+    width: 100%;
+    max-width: 40rem;
+    padding: 1.5rem;
+    padding-bottom: 7.5rem;
+    box-sizing: border-box;
+  }
+}
 
 .pj-container {
   flex: 3;
@@ -756,7 +1034,24 @@ input[type=password] {
     height: auto;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .pj-container {
+    max-width: 75%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    order: -1;
+    transform: scaleX(-1);
+  }
+  .pj-container img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+@media only screen and (min-width: 1025px) {
   .pj-container {
     max-width: 80%;
     margin-left: 24rem;
@@ -838,7 +1133,32 @@ input[type=password] {
     z-index: 1000;
   }
 }
-@media only screen and (max-width: 900px) and (orientation: landscape) {
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .logo_menu,
+  .buttons {
+    display: none;
+  }
+  .orientation-message {
+    font-family: "Federant", serif;
+    font-size: 1.875rem;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 0%, 0.3);
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+@media only screen and (max-width: 1024px) {
   .fondo {
     height: 100vh;
   }
@@ -866,16 +1186,16 @@ input[type=password] {
     display: none;
   }
 }
-@media only screen and (max-width: 1024px) and (min-width: 901px) and (orientation: landscape) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }
   .logo_menu {
     margin: 1rem auto 0;
-    margin-top: 11rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
     padding-bottom: 0;
-    width: 80%;
+    width: 70%;
   }
   .menu-section {
     margin-top: 0;
@@ -884,8 +1204,8 @@ input[type=password] {
     margin-bottom: 0;
   }
   .buttons a {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.875rem;
+    margin-bottom: 0rem;
     padding: 0;
   }
   .buttons:nth-child(2) {
@@ -895,7 +1215,7 @@ input[type=password] {
     display: none;
   }
 }
-@media only screen and (max-width: 1700px) and (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
   .logo_menu {
     margin: 1rem auto 0;
     margin-top: 7rem;
@@ -981,6 +1301,13 @@ tr:nth-child(even) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1rem;
+    box-sizing: border-box;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .Log_Ran_Cred {
+    height: auto;
+    padding: 1.5rem;
     box-sizing: border-box;
   }
 }

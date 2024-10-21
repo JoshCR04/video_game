@@ -76,7 +76,31 @@
     z-index: 1000;
   }
 }
-
+@include respond-to($tablet) {
+  .logo_menu,
+  .buttons {
+    display: none;
+  }
+  .orientation-message {
+    font-family: $ff-secondary;
+    font-size: $fs-md;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $clr-aviso-rotar;
+    color: $clr-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
 //menu para celulares volteados y tabletas
 @include respond-to($phone-tablet-portrait-landscape) {
   .fondo {
@@ -121,10 +145,10 @@
 
   .logo_menu {
     margin: 1rem auto 0;
-    margin-top: 11rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
     padding-bottom: 0;
-    width: 80%;
+    width: 70%;
   }
 
   .menu-section {
@@ -136,8 +160,8 @@
   }
 
   .buttons a {
-    font-size: $fs-xmd;
-    margin-bottom: 1rem;
+    font-size: $fs-md;
+    margin-bottom: 0rem;
     padding: 0;
   }
 

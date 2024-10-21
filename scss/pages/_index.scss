@@ -59,6 +59,17 @@
     margin-left: auto;
     margin-right: auto;
   }
+  @include respond-to($tablet) {
+    background-color: $clr-history-section;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .history-container {
@@ -78,6 +89,17 @@
     max-width: 37.5rem;
     padding: 1rem;
     padding-bottom: 7rem;
+    box-sizing: border-box;
+  }
+  @include respond-to($tablet) {
+    font-family: $ff-text;
+    font-size: $fs-sm;
+    color: $clr-white;
+    text-align: left;
+    width: 100%;
+    max-width: 40rem;
+    padding: 1.5rem;
+    padding-bottom: 7.5rem;
     box-sizing: border-box;
   }
 }
@@ -105,7 +127,21 @@
       height: auto;
     }
   }
-
+  @include respond-to($tablet) {
+    max-width: 75%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    order: -1;
+    transform: scaleX(-1);
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
   @include respond-to($large-desktop) {
     max-width: 80%;
     margin-left: 24rem;

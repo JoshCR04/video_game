@@ -7,6 +7,12 @@
   height: 2rem;
   margin-right: 0.5rem;
   transition: filter 0.3s ease;
+
+  @include respond-to($phone-tablet-portrait-landscape) {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+  }
 }
 
 //iconos del footer
@@ -19,6 +25,40 @@
     display: flex;
     justify-content: center;
     margin: 0 0.5rem;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $clr-header-footer;
+    padding: 1rem 2rem;
+
+    @include respond-to($tablet) {
+      padding: 1rem;
+      flex-direction: row;
+    }
+  }
+
+  .logo {
+    width: 150px;
+    img {
+      width: 100%;
+    }
+  }
+
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+
+    @include respond-to($tablet) {
+      display: block;
+      z-index: 1000;
+    }
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 }
 

@@ -17,5 +17,12 @@
     box-sizing: border-box;
   }
 }
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .Log_Ran_Cred {
+    height: auto;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+}
 
 /*# sourceMappingURL=shared.css.map */
