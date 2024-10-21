@@ -92,7 +92,7 @@ button:focus {
 .instructions-title {
   color: hsl(0, 0%, 0%);
   font-family: "Karantina", system-ui;
-  font-size: 2.5rem;
+  font-size: 3.125rem;
   font-weight: 400;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -107,11 +107,6 @@ button:focus {
   .instructions-title {
     padding: 1.25rem;
     margin-bottom: 1.25rem;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .instructions-title {
-    margin-bottom: 3rem;
   }
 }
 
@@ -137,14 +132,6 @@ button:focus {
     align-items: center;
     gap: 2.5rem;
     padding: 0 1.5rem;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .instructions-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
   }
 }
 
@@ -199,12 +186,6 @@ button:focus {
     padding-bottom: 4rem;
   }
 }
-@media only screen and (min-width: 1025px) {
-  .instruction-card {
-    width: 30%;
-    max-width: 34rem;
-  }
-}
 
 .img-cards {
   max-width: 50%;
@@ -229,16 +210,11 @@ button:focus {
     padding: 1rem;
   }
 }
-@media only screen and (min-width: 1025px) {
-  .img-cards {
-    max-width: 60%;
-    margin: 2rem;
-  }
-}
 
 .text-box {
   background-color: hsl(195, 15%, 22%);
   border: 0.006 solid hsl(0, 0%, 47%);
+  font-size: 2.5rem;
   margin-top: 2rem;
   padding-top: 3rem;
   padding: 2rem;
@@ -284,13 +260,6 @@ button:focus {
     white-space: normal;
   }
 }
-@media only screen and (min-width: 1025px) {
-  .text-box {
-    height: auto;
-    padding: 1rem;
-    height: 20rem;
-  }
-}
 
 .text-box figcaption {
   text-align: left;
@@ -298,11 +267,6 @@ button:focus {
   font-size: 1rem;
   color: hsl(0, 0%, 100%);
   margin: 0;
-}
-@media only screen and (min-width: 1025px) {
-  .text-box figcaption {
-    font-size: 0.8rem;
-  }
 }
 
 .title-tarjeta {
@@ -322,11 +286,6 @@ button:focus {
   .title-tarjeta {
     font-size: 1.5625rem;
     font-weight: 700;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .title-tarjeta {
-    font-size: 3.75rem;
   }
 }
 
@@ -349,12 +308,6 @@ button:focus {
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .image-container {
-    margin-top: 6rem;
-    max-width: 100%;
   }
 }
 
@@ -450,13 +403,6 @@ button:focus {
   margin-right: 0.5rem;
   transition: filter 0.3s ease;
 }
-@media only screen and (max-width: 1024px) and (min-width: 925px) {
-  .icons {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
-  }
-}
 
 .icons-footer {
   width: 2rem;
@@ -543,11 +489,6 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 1025px) {
-  .instructions-section {
-    margin: 3rem 0;
-  }
-}
 
 .header {
   display: flex;
@@ -571,14 +512,6 @@ input[type=password] {
     flex-direction: row;
   }
 }
-@media only screen and (max-width: 1024px) and (min-width: 925px) {
-  .header {
-    padding: 0.1rem;
-    margin: auto;
-    text-align: center;
-    padding-right: 2rem;
-  }
-}
 
 .logo-header {
   width: 8.75rem;
@@ -587,16 +520,6 @@ input[type=password] {
 @media only screen and (max-width: 576px) {
   .logo-header {
     width: 80%;
-    max-width: 9rem;
-    margin: 0;
-    padding: 1rem;
-    display: block;
-    height: auto;
-  }
-}
-@media only screen and (max-width: 1024px) and (min-width: 925px) {
-  .logo-header {
-    width: 90%;
     max-width: 9rem;
     margin: 0;
     padding: 1rem;
@@ -681,12 +604,6 @@ input[type=password] {
   .nav-links,
   .nav-links-footer {
     padding-bottom: 1rem;
-  }
-}
-@media only screen and (max-width: 1024px) and (min-width: 925px) {
-  .nav-links,
-  .nav-links-footer {
-    font-size: 1rem;
   }
 }
 
@@ -918,20 +835,9 @@ input[type=password] {
   align-items: center;
   justify-content: center;
 }
-@media only screen and (min-width: 1025px) {
-  .image-container-key {
-    margin-top: 6rem;
-    max-width: 100%;
-  }
-}
 
 .small-image {
   width: 30%;
-}
-@media only screen and (min-width: 1025px) {
-  .small-image {
-    width: 40%;
-  }
 }
 
 .small-image img {
@@ -1051,15 +957,6 @@ input[type=password] {
     height: auto;
   }
 }
-@media only screen and (min-width: 1025px) {
-  .pj-container {
-    max-width: 80%;
-    margin-left: 24rem;
-    margin-right: auto;
-    display: flex;
-    margin-top: 3rem;
-  }
-}
 
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
@@ -1074,8 +971,15 @@ input[type=password] {
 
 .logo_menu {
   display: table;
-  margin: 8rem auto 4rem;
-  width: 70%;
+  margin: 13rem auto 4rem;
+  width: 80%;
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .logo_menu {
+    display: table;
+    margin: 1rem auto 1rem;
+    width: 50%;
+  }
 }
 
 .menu-section {
@@ -1106,6 +1010,13 @@ input[type=password] {
   margin-top: 2rem;
   font-size: 2.5rem;
   padding: 0.5rem 1rem;
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .buttons a {
+    margin-top: 0;
+    font-size: 1.5625rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 @media only screen and (max-width: 576px) {
@@ -1156,83 +1067,6 @@ input[type=password] {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-}
-@media only screen and (max-width: 1024px) and (min-width: 925px) {
-  .fondo {
-    height: 100vh;
-  }
-  .logo_menu {
-    margin: 1rem auto 0;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0;
-    width: 50%;
-  }
-  .menu-section {
-    margin-top: 0;
-  }
-  .buttons {
-    margin-bottom: 0;
-  }
-  .buttons a {
-    font-size: 1.5625rem;
-    margin-bottom: 0.1rem;
-    padding: 0;
-  }
-  .buttons:nth-child(2) {
-    display: none;
-  }
-  .orientation-message {
-    display: none;
-  }
-}
-@media only screen and (min-width: 769px) and (max-width: 924px) and (orientation: landscape) {
-  .fondo {
-    height: 100vh;
-  }
-  .logo_menu {
-    margin: 1rem auto 0;
-    margin-top: 1rem;
-    margin-bottom: 0rem;
-    padding-bottom: 0;
-    width: 70%;
-  }
-  .menu-section {
-    margin-top: 0;
-  }
-  .buttons {
-    margin-bottom: 0;
-  }
-  .buttons a {
-    font-size: 1.875rem;
-    margin-bottom: 0rem;
-    padding: 0;
-  }
-  .buttons:nth-child(2) {
-    display: none;
-  }
-  .orientation-message {
-    display: none;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .logo_menu {
-    margin: 1rem auto 0;
-    margin-top: 7rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0;
-    width: 70%;
-  }
-  .menu-section {
-    margin-top: 0;
-  }
-  .buttons {
-    margin-bottom: 0;
-  }
-  .buttons a {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    padding: 0;
   }
 }
 .ranking-content {

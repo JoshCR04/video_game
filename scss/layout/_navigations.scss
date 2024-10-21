@@ -26,10 +26,6 @@
   @include respond-to($phone) {
     padding-bottom: 1rem;
   }
-
-  @include respond-to($phone-tablet-portrait-landscape) {
-    font-size: $fs-sm;
-  }
 }
 /*menu hamburguesa*/
 .menu-icon {

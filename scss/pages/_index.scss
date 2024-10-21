@@ -23,17 +23,10 @@
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
-  @include respond-to($large-desktop) {
-    margin-top: 6rem;
-    max-width: 100%;
-  }
 }
 
 .small-image {
   width: 30%;
-  @include respond-to($large-desktop) {
-    width: 40%;
-  }
 }
 
 .small-image img {
@@ -141,12 +134,5 @@
       max-width: 100%;
       height: auto;
     }
-  }
-  @include respond-to($large-desktop) {
-    max-width: 80%;
-    margin-left: 24rem;
-    margin-right: auto;
-    display: flex;
-    margin-top: 3rem;
   }
 }

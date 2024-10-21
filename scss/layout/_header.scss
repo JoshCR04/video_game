@@ -19,13 +19,6 @@
     text-align: center;
     flex-direction: row;
   }
-
-  @include respond-to($phone-tablet-portrait-landscape) {
-    padding: 0.1rem;
-    margin: auto;
-    text-align: center;
-    padding-right: 2rem;
-  }
 }
 .logo-header {
   width: 8.75rem;
@@ -33,15 +26,6 @@
 
   @include respond-to($phone) {
     width: 80%;
-    max-width: 9rem;
-    margin: 0;
-    padding: 1rem;
-    display: block;
-    height: auto;
-  }
-
-  @include respond-to($phone-tablet-portrait-landscape) {
-    width: 90%;
     max-width: 9rem;
     margin: 0;
     padding: 1rem;
