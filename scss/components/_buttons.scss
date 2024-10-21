@@ -1,16 +1,29 @@
 @use "../abstracts/variables" as *;
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
+.login-button {
+  background-color: $clr-log-button;
+  color: $clr-white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: $fs-md;
+  font-family: $ff-primary;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.buttons a {
-  margin-top: 2rem;
-  font-size: $fs-xmd;
-  padding: 0.5rem 1rem;
+.login-button:hover {
+  background-color: lighten($clr-log-button, 10%);
+}
+
+.register-link {
+  font-family: $ff-primary;
+  margin-top: 1rem;
+  font-size: $fs-md;
+  color: $clr-white;
+  text-align: center;
+  text-decoration: none;
 }
 
 .back-button {
@@ -31,5 +44,8 @@
     color: $clr-white;
     text-decoration: none;
   }
+  &:hover {
+    text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
+      0 0 30px $clr-shadow-3;
+  }
 }
-

@@ -4,8 +4,8 @@
   width: 100%;
   max-width: 90rem;
   margin: auto;
-  padding: 1rem;
-  background-color: $clr-controls-panel;
+  padding: 4.3rem;
+  background-color: $clr-header-footer;
   text-align: center;
   position: fixed;
   top: 0;
@@ -15,11 +15,28 @@
   overflow-y: auto;
 }
 
-.image-container-controls {
-  display: flex;
-  justify-content: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-top: 6rem;
+.nav-section {
+  text-align: center;
+  position: relative;
 }
 
+.controls-title {
+  font-family: $ff-secondary;
+  font-size: $fs-md;
+  color: $clr-white;
+  font-weight: $fw-light;
+  margin: 0.1rem 0 1rem;
+}
+
+
+
+.divider {
+  border: none;
+  border-top: 0.4rem solid $clr-white;
+  margin: 1rem 0;
+}
+
+.controls-panel {
+  max-width: 30%;
+  height: max-content;
+}

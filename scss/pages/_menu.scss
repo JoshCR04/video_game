@@ -1,5 +1,6 @@
 @use "../abstracts/variables" as *;
 
+//menu juego
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
@@ -20,24 +21,31 @@
 .menu-section {
   text-align: center;
   margin-top: 2rem;
-}
+  a {
+    font-family: $ff-secondary;
+    font-size: $fs-xxmd;
+    color: $clr-white;
+    font-weight: $fw-light;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-.divider {
-  border: none;
-  border-top: 0.4rem solid $clr-white;
-  margin: 1rem 0;
-}
-
-a {
-  font-family: $ff-secondary;
-  font-size: $fs-xxmd;
-  color: $clr-white;
-  font-weight: $fw-light;
-  text-decoration: none;
-  transition: all 0.3s ease;
-
-  &:hover {
-    text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
-      0 0 30px $clr-shadow-3;
+    &:hover {
+      text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
+        0 0 30px $clr-shadow-3;
+      font-size: calc($fs-xxmd + 0.5rem);
+    }
   }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.buttons a {
+  margin-top: 2rem;
+  font-size: $fs-xmd;
+  padding: 0.5rem 1rem;
 }

@@ -1,11 +1,13 @@
 @use "../abstracts/variables" as *;
 
-.instructions-section {
-  text-align: center;
-  margin: 5rem 0;
+.instructions-title {
+  color: $clr-black;
+  font-family: $ff-primary;
+  font-size: $fs-xmd;
+  font-weight: $fw-regular;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
 }
-
-
 
 .instructions-cards {
   display: flex;
@@ -24,10 +26,6 @@
   text-align: center;
 }
 
-figure {
-  margin: 0;
-}
-
 .img-cards {
   max-width: 50%;
   height: auto;
@@ -36,19 +34,37 @@ figure {
   justify-content: center;
 }
 
+.text-box {
+  background-color: $clr-tarjet-text;
+  border: 0.1px solid $clr-tarjet-border;
+  margin-top: 2rem;
+  padding-top: 3rem;
+  padding: 2rem;
+  height: 15rem;
+}
+
+.text-box figcaption {
+  text-align: left;
+  font-family: $ff-text;
+  font-size: $fs-sm;
+  color: $clr-white;
+  margin: 0;
+}
+
+.title-tarjeta {
+  text-align: left;
+  padding-bottom: 1rem;
+  font-family: $ff-secondary;
+  font-size: $fs-xmd;
+  color: $clr-white;
+}
+
 .image-container {
   display: flex;
   justify-content: center;
   margin-left: 2rem;
   margin-right: 2rem;
-  margin-top: 11rem;
-}
-.image-container-key {
-  max-width: 50%;
-  height: auto;
-  margin-top: 10rem;
-  align-items: center;
-  justify-content: center;
+  margin-top: 12rem;
 }
 
 .small-image {
@@ -60,6 +76,13 @@ figure {
   height: auto;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .card {
   background-color: $clr-tarjet;
   padding: 1rem;
@@ -67,4 +90,24 @@ figure {
   text-align: center;
 }
 
+.card-title {
+  font-family: $ff-primary;
+  font-size: $fs-xmd;
+  color: $clr-white;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
+.card-content {
+  background-color: $clr-light-blue;
+  font-family: $ff-primary;
+  font-size: $fs-xmd;
+  color: $clr-white;
+  padding: 2rem;
+  padding-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}

@@ -4,16 +4,8 @@
   box-sizing: border-box;
 }
 
-a {
-  font-family: "Federant", serif;
-  font-size: 3.125rem;
-  color: hsl(0, 0%, 100%);
-  font-weight: 300;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-a:hover {
-  text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
+figure {
+  margin: 0;
 }
 
 .title {
@@ -24,12 +16,52 @@ a:hover {
   text-align: center;
 }
 
-.controls-title {
-  font-family: "Federant", serif;
+.login-button {
+  background-color: hsl(194, 23%, 62%);
+  color: hsl(0, 0%, 100%);
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.875rem;
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: hsl(194, 23%, 72%);
+}
+
+.register-link {
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
   font-size: 1.875rem;
   color: hsl(0, 0%, 100%);
-  font-weight: 300;
+  text-align: center;
+  text-decoration: none;
+}
+
+.back-button {
+  position: absolute;
+  left: 0;
   margin: 0.1rem 0 1rem;
+  background: none;
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
+  font-weight: 300;
+}
+.back-button a {
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
+  font-weight: 300;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+}
+.back-button:hover {
+  text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
 }
 
 .instructions-title {
@@ -39,6 +71,31 @@ a:hover {
   font-weight: 400;
   margin-top: 1rem;
   margin-bottom: 5rem;
+}
+
+.instructions-cards {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.instruction-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: hsl(193, 13%, 28%);
+  border: 1px solid hsl(0, 0%, 47%);
+  width: 34rem;
+  text-align: center;
+}
+
+.img-cards {
+  max-width: 50%;
+  height: auto;
+  margin: 5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .text-box {
@@ -66,6 +123,37 @@ a:hover {
   color: hsl(0, 0%, 100%);
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 12rem;
+}
+
+.small-image {
+  width: 30%;
+}
+
+.small-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  background-color: hsl(193, 13%, 28%);
+  padding: 1rem;
+  width: 50rem;
+  text-align: center;
+}
+
 .card-title {
   font-family: "Karantina", system-ui;
   font-size: 2.5rem;
@@ -85,120 +173,6 @@ a:hover {
   margin-left: 4rem;
   margin-right: 4rem;
   margin-bottom: 2rem;
-  text-align: center;
-}
-
-.credits-title {
-  font-family: "Karantina", system-ui;
-  font-size: 1.875rem;
-  color: hsl(0, 0%, 100%);
-  text-align: center;
-}
-
-.credits-text {
-  font-family: "Karantina", system-ui;
-  font-size: 1.875rem;
-  font-weight: 300;
-  color: hsl(0, 0%, 100%);
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.buttons a {
-  margin-top: 2rem;
-  font-size: 2.5rem;
-  padding: 0.5rem 1rem;
-}
-
-.back-button {
-  position: absolute;
-  left: 0;
-  margin: 0.1rem 0 1rem;
-  background: none;
-  border: none;
-  color: hsl(0, 0%, 100%);
-  font-family: "Federant", serif;
-  font-size: 1.875rem;
-  font-weight: 300;
-}
-.back-button a {
-  font-family: "Federant", serif;
-  font-size: 1.875rem;
-  font-weight: 300;
-  color: hsl(0, 0%, 100%);
-  text-decoration: none;
-}
-
-.instructions-section {
-  text-align: center;
-  margin: 5rem 0;
-}
-
-.instructions-cards {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.instruction-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: hsl(193, 13%, 28%);
-  border: 1px solid hsl(0, 0%, 47%);
-  width: 34rem;
-  text-align: center;
-}
-
-figure {
-  margin: 0;
-}
-
-.img-cards {
-  max-width: 50%;
-  height: auto;
-  margin: 5rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-top: 11rem;
-}
-
-.image-container-key {
-  max-width: 50%;
-  height: auto;
-  margin-top: 10rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.small-image {
-  width: 30%;
-}
-
-.small-image img {
-  max-width: 100%;
-  height: auto;
-}
-
-.card {
-  background-color: hsl(193, 13%, 28%);
-  padding: 1rem;
-  width: 50rem;
   text-align: center;
 }
 
@@ -232,6 +206,54 @@ input[type=password] {
   text-align: center;
 }
 
+.logo-header {
+  width: 140px;
+  height: auto;
+}
+
+.logo-footer {
+  width: 83px;
+  height: auto;
+  margin-left: 28px;
+}
+
+/* Header y footer */
+.header-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(189, 7%, 19%);
+  padding: 2rem 5rem;
+  position: relative;
+}
+
+.nav-links,
+.nav-links-footer {
+  display: flex;
+  gap: 1rem;
+}
+.nav-links a,
+.nav-links-footer a {
+  display: flex;
+  align-items: center;
+  color: hsl(0, 0%, 100%);
+  font-family: "Federant", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover,
+.nav-links-footer a:hover {
+  text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  gap: 3rem;
+}
+
+/*menu hamburguesa*/
 .menu-icon {
   display: none;
   cursor: pointer;
@@ -245,11 +267,85 @@ input[type=password] {
 
 .nav-links li a {
   text-decoration: none;
-  color: hsl(0, 0%, 100%);
+  color: white;
 }
 
 .orientation-message {
   display: none;
+}
+
+.panel {
+  width: 100%;
+  max-width: 90rem;
+  margin: auto;
+  padding: 4.3rem;
+  background-color: hsl(189, 7%, 19%);
+  text-align: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+}
+
+.nav-section {
+  text-align: center;
+  position: relative;
+}
+
+.controls-title {
+  font-family: "Federant", serif;
+  font-size: 1.875rem;
+  color: hsl(0, 0%, 100%);
+  font-weight: 300;
+  margin: 0.1rem 0 1rem;
+}
+
+.divider {
+  border: none;
+  border-top: 0.4rem solid hsl(0, 0%, 100%);
+  margin: 1rem 0;
+}
+
+.controls-panel {
+  max-width: 30%;
+  height: max-content;
+}
+
+.credits-title {
+  font-family: "Karantina", system-ui;
+  font-size: 1.875rem;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+}
+
+.credits-text {
+  font-family: "Karantina", system-ui;
+  font-size: 1.875rem;
+  font-weight: 300;
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instructions-section {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.image-container-key {
+  max-width: 50%;
+  height: auto;
+  margin-top: 12rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .history-section {
@@ -279,140 +375,6 @@ input[type=password] {
   padding-right: 10rem;
 }
 
-.header-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: hsl(189, 7%, 19%);
-  padding: 2rem 5rem;
-  position: relative;
-}
-
-.logo-header {
-  width: 8.75rem;
-  height: auto;
-}
-
-.footer {
-  background-color: hsl(189, 7%, 19%);
-  padding: 2rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo-footer {
-  width: 5.188rem;
-  height: auto;
-  margin-left: 1.75rem;
-}
-
-.nav-links,
-.nav-links-footer {
-  display: flex;
-  gap: 1rem;
-}
-.nav-links a,
-.nav-links-footer a {
-  display: flex;
-  align-items: center;
-  color: hsl(0, 0%, 100%);
-  font-family: "Federant", serif;
-  font-size: 1rem;
-  font-weight: 400;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.nav-links a:hover,
-.nav-links-footer a:hover {
-  text-shadow: 0 0 0.625rem hsla(184, 86%, 71%, 0.8), 0 0 1.25rem hsla(0, 0%, 100%, 0.6), 0 0 1.875rem hsla(0, 0%, 100%, 0.4);
-}
-
-.nav-links {
-  gap: 3rem;
-}
-
-.nav-section {
-  text-align: center;
-  position: relative;
-  margin: 3rem;
-}
-
-.panel {
-  width: 100%;
-  max-width: 90rem;
-  margin: auto;
-  padding: 1rem;
-  background-color: hsl(189, 7%, 19%);
-  text-align: center;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
-}
-
-.image-container-controls {
-  display: flex;
-  justify-content: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-top: 6rem;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.banner-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.login-button {
-  background-color: hsl(194, 23%, 62%);
-  color: hsl(0, 0%, 100%);
-  padding: 0.75rem;
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  font-size: 1.875rem;
-  font-family: "Karantina", system-ui;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: hsl(194, 23%, 72%);
-}
-
-.register-link {
-  font-family: "Karantina", system-ui;
-  margin-top: 1rem;
-  font-size: 1.875rem;
-  color: hsl(0, 0%, 100%);
-  text-align: center;
-  text-decoration: none;
-}
-
-.Log_Ran_Cred {
-  background-image: url("../img/fondo.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
@@ -434,14 +396,7 @@ input[type=password] {
   text-align: center;
   margin-top: 2rem;
 }
-
-.divider {
-  border: none;
-  border-top: 0.4rem solid hsl(0, 0%, 100%);
-  margin: 1rem 0;
-}
-
-a {
+.menu-section a {
   font-family: "Federant", serif;
   font-size: 3.125rem;
   color: hsl(0, 0%, 100%);
@@ -449,8 +404,22 @@ a {
   text-decoration: none;
   transition: all 0.3s ease;
 }
-a:hover {
+.menu-section a:hover {
   text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
+  font-size: 3.625rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.buttons a {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .ranking-content {
@@ -463,16 +432,7 @@ a:hover {
   margin-right: 4rem;
   margin-bottom: 3rem;
   text-align: center;
-  min-height: 18.75rem;
-}
-
-.user {
-  text-align: left;
-}
-
-.points {
-  text-align: right;
-  min-width: 3.125rem;
+  min-height: 300px;
 }
 
 table {
@@ -484,7 +444,7 @@ table {
 th {
   font-weight: 400;
   font-size: 2.5rem;
-  padding: 0.625rem;
+  padding: 10px;
   text-align: center;
 }
 
@@ -492,7 +452,7 @@ td {
   font-family: "Neuton", serif;
   font-weight: 300;
   font-size: 1rem;
-  padding: 0.625rem;
+  padding: 10px;
   text-align: center;
 }
 
@@ -505,300 +465,26 @@ tr:nth-child(even) {
   background-color: hsl(193, 13%, 38%);
 }
 
-@media (max-width: 576px) {
-  .header-footer {
-    padding: 0.1rem;
-    margin: auto;
-    text-align: center;
-  }
-  .logo-header {
-    width: 80%;
-    max-width: 9rem;
-    margin: 0;
-    padding: 1rem;
-    display: block;
-    height: auto;
-  }
-  .banner-image {
-    width: 100%;
-    height: 40vh;
-    object-fit: cover;
-  }
-  .content {
-    display: block;
-    transition: opacity 0.3s ease;
-  }
-  .content.hidden {
-    display: none;
-  }
-  .menu-icon {
-    display: block;
-    margin: 1rem;
-    margin-right: 2rem;
-  }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: hsl(185, 8%, 27%);
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 134px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 134px);
-    background-color: hsl(185, 8%, 27%);
-  }
-  .nav-links a {
-    margin-top: 1.3rem;
-    font-size: 1rem;
-    margin-top: 2rem;
-    padding: 0.5rem 0 1.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: "";
-    display: block;
-    height: 0.0625rem;
-    background-color: hsl(185, 16%, 43%);
-    width: 70%;
-    margin: 0 auto;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .nav-links img.icons {
-    margin-right: 0.5rem;
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-  .nav-links img {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .pj-container {
-    max-width: 70%;
-    margin: 3rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
-    order: -1;
-    transform: scaleX(-1);
-  }
-  .pj-container img {
-    max-width: 100%;
-    height: auto;
-  }
-  .text-box {
-    background-color: hsl(195, 15%, 22%);
-    border: 0.00625rem solid hsl(0, 0%, 47%);
-    margin-top: 1rem;
-    padding: 1rem;
-    height: auto;
-    overflow: hidden;
-    text-align: left;
-    box-sizing: border-box;
-  }
-  .instructions-section {
-    text-align: center;
-    margin: 5rem 0;
-    margin-top: 1rem;
-    padding: 0 1rem;
-    box-sizing: border-box;
-  }
-  .instructions-title {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  .title-tarjeta {
-    font-size: 1.5625rem;
-    font-weight: 700;
-  }
-  .instructions-cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-  .instruction-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: hsl(193, 13%, 28%);
-    border: 1px solid hsl(0, 0%, 47%);
-    width: 90%;
-    max-width: 18.75rem;
-    text-align: center;
-    margin: 0 auto;
-    padding: 0;
-    height: auto;
-    box-sizing: border-box;
-  }
-  .instruction-card:nth-of-type(2) .image-container {
-    margin-left: 0.0625rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-  .img-cards {
-    max-width: 80%;
-    height: auto;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-  .text-box figcaption {
-    text-align: left;
-    font-family: "Neuton", serif;
-    font-size: 1rem;
-    color: hsl(0, 0%, 100%);
-    margin: 0;
-    white-space: normal;
-  }
-  .history-section {
-    background-color: hsl(191, 18%, 30%);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .history-container {
-    font-family: "Neuton", serif;
-    font-size: 1rem;
-    color: hsl(0, 0%, 100%);
-    text-align: left;
-    width: 100%;
-    max-width: 37.5rem;
-    padding: 1rem;
-    padding-bottom: 7rem;
-    box-sizing: border-box;
-  }
-  .history-text {
-    width: 90%;
-    max-width: 15.625rem;
-    background-color: hsl(195, 15%, 22%);
-    border: 1px solid hsl(0, 0%, 47%);
-    padding: 2rem;
-    box-sizing: border-box;
-    margin: 1rem auto;
-    overflow: visible;
-    white-space: normal;
-    color: hsl(0, 0%, 100%);
-    font-family: "Neuton", serif;
-    font-size: 1rem;
-  }
-  .image-container {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-  .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-  }
-  .footer img.logo-footer {
-    max-width: 4.375rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    margin-left: 0.5rem;
-  }
-  .footer-icons {
-    display: flex;
-    justify-content: center;
-  }
-  .footer-icon {
-    margin: 0 0.5rem;
-  }
-  .Log_Ran_Cred {
-    height: auto;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .card-title {
-    margin: 2rem;
-  }
-  .card-content {
-    margin: 0;
-    padding: 1rem;
-  }
-  .card {
-    background-color: transparent;
-    width: 100%;
-    margin-bottom: 3rem;
-    padding: 0;
-  }
-  input[type=text],
-  input[type=password] {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 0;
-    border: 1px solid hsl(0, 0%, 100%);
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .login-button {
-    padding: 0.5rem;
-    font-size: 1.875rem;
-  }
-  .register-link {
-    font-size: 1.5625rem;
-  }
-  .ranking-content {
-    padding: 1rem;
-    min-height: auto;
-  }
-  .ranking-content {
-    padding: 0.5rem;
-    margin: 0;
-    min-height: auto;
-  }
-  .logo_menu,
-  .buttons {
-    display: none;
-  }
-  .orientation-message {
-    font-family: "Federant", serif;
-    font-size: 1.875rem;
-    margin: 0;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: hsla(0, 0%, 0%, 0.3);
-    color: hsl(0, 0%, 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+.user {
+  text-align: left;
+}
+
+.points {
+  text-align: right;
+  min-width: 50px;
+}
+
+.Log_Ran_Cred {
+  background-image: url("../img/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */

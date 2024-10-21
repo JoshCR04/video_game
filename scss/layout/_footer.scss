@@ -1,15 +1,7 @@
 @use "../abstracts/variables" as *;
 
-.footer {
-  background-color: $clr-header-footer;
-  padding: 2rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .logo-footer {
-  width: 5.188rem;
+  width: 83px;
   height: auto;
-  margin-left: 1.75rem;
+  margin-left: 28px;
 }

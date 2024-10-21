@@ -3,11 +3,11 @@
 @use "./components/buttons";
 @use "./components/cards";
 @use "./components/icons";
-@use "./components/inputs";
-@use "./components/menu_hamburguesa";
+@use "./components/forms";
 @use "./components/sections";
 @use "./layout/header";
 @use "./layout/footer";
+@use "./layout/shared-layout";
 @use "./layout/navigations";
 @use "./pages/controls";
 @use "./pages/credits";
@@ -15,4 +15,4 @@
 @use "./pages/login";
 @use "./pages/menu";
 @use "./pages/ranking";
-@use "./abstracts/media";
+@use "./pages/shared";

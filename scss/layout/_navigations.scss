@@ -1,5 +1,4 @@
 @use "../abstracts/variables" as *;
-
 .nav-links,
 .nav-links-footer {
   display: flex;
@@ -16,8 +15,9 @@
     transition: color 0.3s ease;
 
     &:hover {
-      text-shadow: 0 0 0.625rem $clr-shadow-1, 0 0 1.25rem $clr-shadow-2,
-        0 0 1.875rem $clr-shadow-3;
+      text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
+        0 0 30px $clr-shadow-3;
+      font-size: calc($fs-sm + 0.1rem);
     }
   }
 }
@@ -26,8 +26,22 @@
   gap: 3rem;
 }
 
-.nav-section {
-  text-align: center;
-  position: relative;
-  margin: 3rem;
+/*menu hamburguesa*/
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+}
+.orientation-message {
+  display: none;
 }

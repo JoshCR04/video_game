@@ -1,8 +1,17 @@
 @use "../abstracts/variables" as *;
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+.credits-title {
+  font-family: $ff-primary;
+  font-size: $fs-md;
+  color: $clr-white;
+  text-align: center;
+}
+
+.credits-text {
+  font-family: $ff-primary;
+  font-size: $fs-md;
+  font-weight: $fw-light;
+  color: $clr-white;
+  margin-bottom: 2rem;
+  text-align: center;
 }

@@ -10,17 +10,9 @@
   margin-right: 4rem;
   margin-bottom: 3rem;
   text-align: center;
-  min-height: 18.75rem;
+  min-height: 300px;
 }
 
-.user {
-  text-align: left;
-}
-
-.points {
-  text-align: right;
-  min-width: 3.125rem;
-}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -30,7 +22,7 @@ table {
 th {
   font-weight: $fw-regular;
   font-size: $fs-xmd;
-  padding: 0.625rem;
+  padding: 10px;
   text-align: center;
 }
 
@@ -38,7 +30,7 @@ td {
   font-family: $ff-text;
   font-weight: $fw-light;
   font-size: $fs-sm;
-  padding: 0.625rem;
+  padding: 10px;
   text-align: center;
 }
 th {
@@ -48,4 +40,13 @@ th {
 
 tr:nth-child(even) {
   background-color: lighten($clr-tarjet, 10%);
+}
+
+.user {
+  text-align: left;
+}
+
+.points {
+  text-align: right;
+  min-width: 50px;
 }

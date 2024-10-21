@@ -5,3 +5,43 @@
   height: 100%;
   object-fit: cover;
 }
+
+.instructions-section {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.image-container-key {
+  max-width: 50%;
+  height: auto;
+  margin-top: 12rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-section {
+  background-color: $clr-history-section;
+  padding: 4rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.history-container {
+  font-family: $ff-text;
+  font-size: $fs-sm;
+  color: $clr-white;
+  text-align: left;
+  width: 100%;
+  max-width: 37rem;
+  padding-left: 1.5rem;
+}
+
+.pj-container {
+  flex: 3;
+  max-width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: end;
+  padding-right: 10rem;
+}
