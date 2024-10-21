@@ -1,0 +1,51 @@
+@use "../abstracts/variables" as *;
+
+.ranking-content {
+  background-color: $clr-light-blue;
+  font-family: $ff-primary;
+  font-size: $fs-sm;
+  color: $clr-white;
+  padding-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  min-height: 18.75rem;
+}
+
+.user {
+  text-align: left;
+}
+
+.points {
+  text-align: right;
+  min-width: 3.125rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th {
+  font-weight: $fw-regular;
+  font-size: $fs-xmd;
+  padding: 0.625rem;
+  text-align: center;
+}
+
+td {
+  font-family: $ff-text;
+  font-weight: $fw-light;
+  font-size: $fs-sm;
+  padding: 0.625rem;
+  text-align: center;
+}
+th {
+  background-color: $clr-light-blue;
+  color: $clr-white;
+}
+
+tr:nth-child(even) {
+  background-color: lighten($clr-tarjet, 10%);
+}

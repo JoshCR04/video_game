@@ -1,0 +1,25 @@
+@use "../abstracts/variables" as *;
+
+.panel {
+  width: 100%;
+  max-width: 90rem;
+  margin: auto;
+  padding: 1rem;
+  background-color: $clr-controls-panel;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+}
+
+.image-container-controls {
+  display: flex;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 6rem;
+}
+

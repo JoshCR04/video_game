@@ -1,0 +1,33 @@
+@use "../abstracts/variables" as *;
+
+.nav-links,
+.nav-links-footer {
+  display: flex;
+  gap: 1rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: $clr-white;
+    font-family: $ff-secondary;
+    font-size: $fs-sm;
+    font-weight: $fw-regular;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      text-shadow: 0 0 0.625rem $clr-shadow-1, 0 0 1.25rem $clr-shadow-2,
+        0 0 1.875rem $clr-shadow-3;
+    }
+  }
+}
+
+.nav-links {
+  gap: 3rem;
+}
+
+.nav-section {
+  text-align: center;
+  position: relative;
+  margin: 3rem;
+}

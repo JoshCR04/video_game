@@ -1,0 +1,43 @@
+@use "../abstracts/variables" as *;
+
+.fondo {
+  background: url(../img/fondo_menu.png) no-repeat center center fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.logo_menu {
+  display: table;
+  margin: 8rem auto 4rem;
+  width: 70%;
+}
+
+.menu-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.divider {
+  border: none;
+  border-top: 0.4rem solid $clr-white;
+  margin: 1rem 0;
+}
+
+a {
+  font-family: $ff-secondary;
+  font-size: $fs-xxmd;
+  color: $clr-white;
+  font-weight: $fw-light;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
+      0 0 30px $clr-shadow-3;
+  }
+}

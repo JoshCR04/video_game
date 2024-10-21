@@ -1,0 +1,21 @@
+@use "../abstracts/variables" as *;
+
+.icons {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  transition: filter 0.3s ease;
+}
+
+.icons-footer {
+  width: 32px;
+  height: 32px;
+  margin-right: 1px;
+  transition: filter 0.3s ease;
+}
+
+nav a:hover .icons,
+nav a:hover .icons-footer {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}

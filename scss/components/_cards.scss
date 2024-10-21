@@ -1,0 +1,70 @@
+@use "../abstracts/variables" as *;
+
+.instructions-section {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+
+
+.instructions-cards {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.instruction-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $clr-tarjet;
+  border: 1px solid $clr-tarjet-border;
+  width: 34rem;
+  text-align: center;
+}
+
+figure {
+  margin: 0;
+}
+
+.img-cards {
+  max-width: 50%;
+  height: auto;
+  margin: 5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 11rem;
+}
+.image-container-key {
+  max-width: 50%;
+  height: auto;
+  margin-top: 10rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-image {
+  width: 30%;
+}
+
+.small-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card {
+  background-color: $clr-tarjet;
+  padding: 1rem;
+  width: 50rem;
+  text-align: center;
+}
+
+
