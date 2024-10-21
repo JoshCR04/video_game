@@ -1,19 +1,28 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
+//iconos del header
 .icons {
-  width: 32px;
-  height: 32px;
-  margin-right: 8px;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
   transition: filter 0.3s ease;
 }
 
+//iconos del footer
 .icons-footer {
-  width: 32px;
-  height: 32px;
-  margin-right: 1px;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.063rem;
   transition: filter 0.3s ease;
+  @include respond-to($phone) {
+    display: flex;
+    justify-content: center;
+    margin: 0 0.5rem;
+  }
 }
 
+//reaccion de iconos al hover
 nav a:hover .icons,
 nav a:hover .icons-footer {
   transform: scale(1.1);

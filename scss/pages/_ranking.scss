@@ -1,4 +1,5 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 .ranking-content {
   background-color: $clr-light-blue;
@@ -11,6 +12,12 @@
   margin-bottom: 3rem;
   text-align: center;
   min-height: 300px;
+
+  @include respond-to($phone) {
+    padding: 0.5rem;
+    margin: 0;
+    min-height: auto;
+  }
 }
 
 table {
@@ -38,15 +45,7 @@ th {
   color: $clr-white;
 }
 
+//le cambia el color a la columna pares
 tr:nth-child(even) {
   background-color: lighten($clr-tarjet, 10%);
-}
-
-.user {
-  text-align: left;
-}
-
-.points {
-  text-align: right;
-  min-width: 50px;
 }

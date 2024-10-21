@@ -10,5 +10,12 @@
   height: 100vh;
   overflow: hidden;
 }
+@media only screen and (max-width: 576px) {
+  .Log_Ran_Cred {
+    height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}
 
 /*# sourceMappingURL=shared.css.map */

@@ -1,7 +1,38 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $clr-header-footer;
+  padding: 2rem 5rem;
+  position: relative;
+
+  @include respond-to($phone) {
+    padding: 0.1rem;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  @include respond-to($tablet) {
+    padding: 0.2rem;
+    margin: auto;
+    text-align: center;
+  }
+}
 
 .logo-footer {
-  width: 83px;
+  width: 5.188rem;
   height: auto;
-  margin-left: 28px;
+  margin-left: 1.75rem;
+  @include respond-to($phone) {
+    max-width: 4.375rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    margin-left: 0.5rem;
+  }
 }

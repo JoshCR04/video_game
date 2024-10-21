@@ -1,6 +1,35 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $clr-header-footer;
+  padding: 2rem 5rem;
+  position: relative;
+
+  @include respond-to($phone) {
+    padding: 0.1rem;
+    margin: auto;
+    text-align: center;
+  }
+  @include respond-to($tablet) {
+    padding: 0.2rem;
+    margin: auto;
+    text-align: center;
+  }
+}
 .logo-header {
-  width: 140px;
+  width: 8.75rem;
   height: auto;
+
+  @include respond-to($phone) {
+    width: 80%;
+    max-width: 9rem;
+    margin: 0;
+    padding: 1rem;
+    display: block;
+    height: auto;
+  }
 }

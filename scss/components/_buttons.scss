@@ -1,4 +1,5 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 .login-button {
   background-color: $clr-log-button;
@@ -11,6 +12,10 @@
   font-family: $ff-primary;
   margin-top: 1rem;
   transition: background-color 0.3s ease;
+  @include respond-to($phone) {
+    padding: 0.5rem;
+    font-size: $fs-md;
+  }
 }
 
 .login-button:hover {
@@ -24,8 +29,16 @@
   color: $clr-white;
   text-align: center;
   text-decoration: none;
+  &:hover {
+    text-shadow: 0 0 0.625rem $clr-shadow-1, 0 0 1.25rem $clr-shadow-2,
+      0 0 1.875rem $clr-shadow-3;
+  }
+  @include respond-to($phone) {
+    font-size: $fs-m;
+  }
 }
 
+//boton de back usado en controls
 .back-button {
   position: absolute;
   left: 0;
@@ -45,7 +58,7 @@
     text-decoration: none;
   }
   &:hover {
-    text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
-      0 0 30px $clr-shadow-3;
+    text-shadow: 0 0 0.625rem $clr-shadow-1, 0 0 1.25rem $clr-shadow-2,
+      0 0 1.875rem $clr-shadow-3;
   }
 }

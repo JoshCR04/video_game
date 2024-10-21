@@ -7,12 +7,11 @@
 @use "./components/sections";
 @use "./layout/header";
 @use "./layout/footer";
-@use "./layout/shared-layout";
 @use "./layout/navigations";
 @use "./pages/controls";
 @use "./pages/credits";
 @use "./pages/index";
-@use "./pages/login";
 @use "./pages/menu";
 @use "./pages/ranking";
 @use "./pages/shared";
+@use "./abstracts/mixins";

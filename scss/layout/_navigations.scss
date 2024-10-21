@@ -1,4 +1,6 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
 .nav-links,
 .nav-links-footer {
   display: flex;
@@ -20,28 +22,91 @@
       font-size: calc($fs-sm + 0.1rem);
     }
   }
-}
 
-.nav-links {
-  gap: 3rem;
+  @include respond-to($phone) {
+    padding-bottom: 1rem;
+  }
 }
-
 /*menu hamburguesa*/
 .menu-icon {
   display: none;
   cursor: pointer;
+
+  @include respond-to($phone) {
+    display: block;
+    margin: 1rem;
+    margin-right: 2rem;
+  }
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 1rem;
+
+  @include respond-to($phone) {
+    display: none; // Ocultar por defecto en móviles
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $clr-menu-desplegable;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+
+    &.active {
+      // Mostrar en móviles cuando está activo
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 134px;
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - 134px);
+      background-color: $clr-menu-desplegable;
+    }
+
+    a {
+      margin-top: 1.6rem; // Margen superior
+      font-size: $fs-sm;
+      padding: 0.5rem 0 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-decoration: none;
+      color: $clr-white;
+
+      &::after {
+        // Línea debajo del enlace
+        content: "";
+        display: block;
+        height: 0.0625rem;
+        background-color: $clr-linea-menu;
+        width: 70%;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    img.icons {
+      margin-right: 0.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 }
 
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-}
 .orientation-message {
   display: none;
 }

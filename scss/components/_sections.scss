@@ -1,2 +1,19 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
+.instructions-section {
+  text-align: center;
+  margin: 5rem 0;
+
+  @include respond-to($phone) {
+    text-align: center;
+    margin: 5rem 0;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  @include respond-to($large-desktop) {
+    margin: 3rem 0;
+  }
+}
