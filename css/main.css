@@ -450,7 +450,7 @@ button:focus {
   margin-right: 0.5rem;
   transition: filter 0.3s ease;
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) and (min-width: 925px) {
   .icons {
     width: 1rem;
     height: 1rem;
@@ -571,7 +571,7 @@ input[type=password] {
     flex-direction: row;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) and (min-width: 925px) {
   .header {
     padding: 0.1rem;
     margin: auto;
@@ -594,7 +594,7 @@ input[type=password] {
     height: auto;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) and (min-width: 925px) {
   .logo-header {
     width: 90%;
     max-width: 9rem;
@@ -683,7 +683,7 @@ input[type=password] {
     padding-bottom: 1rem;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) and (min-width: 925px) {
   .nav-links,
   .nav-links-footer {
     font-size: 1rem;
@@ -1158,7 +1158,7 @@ input[type=password] {
     z-index: 1000;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) and (min-width: 925px) {
   .fondo {
     height: 100vh;
   }
@@ -1186,7 +1186,7 @@ input[type=password] {
     display: none;
   }
 }
-@media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+@media only screen and (min-width: 769px) and (max-width: 924px) and (orientation: landscape) {
   .fondo {
     height: 100vh;
   }

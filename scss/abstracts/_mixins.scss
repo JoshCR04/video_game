@@ -1,11 +1,9 @@
 // Definición de breakpoints
 $phone: "(max-width: 576px)"; // Móviles pequeños
 $tablet: "(min-width: 577px) and (max-width: 768px)"; // Tabletas en modo retrato
-$tablet-landscape: "(min-width: 769px) and (max-width: 1024px) and (orientation: landscape)"; // Tabletas en modo paisaje
-$phone-tablet-portrait-landscape: "(max-width: 1024px)"; // Aplica tanto a teléfonos como tabletas en retrato/landscape
+$tablet-landscape: "(min-width: 769px) and (max-width: 924px) and (orientation: landscape)"; // Tabletas en modo paisaje
+$phone-tablet-portrait-landscape: "(max-width: 1024px) and (min-width: 925px)"; // Aplica tanto a teléfonos como tabletas en retrato/landscape
 $large-desktop: "(min-width: 1025px)"; // Computadoras de escritorio grandes
-
-
 
 @mixin respond-to($media) {
   @media only screen and #{$media} {
