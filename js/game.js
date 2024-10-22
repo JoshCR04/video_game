@@ -180,7 +180,7 @@ gameScene.update = function () {
 
 // Configuración del juego
 let config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     width: window.innerWidth,
     height: window.innerHeight,
     scene: gameScene,

@@ -245,3 +245,8 @@ textarea {
   }
 }
 
+canvas {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
