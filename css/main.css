@@ -970,29 +970,20 @@ input[type=password] {
 }
 
 .logo_menu {
-  display: none;
+  display: table;
   margin: 13rem auto 4rem;
-  width: 60%;
+  width: 80%;
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .logo_menu {
-    display: table;
     margin: 1rem auto 1rem;
     width: 50%;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .logo_menu {
-    display: table;
-    margin: 10rem auto 3rem;
-    width: 70%;
   }
 }
 
 .menu-section {
   text-align: center;
   margin-top: 2rem;
-  display: none;
 }
 .menu-section a {
   font-family: "Federant", serif;
@@ -1005,19 +996,9 @@ input[type=password] {
 .menu-section a:hover {
   text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  .menu-section {
-    display: block;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .menu-section {
-    display: block;
-  }
-}
 
 .buttons {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
@@ -1028,56 +1009,85 @@ input[type=password] {
   padding: 0.5rem 1rem;
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  .buttons {
-    display: flex;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .buttons {
-    display: flex;
+  .buttons a {
+    margin-top: 0;
+    font-size: 1.5625rem;
+    padding: 0.5rem 1rem;
   }
 }
 
-.orientation-message {
-  font-family: "Federant", serif;
-  font-size: 1.875rem;
-  margin: 0;
-  text-align: center;
-  padding: 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 0%, 0%, 0.3);
-  color: hsl(0, 0%, 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+@media only screen and (max-width: 480px) {
+  .logo_menu,
+  .menu-section,
+  .buttons {
+    display: none;
+  }
+  .orientation-message {
+    font-family: "Federant", serif;
+    font-size: 1.875rem;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 0%, 0.3);
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .logo_menu,
+  .menu-section,
+  .buttons {
+    display: none;
+  }
+  .orientation-message {
+    font-family: "Federant", serif;
+    font-size: 1.875rem;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 0%, 0.3);
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+  .logo_menu,
+  .menu-section,
+  .buttons {
+    display: block;
+  }
+  .orientation-message {
+    display: none;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .logo_menu,
+  .menu-section,
+  .buttons {
+    display: block;
+  }
   .orientation-message {
     display: none;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .orientation-message {
-    display: none;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .orientation-message {
-    display: flex;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .orientation-message {
-    display: flex;
-  }
-}
-
 .ranking-content {
   background-color: hsl(191, 25%, 38%);
   font-family: "Karantina", system-ui;
