@@ -1,21 +1,21 @@
 // Crea una nueva escena
 let gameScene = new Phaser.Scene('Game');
 
-// Parámetros iniciales del juego
+// Inicializa los parámetros del jugador
 gameScene.init = function () {
-    this.playerSpeed = 300;
-    this.playerJump = -440;
+    this.playerSpeed = 300; // Velocidad del jugador
+    this.playerJump = -440; // Fuerza del salto
 
-    // Datos del personaje
+    // Coordenadas del personaje
     this.playerObject = [{ type: 'player', x: 100, y: 0 }];
 
-    // Datos del suelo
-    this.gameObjects = [
-        { type: 'ground_1', x: 390, y: -65 },
-        { type: 'ground_2', x: 1485, y: -65 },
-        { type: 'ground_3', x: 2648, y: -65 },
-        { type: 'ground_4', x: 3937, y: -72 },
-        { type: 'ground_4', x: 5408, y: -72 }
+    // Coordenadas del suelo
+    this.floorCoordinates = [
+        { x: 390, y: -65, type: 'ground_1' },
+        { x: 1485, y: -65, type: 'ground_2' },
+        { x: 2648, y: -65, type: 'ground_3' },
+        { x: 3937, y: -72, type: 'ground_4' },
+        { x: 5408, y: -72, type: 'ground_4' }
     ];
 
     // Datos de enemigos
@@ -26,7 +26,7 @@ gameScene.init = function () {
         { type: 'monster', x: 4120, y: -300 }
     ];
 
-    // Assets
+    // Objetos del juego
     this.gameItems = [
         { type: 'mushroom', x: 4000, y: -190 },
         { type: 'key', x: 5400, y: -180 },
@@ -36,8 +36,8 @@ gameScene.init = function () {
         { type: 'bread', x: 1105, y: -175 }
     ];
 
-    // Datos de plataformas
-    this.platforms = [
+    // Coordenadas de plataformas
+    this.platformCoordinates = [
         { type: 'platform_1', x: 47, y: -310 },
         { type: 'platform_1', x: 147, y: -310 },
         { type: 'platform_1', x: 247, y: -310 },
@@ -97,7 +97,7 @@ gameScene.initGameObjects = function (fondo) {
 
     // Se crean los suelos
     this.grounds = this.physics.add.staticGroup();
-    this.gameObjects.forEach(obj => {
+    this.floorCoordinates.forEach(obj => {
         this.grounds.create(obj.x, fondo.height + obj.y, obj.type).setScale(1).refreshBody();
     });
 
@@ -112,7 +112,7 @@ gameScene.initGameObjects = function (fondo) {
 
     // Crear las plataformas
     this.platformGroup = this.physics.add.staticGroup();
-    this.platforms.forEach(plat => {
+    this.platformCoordinates.forEach(plat => {
         this.platformGroup.create(plat.x, fondo.height + plat.y, plat.type).setScale(1).refreshBody();
     });
 
@@ -137,10 +137,8 @@ gameScene.create = function () {
     this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    
-    // Zoom dinámico
-    this.cameras.main.setZoom(1);
-    
+    this.cameras.main.setZoom(config.height / fondo.height);
+
     // Se pone el pasto
     let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1);
 
@@ -155,46 +153,27 @@ gameScene.create = function () {
     // Control de teclas
     this.cursors = this.input.keyboard.createCursorKeys();
 };
-
 // Función para actualizar, realiza movimientos del personaje
 gameScene.update = function () {
-    // Movimiento del jugador
-    this.player.body.setVelocityX(0);
+    if (!this.cursors) return;
+
+    // Movimiento horizontal
     if (this.cursors.left.isDown) {
         this.player.body.setVelocityX(-this.playerSpeed);
     } else if (this.cursors.right.isDown) {
         this.player.body.setVelocityX(this.playerSpeed);
+    } else {
+        this.player.body.setVelocityX(0);
     }
 
     // Salto
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
+    if (this.cursors.up.isDown && this.player.body.onFloor()) {
         this.player.body.setVelocityY(this.playerJump);
     }
-
-    // Escalar el fondo y elementos según la ventana
-    this.scaleGame();
 };
 
-// Función para escalar y ajustar elementos según el tamaño de la ventana
-gameScene.scaleGame = function () {
-    let scaleX = this.scale.width / 5760;
-    let scaleY = this.scale.height / 800; // Ajusta según la altura de tu fondo
-    let scale = Math.min(scaleX, scaleY);
-
-    // Ajustar el zoom de la cámara
-    this.cameras.main.setZoom(scale);
-
-    // Ajustar tamaño y posición de los elementos
-    this.children.list.forEach(child => {
-        if (child.texture) {
-            child.setScale(scale);
-            child.setPosition(child.x * scale, child.y * scale);
-        }
-    });
-};
-
-// Inicialización del juego
-let config = {
+// Configura el juego
+const config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
@@ -208,10 +187,8 @@ let config = {
     scene: gameScene
 };
 
-// Creación de la instancia del juego
-let game = new Phaser.Game(config);
-
-// Ajustar el juego cuando cambie el tamaño de la ventana
+// Inicializa el juego
+const game = new Phaser.Game(config);
 window.addEventListener('resize', () => {
     game.scale.resize(window.innerWidth, window.innerHeight);
 });
