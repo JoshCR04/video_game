@@ -110,7 +110,6 @@ gameScene.initGameObjects = function (fondo) {
         newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
     });
 
-
     // Crear las plataformas
     this.platformGroup = this.physics.add.staticGroup();
     this.platforms.forEach(plat => {
@@ -154,6 +153,7 @@ gameScene.create = function () {
     // Control de teclas
     this.cursors = this.input.keyboard.createCursorKeys();
 };
+
 // Función para actualizar, realiza movimientos del personaje
 gameScene.update = function () {
     if (!this.cursors) return;
@@ -169,37 +169,51 @@ gameScene.update = function () {
         this.player.body.setVelocityX(0);
     }
 
-    // Saltar
-    if ((this.cursors.up.isDown || this.cursors.space.isDown) && this.player.body.onFloor()) {
+    // Salto
+    if (this.cursors.up.isDown && this.player.body.touching.down) {
         this.player.body.setVelocityY(this.playerJump);
     }
 
-    // Marcar límites del personaje
-    this.player.x = Phaser.Math.Clamp(this.player.x, 0, this.physics.world.bounds.width);
+    // Ajustar el tamaño y posición del fondo según la ventana
+    this.scaleGame();
 };
 
-// Configuración del juego
+// Función para escalar y ajustar elementos según el tamaño de la ventana
+gameScene.scaleGame = function () {
+    let scaleX = this.scale.width / 5760;
+    let scaleY = this.scale.height / 800; // Asumiendo que la altura de tu fondo es 800
+    let scale = Math.min(scaleX, scaleY);
+    
+    this.cameras.main.setZoom(scale);
+
+    // Ajusta el tamaño del fondo y elementos según la escala
+    this.children.list.forEach(child => {
+        if (child.texture) {
+            child.setScale(scale);
+            child.setPosition(child.x * scale, child.y * scale);
+        }
+    });
+};
+
+// Inicialización del juego
 let config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
-    scene: gameScene,
-    title: 'Sword Of Destiny - video_game',
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 900 },
+            gravity: { y: 0 },
             debug: false
         }
     },
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 5760, // ancho base
-        height: 1080 // alto base
-    }
+    scene: gameScene
 };
 
-// Creación del juego
+// Creación de la instancia del juego
 let game = new Phaser.Game(config);
 
+// Ajustar el juego cuando cambie el tamaño de la ventana
+window.addEventListener('resize', () => {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+});
