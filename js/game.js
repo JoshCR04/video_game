@@ -143,7 +143,7 @@ gameScene.create = function () {
     // Detectar si es dispositivo móvil o tamaño pequeño
     if (window.innerWidth < 924) {
         // Si la pantalla es pequeña (ejemplo: menos de 768px), aplica más zoom
-        this.cameras.main.setZoom(0.5); // Aumentar el zoom en móviles
+        this.cameras.main.setZoom(1); // Aumentar el zoom en móviles
     } else {
         // Si es una pantalla más grande, mantener el zoom estándar
         this.cameras.main.setZoom(config.height / fondo.height);
