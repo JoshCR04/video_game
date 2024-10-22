@@ -16,7 +16,7 @@
 .logo_menu {
   display: table;
   margin: 13rem auto 4rem;
-  width: 80%;
+  width: 60%;
   @include respond-to($tablet-landscape) {
     display: table;
     margin: 1rem auto 1rem;
@@ -39,7 +39,6 @@
     &:hover {
       text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
         0 0 30px $clr-shadow-3;
-      font-size: calc($fs-xxmd + 0.5rem);
     }
   }
 }

@@ -39,7 +39,7 @@ button:focus {
   margin-top: 1rem;
   transition: background-color 0.3s ease;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .login-button {
     padding: 0.5rem;
     font-size: 1.875rem;
@@ -61,7 +61,7 @@ button:focus {
 .register-link:hover {
   text-shadow: 0 0 0.625rem hsla(184, 86%, 71%, 0.8), 0 0 1.25rem hsla(0, 0%, 100%, 0.6), 0 0 1.875rem hsla(0, 0%, 100%, 0.4);
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .register-link {
     font-size: 1.5625rem;
   }
@@ -97,13 +97,13 @@ button:focus {
   margin-top: 1rem;
   margin-bottom: 5rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .instructions-title {
     padding: 1rem;
     margin-bottom: 1rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .instructions-title {
     padding: 1.25rem;
     margin-bottom: 1.25rem;
@@ -116,7 +116,7 @@ button:focus {
   gap: 3rem;
   flex-wrap: wrap;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .instructions-cards {
     display: flex;
     flex-direction: column;
@@ -125,7 +125,7 @@ button:focus {
     padding: 0 1rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .instructions-cards {
     display: flex;
     flex-direction: column;
@@ -144,7 +144,7 @@ button:focus {
   width: 34rem;
   text-align: center;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .instruction-card {
     display: flex;
     flex-direction: column;
@@ -165,7 +165,7 @@ button:focus {
     padding-bottom: 4rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .instruction-card {
     display: flex;
     flex-direction: column;
@@ -194,7 +194,7 @@ button:focus {
   align-items: center;
   justify-content: center;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .img-cards {
     max-width: 80%;
     height: auto;
@@ -202,7 +202,7 @@ button:focus {
     padding: 1rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .img-cards {
     max-width: 85%;
     height: auto;
@@ -220,7 +220,7 @@ button:focus {
   padding: 2rem;
   height: 15rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .text-box {
     background-color: hsl(195, 15%, 22%);
     border: 0.00625rem solid hsl(0, 0%, 47%);
@@ -240,7 +240,7 @@ button:focus {
     white-space: normal;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .text-box {
     background-color: hsl(195, 15%, 22%);
     border: 0.0625rem solid hsl(0, 0%, 47%);
@@ -276,13 +276,13 @@ button:focus {
   font-size: 2.5rem;
   color: hsl(0, 0%, 100%);
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .title-tarjeta {
     font-size: 1.5625rem;
     font-weight: 700;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .title-tarjeta {
     font-size: 1.5625rem;
     font-weight: 700;
@@ -296,14 +296,14 @@ button:focus {
   margin-right: 2rem;
   margin-top: 12rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .image-container {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .image-container {
     margin-top: 1.5rem;
     display: flex;
@@ -317,13 +317,13 @@ button:focus {
   align-items: center;
   width: 100%;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .container {
     flex-direction: column;
     align-items: center;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -336,7 +336,7 @@ button:focus {
   width: 50rem;
   text-align: center;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .card {
     background-color: transparent;
     width: 100%;
@@ -344,7 +344,7 @@ button:focus {
     padding: 0;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .card {
     background-color: transparent;
     width: 100%;
@@ -361,12 +361,12 @@ button:focus {
   margin-bottom: 1rem;
   text-align: center;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .card-title {
     margin: 2rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .card-title {
     margin: 2.5rem;
   }
@@ -384,13 +384,13 @@ button:focus {
   margin-bottom: 2rem;
   text-align: center;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .card-content {
     margin: 0;
     padding: 1rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .card-content {
     margin: 2rem;
     padding: 1.5rem;
@@ -410,7 +410,7 @@ button:focus {
   margin-right: 0.063rem;
   transition: filter 0.3s ease;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .icons-footer {
     display: flex;
     justify-content: center;
@@ -424,7 +424,7 @@ button:focus {
   background-color: hsl(189, 7%, 19%);
   padding: 1rem 2rem;
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .icons-footer .header {
     padding: 1rem;
     flex-direction: row;
@@ -440,7 +440,7 @@ button:focus {
   display: block;
   cursor: pointer;
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .icons-footer .menu-icon {
     display: block;
     z-index: 1000;
@@ -471,7 +471,7 @@ input[type=password] {
   text-align: center;
   margin: 5rem 0;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .instructions-section {
     text-align: center;
     margin: 5rem 0;
@@ -480,7 +480,7 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .instructions-section {
     text-align: center;
     margin: 5rem 0;
@@ -498,14 +498,14 @@ input[type=password] {
   padding: 2rem 5rem;
   position: relative;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .header {
     padding: 0.1rem;
     margin: auto;
     text-align: center;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .header {
     margin: auto;
     text-align: center;
@@ -517,7 +517,7 @@ input[type=password] {
   width: 8.75rem;
   height: auto;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .logo-header {
     width: 80%;
     max-width: 9rem;
@@ -536,7 +536,7 @@ input[type=password] {
   padding: 2rem 5rem;
   position: relative;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .footer {
     padding: 0.1rem;
     margin: auto;
@@ -547,7 +547,7 @@ input[type=password] {
     padding: 1rem 0;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .footer {
     margin: auto;
     display: flex;
@@ -562,7 +562,7 @@ input[type=password] {
   height: auto;
   margin-left: 1.75rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .logo-footer {
     max-width: 4.375rem;
     margin-top: 1rem;
@@ -570,7 +570,7 @@ input[type=password] {
     margin-left: 0.5rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .logo-footer {
     max-width: 5rem;
     margin-top: 1.5rem;
@@ -600,7 +600,7 @@ input[type=password] {
   text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
   font-size: 1.1rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .nav-links,
   .nav-links-footer {
     padding-bottom: 1rem;
@@ -612,14 +612,14 @@ input[type=password] {
   display: none;
   cursor: pointer;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .menu-icon {
     display: block;
     margin: 1rem;
     margin-right: 2rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .menu-icon {
     display: block;
     z-index: 1000;
@@ -636,7 +636,7 @@ input[type=password] {
   display: flex;
   gap: 1rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .nav-links {
     display: none;
     flex-direction: column;
@@ -692,7 +692,7 @@ input[type=password] {
     height: 1.5rem;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .nav-links {
     display: none;
     flex-direction: column;
@@ -813,14 +813,14 @@ input[type=password] {
   height: 100%;
   object-fit: cover;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .banner-image {
     width: 100%;
     height: 40vh;
     object-fit: cover;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .banner-image {
     width: 100%;
     height: 50vh;
@@ -852,7 +852,7 @@ input[type=password] {
   align-items: flex-start;
   justify-content: space-between;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .history-section {
     background-color: hsl(191, 18%, 30%);
     padding: 0;
@@ -865,7 +865,7 @@ input[type=password] {
     margin-right: auto;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .history-section {
     background-color: hsl(191, 18%, 30%);
     padding: 0;
@@ -888,7 +888,7 @@ input[type=password] {
   max-width: 37rem;
   padding-left: 1.5rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .history-container {
     font-family: "Neuton", serif;
     font-size: 1rem;
@@ -901,7 +901,7 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .history-container {
     font-family: "Neuton", serif;
     font-size: 1rem;
@@ -923,7 +923,7 @@ input[type=password] {
   justify-content: end;
   padding-right: 10rem;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .pj-container {
     max-width: 70%;
     margin: 3rem auto;
@@ -940,7 +940,7 @@ input[type=password] {
     height: auto;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .pj-container {
     max-width: 75%;
     margin: 3rem auto;
@@ -972,7 +972,7 @@ input[type=password] {
 .logo_menu {
   display: table;
   margin: 13rem auto 4rem;
-  width: 80%;
+  width: 60%;
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
   .logo_menu {
@@ -996,7 +996,6 @@ input[type=password] {
 }
 .menu-section a:hover {
   text-shadow: 0 0 10px hsla(184, 86%, 71%, 0.8), 0 0 20px hsla(0, 0%, 100%, 0.6), 0 0 30px hsla(0, 0%, 100%, 0.4);
-  font-size: 3.625rem;
 }
 
 .buttons {
@@ -1019,7 +1018,7 @@ input[type=password] {
   }
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .logo_menu,
   .buttons {
     display: none;
@@ -1044,7 +1043,7 @@ input[type=password] {
     z-index: 1000;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .logo_menu,
   .buttons {
     display: none;
@@ -1081,7 +1080,7 @@ input[type=password] {
   text-align: center;
   min-height: 300px;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .ranking-content {
     padding: 0.5rem;
     margin: 0;
@@ -1131,14 +1130,14 @@ tr:nth-child(even) {
   height: 100vh;
   overflow: hidden;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1rem;
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1.5rem;

@@ -10,14 +10,14 @@
   height: 100vh;
   overflow: hidden;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1rem;
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1.5rem;

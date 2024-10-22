@@ -1,8 +1,7 @@
 // Definición de breakpoints
-$phone: "(max-width: 576px)"; // Móviles pequeños
-$tablet: "(min-width: 577px) and (max-width: 768px)"; // Tabletas en modo retrato
+$phone: "(max-width: 480px)"; // Móviles pequeños
+$tablet: "(min-width: 481px) and (max-width: 768px)"; // Tabletas en modo retrato
 $tablet-landscape: "(min-width: 769px) and (max-width: 1024px) and (orientation: landscape)"; // Tabletas en modo paisaje
-
 
 @mixin respond-to($media) {
   @media only screen and #{$media} {
