@@ -179,11 +179,10 @@ gameScene.update = function () {
 };
 
 // Configuración del juego
-// Configuración del juego
 let config = {
     type: Phaser.AUTO,
-    width: window.innerWidth >= 768 ? 5760 : window.innerWidth, // Ancho total si es pantalla grande
-    height: window.innerWidth >= 768 ? window.innerHeight : window.innerHeight * (window.innerWidth / 5760), // Ajuste de altura para pantallas pequeñas
+    width: window.innerWidth,
+    height: window.innerHeight,
     scene: gameScene,
     title: 'Sword Of Destiny - video_game',
     physics: {
@@ -197,48 +196,4 @@ let config = {
 
 // Creación del juego
 let game = new Phaser.Game(config);
-
-// Reajustar el tamaño del juego al cambiar el tamaño de la ventana
-window.addEventListener('resize', () => {
-    if (window.innerWidth < 768) {
-        game.scale.resize(window.innerWidth, window.innerHeight * (window.innerWidth / 5760));
-    } else {
-        game.scale.resize(5760, window.innerHeight);
-    }
-});
-
-// Ajustar la cámara y el tamaño de los elementos al crear la escena
-gameScene.create = function () {
-    let fondo = this.add.image(0, 0, 'background').setOrigin(0, 0);
-    let fondoMedio = this.add.image(0, 0, 'background_medium').setOrigin(0, 0);
-    
-    // Ajustar escala de fondo para que encaje
-    fondo.setScale(this.cameras.main.width / fondo.width, this.cameras.main.height / fondo.height);
-    fondoMedio.setScale(this.cameras.main.width / fondo.width, this.cameras.main.height / fondo.height);
-
-    // Inicializa los objetos del juego
-    this.initGameObjects(fondo);
-
-    // Se establecen los límites del mapa
-    const worldWidth = 5760; // ancho
-    const worldHeight = fondo.height;
-    this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
-    this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    this.cameras.main.setZoom(config.height / fondo.height);
-
-    // Se pone el pasto
-    let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1).setScale(this.cameras.main.width / fondo.width);
-
-    // Colisiones
-    this.physics.add.collider(this.player, this.grounds);
-    this.physics.add.collider(this.player, this.platformGroup);
-    this.physics.add.collider(this.player, this.enemiesGroup);
-    this.physics.add.collider(this.player, this.gameItemsGroup);
-    this.physics.add.collider(this.enemiesGroup, this.grounds);
-    this.physics.add.collider(this.enemiesGroup, this.platformGroup);
-
-    // Control de teclas
-    this.cursors = this.input.keyboard.createCursorKeys();
-};
 
