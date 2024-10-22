@@ -26,7 +26,7 @@ gameScene.init = function () {
         { type: 'monster', x: 4120, y: -300 }
     ];
 
-    //assets
+    // Assets
     this.gameItems = [
         { type: 'mushroom', x: 4000, y: -190 },
         { type: 'key', x: 5400, y: -180 },
@@ -101,7 +101,7 @@ gameScene.initGameObjects = function (fondo) {
         this.grounds.create(obj.x, fondo.height + obj.y, obj.type).setScale(1).refreshBody();
     });
 
-    // Crea enemigos
+    // Crear enemigos
     this.enemiesGroup = this.physics.add.group();
     this.enemiesObjects.forEach(enemy => {
         let newEnemy = this.enemiesGroup.create(enemy.x, fondo.height + enemy.y, enemy.type);
@@ -137,8 +137,10 @@ gameScene.create = function () {
     this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    this.cameras.main.setZoom(config.height / fondo.height);
-
+    
+    // Zoom dinámico
+    this.cameras.main.setZoom(1);
+    
     // Se pone el pasto
     let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1);
 
@@ -156,17 +158,12 @@ gameScene.create = function () {
 
 // Función para actualizar, realiza movimientos del personaje
 gameScene.update = function () {
-    if (!this.cursors) return;
-
-    // Movimiento horizontal
+    // Movimiento del jugador
+    this.player.body.setVelocityX(0);
     if (this.cursors.left.isDown) {
         this.player.body.setVelocityX(-this.playerSpeed);
-        this.player.flipX = true;
     } else if (this.cursors.right.isDown) {
         this.player.body.setVelocityX(this.playerSpeed);
-        this.player.flipX = false;
-    } else {
-        this.player.body.setVelocityX(0);
     }
 
     // Salto
@@ -174,19 +171,20 @@ gameScene.update = function () {
         this.player.body.setVelocityY(this.playerJump);
     }
 
-    // Ajustar el tamaño y posición del fondo según la ventana
+    // Escalar el fondo y elementos según la ventana
     this.scaleGame();
 };
 
 // Función para escalar y ajustar elementos según el tamaño de la ventana
 gameScene.scaleGame = function () {
     let scaleX = this.scale.width / 5760;
-    let scaleY = this.scale.height / 800; // Asumiendo que la altura de tu fondo es 800
+    let scaleY = this.scale.height / 800; // Ajusta según la altura de tu fondo
     let scale = Math.min(scaleX, scaleY);
-    
+
+    // Ajustar el zoom de la cámara
     this.cameras.main.setZoom(scale);
 
-    // Ajusta el tamaño del fondo y elementos según la escala
+    // Ajustar tamaño y posición de los elementos
     this.children.list.forEach(child => {
         if (child.texture) {
             child.setScale(scale);
