@@ -138,7 +138,16 @@ gameScene.create = function () {
     this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    this.cameras.main.setZoom(config.height / fondo.height);
+ 
+
+    // Detectar si es dispositivo móvil o tamaño pequeño
+    if (window.innerWidth < 768) {
+        // Si la pantalla es pequeña (ejemplo: menos de 768px), aplica más zoom
+        this.cameras.main.setZoom(2); // Aumentar el zoom en móviles
+    } else {
+        // Si es una pantalla más grande, mantener el zoom estándar
+        this.cameras.main.setZoom(config.height / fondo.height);
+    }
 
     // Se pone el pasto
     let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1);
