@@ -26,7 +26,7 @@ gameScene.init = function () {
         { type: 'monster', x: 4120, y: -300 }
     ];
 
-    // Assets del juego
+    //assets
     this.gameItems = [
         { type: 'mushroom', x: 4000, y: -190 },
         { type: 'key', x: 5400, y: -180 },
@@ -101,7 +101,7 @@ gameScene.initGameObjects = function (fondo) {
         this.grounds.create(obj.x, fondo.height + obj.y, obj.type).setScale(1).refreshBody();
     });
 
-    // Crear enemigos
+    // Crea enemigos
     this.enemiesGroup = this.physics.add.group();
     this.enemiesObjects.forEach(enemy => {
         let newEnemy = this.enemiesGroup.create(enemy.x, fondo.height + enemy.y, enemy.type);
@@ -109,6 +109,7 @@ gameScene.initGameObjects = function (fondo) {
         newEnemy.setCollideWorldBounds(true);
         newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
     });
+
 
     // Crear las plataformas
     this.platformGroup = this.physics.add.staticGroup();
@@ -137,10 +138,7 @@ gameScene.create = function () {
     this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    
-    // Se ajusta el zoom dependiendo del ancho del dispositivo
-    const zoomFactor = window.innerWidth / fondo.width;
-    this.cameras.main.setZoom(zoomFactor);
+    this.cameras.main.setZoom(config.height / fondo.height);
 
     // Se pone el pasto
     let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1);
@@ -156,7 +154,6 @@ gameScene.create = function () {
     // Control de teclas
     this.cursors = this.input.keyboard.createCursorKeys();
 };
-
 // Función para actualizar, realiza movimientos del personaje
 gameScene.update = function () {
     if (!this.cursors) return;
@@ -172,11 +169,13 @@ gameScene.update = function () {
         this.player.body.setVelocityX(0);
     }
 
-    // Saltar si está tocando suelo
-    let onGround = this.player.body.blocked.down || this.player.body.touching.down;
-    if (this.cursors.up.isDown && onGround) {
+    // Saltar
+    if ((this.cursors.up.isDown || this.cursors.space.isDown) && this.player.body.onFloor()) {
         this.player.body.setVelocityY(this.playerJump);
     }
+
+    // Marcar límites del personaje
+    this.player.x = Phaser.Math.Clamp(this.player.x, 0, this.physics.world.bounds.width);
 };
 
 // Configuración del juego
@@ -184,22 +183,23 @@ let config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
-    scale: {
-        mode: Phaser.Scale.RESIZE, // Ajustar escala automáticamente
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        min: {
-            width: 320, height: 180 // Mínimo para móviles pequeños
-        }
-    },
+    scene: gameScene,
+    title: 'Sword Of Destiny - video_game',
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 900 },
-            debug: true
+            debug: false
         }
     },
-    scene: gameScene
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 5760, // ancho base
+        height: 1080 // alto base
+    }
 };
 
-// Crea una nueva instancia del juego
+// Creación del juego
 let game = new Phaser.Game(config);
+
