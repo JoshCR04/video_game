@@ -181,8 +181,8 @@ gameScene.update = function () {
 // Configuración del juego
 let config = {
     type: Phaser.AUTO,
-    width: window.innerWidth >= 768 ? 5760 : window.innerWidth, // Ancho total si es pantalla grande
-    height: window.innerWidth >= 768 ? window.innerHeight : window.innerHeight * (window.innerWidth / 5760), // Ajuste de altura para pantallas pequeñas
+    width: window.innerWidth,
+    height: window.innerHeight,
     scene: gameScene,
     title: 'Sword Of Destiny - video_game',
     physics: {
@@ -197,11 +197,3 @@ let config = {
 // Creación del juego
 let game = new Phaser.Game(config);
 
-// Reajustar el tamaño del juego al cambiar el tamaño de la ventana
-window.addEventListener('resize', () => {
-    if (window.innerWidth < 768) {
-        game.scale.resize(window.innerWidth, window.innerHeight * (window.innerWidth / 5760));
-    } else {
-        game.scale.resize(5760, window.innerHeight);
-    }
-});
