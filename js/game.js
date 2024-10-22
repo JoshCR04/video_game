@@ -11,36 +11,37 @@ gameScene.init = function () {
 
     // Datos del suelo
     this.gameObjects = [
-        { type: 'ground_1', x: 390, y: -65 },
-        { type: 'ground_2', x: 1485, y: -65 },
-        { type: 'ground_3', x: 2648, y: -65 },
-        { type: 'ground_4', x: 3937, y: -72 },
-        { type: 'ground_4', x: 5408, y: -72 }
+        { type: 'ground_1', x: 0.5, y: -65 },
+        { type: 'ground_2', x: 0.5, y: -65 },
+        { type: 'ground_3', x: 0.5, y: -65 },
+        { type: 'ground_4', x: 0.5, y: -72 },
+        { type: 'ground_4', x: 0.5, y: -72 }
     ];
 
     // Datos de enemigos
     this.enemiesObjects = [
-        { type: 'flying_bug', x: 920, y: -600 },
-        { type: 'flying_bug', x: 790, y: -300 },
-        { type: 'witch', x: 2420, y: -350 },
-        { type: 'monster', x: 4120, y: -300 }
+        { type: 'flying_bug', x: 0.5, y: -600 },
+        { type: 'flying_bug', x: 0.5, y: -300 },
+        { type: 'witch', x: 0.5, y: -350 },
+        { type: 'monster', x: 0.5, y: -300 }
     ];
 
     // Assets
     this.gameItems = [
-        { type: 'mushroom', x: 4000, y: -190 },
-        { type: 'key', x: 5400, y: -180 },
-        { type: 'crow', x: 2960, y: -510 },
-        { type: 'goblin', x: 1249, y: -331 },
-        { type: 'sword', x: 40, y: -500 },
-        { type: 'bread', x: 1105, y: -175 }
+        { type: 'mushroom', x: 0.5, y: -190 },
+        { type: 'key', x: 0.5, y: -180 },
+        { type: 'crow', x: 0.5, y: -510 },
+        { type: 'goblin', x: 0.5, y: -331 },
+        { type: 'sword', x: 0.5, y: -500 },
+        { type: 'bread', x: 0.5, y: -175 }
     ];
 
     // Datos de plataformas
     this.platforms = [
-        { type: 'platform_1', x: 47, y: -310 },
-        { type: 'platform_1', x: 147, y: -310 },
-        // ... (continúa con los demás objetos de plataforma)
+        { type: 'platform_1', x: 0.5, y: -310 },
+        { type: 'platform_1', x: 0.5, y: -310 },
+        { type: 'platform_1', x: 0.5, y: -310 },
+        // Añadir más plataformas según sea necesario
     ];
 };
 
@@ -67,7 +68,6 @@ gameScene.preload = function () {
     this.load.image('goblin', '../img/assets/duende.png');
 };
 
-
 // Función para inicializar los objetos del juego
 gameScene.initGameObjects = function (fondo) {
     // Se posiciona al jugador
@@ -80,13 +80,13 @@ gameScene.initGameObjects = function (fondo) {
     // Se crean los suelos
     this.grounds = this.physics.add.staticGroup();
     this.gameObjects.forEach(obj => {
-        this.grounds.create(obj.x, fondo.height + obj.y, obj.type).setScale(1).refreshBody();
+        this.grounds.create(this.scale.width * obj.x, fondo.height + obj.y, obj.type).setScale(1).refreshBody();
     });
 
     // Crea enemigos
     this.enemiesGroup = this.physics.add.group();
     this.enemiesObjects.forEach(enemy => {
-        let newEnemy = this.enemiesGroup.create(enemy.x, fondo.height + enemy.y, enemy.type);
+        let newEnemy = this.enemiesGroup.create(this.scale.width * enemy.x, fondo.height + enemy.y, enemy.type);
         newEnemy.body.setAllowGravity(enemy.type !== 'flying_bug');
         newEnemy.setCollideWorldBounds(true);
         newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
@@ -95,19 +95,21 @@ gameScene.initGameObjects = function (fondo) {
     // Crear las plataformas
     this.platformGroup = this.physics.add.staticGroup();
     this.platforms.forEach(plat => {
-        this.platformGroup.create(plat.x, fondo.height + plat.y, plat.type).setScale(1).refreshBody();
+        this.platformGroup.create(this.scale.width * plat.x, fondo.height + plat.y, plat.type).setScale(1).refreshBody();
     });
 
-    // Objetos del juego
+    // Objetos del juego (llave, espada, pan, hongo, duende, cuervo)
     this.gameItemsGroup = this.physics.add.staticGroup();
     this.gameItems.forEach(item => {
-        this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type).setScale(1).refreshBody();
+        this.gameItemsGroup.create(this.scale.width * item.x, fondo.height + item.y, item.type).setScale(1).refreshBody();
     });
 };
 
 // Crea los elementos del juego
 gameScene.create = function () {
     let fondo = this.add.image(0, 0, 'background').setOrigin(0, 0);
+    let fondoMedio = this.add.image(0, 0, 'background_medium').setOrigin(0, 0);
+
     // Inicializa los objetos del juego
     this.initGameObjects(fondo);
 
@@ -117,7 +119,10 @@ gameScene.create = function () {
     this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-    this.cameras.main.setZoom(window.innerHeight / fondo.height); // Ajusta el zoom dinámicamente
+    this.cameras.main.setZoom(config.height / fondo.height);
+
+    // Se pone el pasto
+    let pastoSuperior = this.add.image(0, fondo.height, 'background_superior').setOrigin(0, 1);
 
     // Colisiones
     this.physics.add.collider(this.player, this.grounds);
@@ -129,9 +134,6 @@ gameScene.create = function () {
 
     // Control de teclas
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    // Controles táctiles (opcional)
-    this.input.addPointer(1); // Añade un segundo puntero para el control táctil
 };
 
 // Función para actualizar, realiza movimientos del personaje
@@ -171,8 +173,20 @@ let config = {
             gravity: { y: 900 },
             debug: false
         }
-    }
+    },
 };
 
-// Creación del juego
+// Inicia el juego
 let game = new Phaser.Game(config);
+
+// Manejo del evento de redimensionamiento de la ventana
+window.addEventListener('resize', () => {
+    let newWidth = window.innerWidth;
+    let newHeight = window.innerHeight;
+    game.scale.resize(newWidth, newHeight);
+    game.scene.scenes.forEach(scene => {
+        if (scene.initGameObjects) {
+            scene.initGameObjects(scene.add.image(0, 0, 'background').setOrigin(0, 0));
+        }
+    });
+});
