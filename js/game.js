@@ -185,6 +185,10 @@ let config = {
     height: window.innerHeight,
     scene: gameScene,
     title: 'Sword Of Destiny - video_game',
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -193,7 +197,13 @@ let config = {
         }
     }
 };
-
 // Creación del juego
 let game = new Phaser.Game(config);
+
+window.addEventListener('resize', function () {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+});
+
+
+
 
