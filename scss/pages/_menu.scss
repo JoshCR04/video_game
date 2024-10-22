@@ -1,7 +1,7 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-//menu juego
+// Estilos globales para el menú y el mensaje de rotar
 .fondo {
   background: url(../img/fondo_menu.png) no-repeat center center fixed;
   background-size: cover;
@@ -13,21 +13,32 @@
   padding: 0;
 }
 
+// Logo del menú
 .logo_menu {
-  display: table;
+  display: none; // Se oculta por defecto en modo retrato (tanto en teléfonos como en tabletas)
   margin: 13rem auto 4rem;
   width: 60%;
+
+  // Mostrar en modo paisaje para teléfonos y tabletas
   @include respond-to($tablet-landscape) {
     display: table;
     margin: 1rem auto 1rem;
     width: 50%;
-    
+  }
+  
+  @include respond-to($tablet) {
+    display: table;
+    margin: 10rem auto 3rem;
+    width: 70%;
   }
 }
 
+// Sección del menú
 .menu-section {
   text-align: center;
   margin-top: 2rem;
+  display: none; // Se oculta por defecto en modo retrato (teléfonos y tabletas)
+
   a {
     font-family: $ff-secondary;
     font-size: $fs-xxmd;
@@ -37,77 +48,78 @@
     transition: all 0.3s ease;
 
     &:hover {
-      text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2,
-        0 0 30px $clr-shadow-3;
+      text-shadow: 0 0 10px $clr-shadow-1, 0 0 20px $clr-shadow-2, 0 0 30px $clr-shadow-3;
     }
+  }
+
+  // Mostrar en modo paisaje para teléfonos y tabletas
+  @include respond-to($tablet-landscape) {
+    display: block;
+  }
+
+  @include respond-to($tablet) {
+    display: block;
   }
 }
 
+// Botones del menú
 .buttons {
-  display: flex;
+  display: none; // Se ocultan por defecto en modo retrato
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
-}
 
-.buttons a {
-  margin-top: 2rem;
-  font-size: $fs-xmd;
-  padding: 0.5rem 1rem;
-  @include respond-to($tablet-landscape) {
-    margin-top: 0;
-    font-size: $fs-m;
+  a {
+    margin-top: 2rem;
+    font-size: $fs-xmd;
     padding: 0.5rem 1rem;
   }
+
+  // Mostrar en modo paisaje para teléfonos y tabletas
+  @include respond-to($tablet-landscape) {
+    display: flex;
+  }
+
+  @include respond-to($tablet) {
+    display: flex;
+  }
 }
 
-@include respond-to($phone) {
-  .logo_menu,
-  .buttons {
+// Mensaje de orientación (rotar el dispositivo)
+.orientation-message {
+  font-family: $ff-secondary;
+  font-size: $fs-md;
+  margin: 0;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $clr-aviso-rotar;
+  color: $clr-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  // Ocultar en modo paisaje para teléfonos y tabletas
+  @include respond-to($tablet-landscape) {
     display: none;
   }
-  .orientation-message {
-    font-family: $ff-secondary;
-    font-size: $fs-md;
-    margin: 0;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $clr-aviso-rotar;
-    color: $clr-white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-}
-@include respond-to($tablet) {
-  .logo_menu,
-  .buttons {
+
+  @include respond-to($tablet) {
     display: none;
   }
-  .orientation-message {
-    font-family: $ff-secondary;
-    font-size: $fs-md;
-    margin: 0;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $clr-aviso-rotar;
-    color: $clr-white;
+
+  // Mostrar en modo retrato para teléfonos y tabletas
+  @include respond-to($phone) {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  }
+
+  @include respond-to($tablet) {
+    display: flex;
   }
 }

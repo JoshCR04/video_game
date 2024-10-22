@@ -17,7 +17,7 @@
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 481px) and (max-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1.5rem;
