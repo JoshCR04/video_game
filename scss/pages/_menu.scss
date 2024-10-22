@@ -17,11 +17,11 @@
 .logo_menu {
   display: table;
   margin: 13rem auto 4rem;
-  width: 80%;
+  width: 60%;
 
   // Ajustes para tabletas en modo paisaje
   @include respond-to($tablet-landscape) {
-    margin: 1rem auto 1rem;
+    margin: 13rem auto 2rem;
     width: 50%;
   }
 }
@@ -55,7 +55,7 @@
 
   a {
     margin-top: 2rem;
-    font-size: $fs-xmd;
+    font-size: $fs-xxmd;
     padding: 0.5rem 1rem;
 
     @include respond-to($tablet-landscape) {
