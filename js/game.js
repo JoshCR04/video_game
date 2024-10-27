@@ -146,14 +146,15 @@ gameScene.initGameObjects = function (fondo) {
       .refreshBody();
   });
 
-  // Objetos del juego (llave, espada, pan, hongo, duende, cuervo)
-  this.gameItemsGroup = this.physics.add.staticGroup();
+  // Crear objetos del juego (llave, espada, pan, hongo, etc.)
+  this.gameItemsGroup = this.physics.add.group();
   this.gameItems.forEach((item) => {
-    this.gameItemsGroup
-      .create(item.x, fondo.height + item.y, item.type)
-      .setScale(1)
-      .refreshBody();
+    let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
+    newItem.type = item.type;
+    newItem.setImmovable(true); // Evita que el objeto se mueva al colisionar
+    newItem.body.setAllowGravity(false); // Desactiva la gravedad en el objeto
   });
+
 
   // Inicializar el texto de vidas
   this.livesText = this.add.text(16, 16, 'Lives: ' + this.lives, {
@@ -161,6 +162,17 @@ gameScene.initGameObjects = function (fondo) {
     fill: '#FFFFFF'
   });
 };
+
+
+// Función para manejar la recogida de un objeto
+gameScene.collectItem = function (player, item) {
+  if (item.type === 'bread') {
+    this.lives++;
+    this.livesText.setText('Lives: ' + this.lives);
+  }
+  item.destroy(); // Eliminar el objeto recolectado
+};
+
 
 // Crea los elementos del juego
 gameScene.create = function () {
@@ -184,9 +196,12 @@ gameScene.create = function () {
   // Colisiones
   this.physics.add.collider(this.player, this.grounds);
   this.physics.add.collider(this.player, this.platformGroup);
-  this.physics.add.collider(this.player, this.gameItemsGroup);
-  this.physics.add.collider(this.enemiesGroup, this.grounds);
   this.physics.add.collider(this.enemiesGroup, this.platformGroup);
+  this.physics.add.collider(this.enemiesGroup, this.grounds);
+
+  // Colisión entre el jugador y los objetos del juego
+  this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this);
+
 
   // Colisión entre el jugador y los enemigos
   this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this);
@@ -194,6 +209,8 @@ gameScene.create = function () {
   // Control de teclas
   this.cursors = this.input.keyboard.createCursorKeys();
 };
+
+
 
 // Función para manejar la pérdida del juego
 gameScene.handleGameOver = function () {
@@ -227,10 +244,20 @@ gameScene.handleGameOver = function () {
       this.lives = 3;
       this.scene.restart();
     }, null, this);
+
   } else {
-    // Reiniciar la posición del jugador y hacer que regrese a la vida
-    this.player.setPosition(this.playerObject[0].x, this.playerObject[0].y);
+    // El jugador pierde una vida, pero no regresa a la posición inicial
     this.cameras.main.shake(200, 0.02);
+
+    // Activar un efecto de invulnerabilidad temporal
+    this.player.setAlpha(0.5); // Cambia la transparencia del jugador
+    this.player.body.setEnable(false); // Desactiva colisiones
+
+    // Después de 1 segundo, restaurar al jugador
+    this.time.delayedCall(1000, () => {
+      this.player.setAlpha(1); // Restaurar la transparencia
+      this.player.body.setEnable(true); // Reactivar colisiones
+    }, null, this);
   }
 };
 
