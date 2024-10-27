@@ -10,6 +10,7 @@ gameScene.init = function () {
   this.playerSpeed = 300;
   this.playerJump = -440;
 
+
   // Datos del personaje
   this.playerObject = [{ type: "player", x: 100, y: 0 }];
 
@@ -213,7 +214,7 @@ gameScene.handleGameOver = function () {
       0x000000
     ).setOrigin(0.5).setDepth(1);
 
-    let textStyle = { font: "64px Arial", fill: "#FFFFFF", align: "center" };
+    let textStyle = { font: "64px Karantina", fill: "#FFFFFF", align: "center" };
     let text = this.add.text(
       this.cameras.main.midPoint.x,
       this.cameras.main.midPoint.y,
