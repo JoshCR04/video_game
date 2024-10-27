@@ -24,11 +24,13 @@ gameScene.init = function () {
 
   // Datos de enemigos
   this.enemiesObjects = [
-    { type: "flying_bug", x: 920, y: -600 },
-    { type: "flying_bug", x: 790, y: -300 },
-    { type: "witch", x: 2420, y: -350 },
-    { type: "monster", x: 4120, y: -300 },
+    { type: "flying_bug", x: 920, y: -600, patrolDistance: 290, patrolSpeed: 200 },
+    { type: "flying_bug", x: 790, y: -300, patrolDistance: 200, patrolSpeed: 200 },
+    { type: "flying_bug", x: 3500, y: -250, patrolDistance: 200, patrolSpeed: 200 },
+    { type: "witch", x: 2600, y: -350, patrolDistance: 280, patrolSpeed: 100 },
+    { type: "monster", x: 4050, y: -300, patrolDistance: 200, patrolSpeed: 100 },
   ];
+
 
   // Assets
   this.gameItems = [
@@ -132,8 +134,8 @@ gameScene.initGameObjects = function (fondo) {
     newEnemy.startX = newEnemy.x; // Guardar la posición inicial
     newEnemy.patrolDistance = enemy.patrolDistance || 100; // Distancia de patrullaje
     newEnemy.patrolDirection = enemy.patrolDirection || 1; // 1 para derecha, -1 para izquierda
+    newEnemy.patrolSpeed = enemy.patrolSpeed || 150; // Velocidad de patrullaje
   });
-
   // Crear plataformas
   this.platformGroup = this.physics.add.staticGroup();
   this.platforms.forEach((plat) => {
@@ -202,20 +204,55 @@ gameScene.handleGameOver = function () {
     this.physics.pause();
     this.cameras.main.stopFollow();
 
-    // Se muestra el mensaje de Game Over
-    let background = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000).setOrigin(0).setDepth(1);
+    // Se muestra el mensaje de Game Over centrado
+    let background = this.add.rectangle(
+      this.cameras.main.midPoint.x,
+      this.cameras.main.midPoint.y,
+      this.cameras.main.width,
+      this.cameras.main.height,
+      0x000000
+    ).setOrigin(0.5).setDepth(1);
+
     let textStyle = { font: "64px Arial", fill: "#FFFFFF", align: "center" };
-    let text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, "Game Over!", textStyle).setOrigin(0.5).setDepth(2);
+    let text = this.add.text(
+      this.cameras.main.midPoint.x,
+      this.cameras.main.midPoint.y,
+      "Game Over!",
+      textStyle
+    ).setOrigin(0.5).setDepth(2);
 
     // Reiniciar la escena después de 2 segundos
     this.time.delayedCall(2000, () => {
+      this.lives = 3;
       this.scene.restart();
     }, null, this);
   } else {
     // Reiniciar la posición del jugador y hacer que regrese a la vida
     this.player.setPosition(this.playerObject[0].x, this.playerObject[0].y);
+    this.cameras.main.shake(200, 0.02);
   }
 };
+
+
+// Función para manejar el movimiento de los enemigos
+gameScene.updateEnemyMovement = function (enemy) {
+  // Cambiar dirección si choca con los límites
+  if (enemy.body.blocked.left || enemy.body.blocked.right) {
+    enemy.patrolDirection *= -1; // Cambia la dirección
+  }
+
+  // Mover el enemigo
+  enemy.body.setVelocityX(enemy.patrolDirection * enemy.patrolSpeed);
+  enemy.setFlipX(enemy.patrolDirection === 1); // Voltear según la dirección
+
+  // Limitar el patrullaje
+  if (enemy.x > enemy.startX + enemy.patrolDistance) {
+    enemy.patrolDirection = -1; // Cambia a la izquierda
+  } else if (enemy.x < enemy.startX - enemy.patrolDistance) {
+    enemy.patrolDirection = 1; // Cambia a la derecha
+  }
+};
+
 
 // Función para actualizar, realiza movimientos del personaje, patrullaje
 gameScene.update = function () {
@@ -249,21 +286,7 @@ gameScene.update = function () {
 
   // Lógica de patrullaje para los enemigos
   this.enemiesGroup.getChildren().forEach((enemy) => {
-    // Cambiar dirección si choca con los límites
-    if (enemy.body.blocked.left || enemy.body.blocked.right) {
-      enemy.patrolDirection *= -1; // Cambia la dirección
-    }
-
-    // Mover el enemigo
-    enemy.body.setVelocityX(enemy.patrolDirection === 1 ? 150 : -150);
-    enemy.setFlipX(enemy.patrolDirection === 1); // Voltear según la dirección
-
-    // Limitar el patrullaje
-    if (enemy.x > enemy.startX + enemy.patrolDistance) {
-      enemy.patrolDirection = -1; // Cambia a la izquierda
-    } else if (enemy.x < enemy.startX - enemy.patrolDistance) {
-      enemy.patrolDirection = 1; // Cambia a la derecha
-    }
+    this.updateEnemyMovement(enemy); // Actualizar el movimiento del enemigo
   });
 };
 
@@ -282,6 +305,7 @@ let config = {
     },
   },
 };
+
 
 // Creación del juego
 let game = new Phaser.Game(config);
