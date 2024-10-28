@@ -176,6 +176,41 @@ gameScene.collectItem = function (player, item) {
 
 // Crea los elementos del juego
 gameScene.create = function () {
+
+ // Crear el joystick usando nipplejs
+ this.joystick = nipplejs.create({
+  zone: document.getElementById('joystick-area'), // Área del joystick
+  mode: 'static', // El joystick se mantendrá en su lugar
+  position: { left: '50%', bottom: '20%' }, // Posición del joystick
+  color: 'blue', // Color del joystick
+  size: 100, // Tamaño del joystick
+  threshold: 0.1 // Umbral para la sensibilidad
+});
+
+// Manejar eventos de movimiento del joystick
+this.joystick.on('move', (evt, data) => {
+  if (data.direction) {
+      // Aquí puedes mover tu personaje
+      const angle = data.angle.degree;
+      const power = data.distance;
+
+      // Convertir la dirección en movimiento
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power;
+      const vy = Math.sin(Phaser.Math.DegToRad(angle)) * power;
+
+      // Mover tu personaje (suponiendo que tienes una referencia al sprite)
+      this.player.setVelocity(vx, vy);
+  }
+});
+
+// Detener el movimiento cuando se suelta el joystick
+this.joystick.on('end', () => {
+  this.player.setVelocity(0, 0);
+});
+
+
+
+
   let fondo = this.add.image(0, 0, "background").setOrigin(0, 0);
   let fondoMedio = this.add.image(0, 0, "background_medium").setOrigin(0, 0);
 
