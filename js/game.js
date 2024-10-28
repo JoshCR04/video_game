@@ -177,37 +177,21 @@ gameScene.collectItem = function (player, item) {
 // Crea los elementos del juego
 gameScene.create = function () {
 
- // Crear el joystick usando nipplejs
- this.joystick = nipplejs.create({
-  zone: document.getElementById('joystick-area'), // Área del joystick
-  mode: 'static', // El joystick se mantendrá en su lugar
-  position: { left: '50%', bottom: '20%' }, // Posición del joystick
-  color: 'blue', // Color del joystick
-  size: 100, // Tamaño del joystick
-  threshold: 0.1 // Umbral para la sensibilidad
-});
-
-// Manejar eventos de movimiento del joystick
-this.joystick.on('move', (evt, data) => {
-  if (data.direction) {
-      // Aquí puedes mover tu personaje
-      const angle = data.angle.degree;
-      const power = data.distance;
-
-      // Convertir la dirección en movimiento
-      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power;
-      const vy = Math.sin(Phaser.Math.DegToRad(angle)) * power;
-
-      // Mover tu personaje (suponiendo que tienes una referencia al sprite)
-      this.player.setVelocity(vx, vy);
+  // Asegúrate de que el contenedor exista
+  const joystickArea = document.getElementById('joystick-area');
+  if (!joystickArea) {
+    console.error("El contenedor del joystick no existe");
+    return; // Salir si no existe el contenedor
   }
-});
 
-// Detener el movimiento cuando se suelta el joystick
-this.joystick.on('end', () => {
-  this.player.setVelocity(0, 0);
-});
-
+  // Crear el joystick usando nipplejs
+  this.joystick = nipplejs.create({
+    zone: joystickArea, // Área del joystick
+    mode: 'dynamic', // Se puede mover, ajusta según prefieras
+    color: 'gray', // Color del joystick
+    size: 100, // Tamaño del joystick
+    threshold: 5 // Umbral para la sensibilidad
+  });
 
 
 
@@ -339,6 +323,40 @@ gameScene.update = function () {
   ) {
     this.player.body.setVelocityY(this.playerJump);
   }
+
+  // Manejar eventos de movimiento del joystick
+this.joystick.on('move', (evt, data) => {
+  if (data.direction) {
+    const angle = data.angle.degree;
+    const power = data.distance;
+
+    // Convertir la dirección en movimiento
+    const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 5; // Ajustar la velocidad
+
+    // Mover tu personaje
+    this.player.setVelocityX(vx);
+
+    // Cambiar la rotación del personaje según la dirección
+    if (vx > 0) {
+      this.player.flipX = false; // Mirar a la derecha
+    } else if (vx < 0) {
+      this.player.flipX = true; // Mirar a la izquierda
+    }
+
+    // Umbral para el salto
+    if (data.direction.y && this.player.body.onFloor()) { // Ajusta el umbral según sea necesario
+      this.player.body.setVelocityY(this.playerJump); // Ajusta la fuerza del salto
+    }
+  }
+});
+
+
+  // Detener el movimiento cuando se suelta el joystick
+  this.joystick.on('end', () => {
+    this.player.setVelocityX(0); // Detener el movimiento horizontal
+  });
+
+
 
   // Marcar límites del personaje
   this.player.x = Phaser.Math.Clamp(
