@@ -72,9 +72,9 @@ gameScene.init = function () {
 
 // Se cargan las imágenes
 gameScene.preload = function () {
+  this.load.image("background_superior", "../img/assets/pasto_superior.png");
   this.load.image("background", "../img/assets/fondo.png");
   this.load.image("background_medium", "../img/assets/medio.png");
-  this.load.image("background_superior", "../img/assets/pasto_superior.png");
   this.load.image("player", "../img/assets/pj.png");
   this.load.image("ground_1", "../img/assets/suelo_piedra_1.png");
   this.load.image("ground_2", "../img/assets/suelo_piedra_2.png");
@@ -96,65 +96,82 @@ gameScene.preload = function () {
 
 
 
-
-
-// Función para inicializar los objetos del juego
-gameScene.initGameObjects = function (fondo) {
-  // Se posiciona al jugador
-  this.playerObject[0].y = fondo.height - 200;
-
-  // Crear el jugador
+// Función para inicializar el jugador
+gameScene.initPlayer = function (fondo) {
   this.player = this.physics.add.sprite(
     this.playerObject[0].x,
-    this.playerObject[0].y,
+    fondo.height - 200,
     "player"
-  ).setCollideWorldBounds(true); // Encadenamiento para mayor claridad
+  ).setCollideWorldBounds(true);
+};
 
-  // Se crean los suelos
+// Función para inicializar el grupo de suelos
+gameScene.initGrounds = function (fondo) {
   this.grounds = this.physics.add.staticGroup();
   this.gameObjects.forEach((obj) => {
-    this.grounds
-      .create(obj.x, fondo.height + obj.y, obj.type)
+    this.grounds.create(obj.x, fondo.height + obj.y, obj.type)
       .setScale(1)
       .refreshBody();
   });
+};
 
-  // Crea enemigos
+// Función para inicializar enemigos
+gameScene.initEnemies = function (fondo) {
   this.enemiesGroup = this.physics.add.group();
   this.enemiesObjects.forEach((enemy) => {
-    let newEnemy = this.enemiesGroup.create(
-      enemy.x,
-      fondo.height + enemy.y,
-      enemy.type
-    );
-    newEnemy.body.setAllowGravity(enemy.type !== "flying_bug");
-    newEnemy.setCollideWorldBounds(true);
-    newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
-
-    // Configura el patrullaje
-    newEnemy.startX = newEnemy.x; // Guardar la posición inicial
-    newEnemy.patrolDistance = enemy.patrolDistance || 100; // Distancia de patrullaje
-    newEnemy.patrolDirection = enemy.patrolDirection || 1; // 1 para derecha, -1 para izquierda
-    newEnemy.patrolSpeed = enemy.patrolSpeed || 150; // Velocidad de patrullaje
+    this.createEnemy(enemy, fondo);
   });
-  // Crear plataformas
+};
+
+gameScene.createEnemy = function (enemy, fondo) {
+  let newEnemy = this.enemiesGroup.create(
+    enemy.x,
+    fondo.height + enemy.y,
+    enemy.type
+  );
+  newEnemy.body.setAllowGravity(enemy.type !== "flying_bug");
+  newEnemy.setCollideWorldBounds(true);
+  newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
+
+  // Configura el patrullaje
+  newEnemy.startX = newEnemy.x; // Guardar la posición inicial
+  newEnemy.patrolDistance = enemy.patrolDistance || 100; // Distancia de patrullaje
+  newEnemy.patrolDirection = enemy.patrolDirection || 1; // 1 para derecha, -1 para izquierda
+  newEnemy.patrolSpeed = enemy.patrolSpeed || 150; // Velocidad de patrullaje
+};
+
+// Función para inicializar plataformas
+gameScene.initPlatforms = function (fondo) {
   this.platformGroup = this.physics.add.staticGroup();
   this.platforms.forEach((plat) => {
-    this.platformGroup
-      .create(plat.x, fondo.height + plat.y, plat.type)
+    this.platformGroup.create(plat.x, fondo.height + plat.y, plat.type)
       .setScale(1)
       .refreshBody();
   });
+};
 
-  // Crear objetos del juego (llave, espada, pan, hongo, etc.)
+// Función para inicializar los objetos del juego
+gameScene.initGameItems = function (fondo) {
   this.gameItemsGroup = this.physics.add.group();
   this.gameItems.forEach((item) => {
-    let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
-    newItem.type = item.type;
-    newItem.setImmovable(true); // Evita que el objeto se mueva al colisionar
-    newItem.body.setAllowGravity(false); // Desactiva la gravedad en el objeto
+    this.createGameItem(item, fondo);
   });
+};
 
+gameScene.createGameItem = function (item, fondo) {
+  let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
+  newItem.type = item.type;
+  newItem.setImmovable(true); // Evita que el objeto se mueva al colisionar
+  newItem.body.setAllowGravity(false); // Desactiva la gravedad en el objeto
+};
+
+// Inicializa los objetos del juego
+gameScene.initGameObjects = function (fondo) {
+  this.initPlayer(fondo);
+  this.initGrounds(fondo);
+  this.initEnemies(fondo);
+  this.initPlatforms(fondo);
+  this.initGameItems(fondo);
 
   // Inicializar el texto de vidas
   this.livesText = this.add.text(16, 16, 'Lives: ' + this.lives, {
@@ -162,7 +179,6 @@ gameScene.initGameObjects = function (fondo) {
     fill: '#FFFFFF'
   });
 };
-
 
 // Función para manejar la recogida de un objeto
 gameScene.collectItem = function (player, item) {
@@ -173,139 +189,127 @@ gameScene.collectItem = function (player, item) {
   item.destroy(); // Eliminar el objeto recolectado
 };
 
-
-// Crea los elementos del juego
-gameScene.create = function () {
-
-  // Asegúrate de que el contenedor exista
+// Función para crear el joystick
+gameScene.createJoystick = function () {
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
-    return; // Salir si no existe el contenedor
+    return;
   }
 
-  // Crear el joystick usando nipplejs
   this.joystick = nipplejs.create({
-    zone: joystickArea, // Área del joystick
-    mode: 'dynamic', // Se puede mover, ajusta según prefieras
-    color: 'gray', // Color del joystick
-    size: 100, // Tamaño del joystick
-    threshold: 5 // Umbral para la sensibilidad
+    zone: joystickArea,
+    mode: 'dynamic',
+    color: 'gray',
+    size: 100,
+    threshold: 0.5
   });
+};
 
+// Función para inicializar el fondo
+gameScene.initBackground = function () {
+  this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
+  this.backgroundMedium = this.add.image(0, 0, "background_medium").setOrigin(0, 0);
+  this.pastoSuperior = this.add.image(0, 0, 'background_superior').setOrigin(0, 0).setDepth(1);
+};
 
-
-  let fondo = this.add.image(0, 0, "background").setOrigin(0, 0);
-  let fondoMedio = this.add.image(0, 0, "background_medium").setOrigin(0, 0);
-
-  // Inicializa los objetos del juego
-  this.initGameObjects(fondo);
-
-  // Se establecen los límites del mapa
-  const worldWidth = 5760; // ancho
-  const worldHeight = fondo.height;
-  this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
-  this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-  this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-  this.cameras.main.setZoom(config.height / fondo.height);
-
-  // Se pone el pasto
-  this.add.image(0, fondo.height, "background_superior").setOrigin(0, 1);
-
-  // Colisiones
+// Función para configurar las colisiones
+gameScene.setupCollisions = function () {
   this.physics.add.collider(this.player, this.grounds);
   this.physics.add.collider(this.player, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.grounds);
-
-  // Colisión entre el jugador y los objetos del juego
   this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this);
-
-
-  // Colisión entre el jugador y los enemigos
   this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this);
+};
 
-  // Control de teclas
+// Función para configurar la cámara
+gameScene.setupCamera = function () {
+  const worldWidth = 5760;
+  const worldHeight = this.background.height;
+  this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
+  this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+  this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+  this.cameras.main.setZoom(config.height / worldHeight);
+};
+
+// Función para crear los elementos del juego
+gameScene.create = function () {
+  this.createJoystick();
+  this.initBackground();
+  this.initGameObjects(this.background);
+  this.setupCamera();
+  this.setupCollisions();
   this.cursors = this.input.keyboard.createCursorKeys();
 };
 
-
-
 // Función para manejar la pérdida del juego
 gameScene.handleGameOver = function () {
-  this.lives--; // Restar una vida
-  this.livesText.setText('Lives: ' + this.lives); // Actualizar el texto de vidas
+  this.lives--;
+  this.livesText.setText('Lives: ' + this.lives);
 
   if (this.lives <= 0) {
-    // Si no quedan vidas, se pierde el juego
-    this.physics.pause();
-    this.cameras.main.stopFollow();
-
-    // Se muestra el mensaje de Game Over centrado
-    let background = this.add.rectangle(
-      this.cameras.main.midPoint.x,
-      this.cameras.main.midPoint.y,
-      this.cameras.main.width,
-      this.cameras.main.height,
-      0x000000
-    ).setOrigin(0.5).setDepth(1);
-
-    let textStyle = { font: "64px Karantina", fill: "#FFFFFF", align: "center" };
-    let text = this.add.text(
-      this.cameras.main.midPoint.x,
-      this.cameras.main.midPoint.y,
-      "Game Over!",
-      textStyle
-    ).setOrigin(0.5).setDepth(2);
-
-    // Reiniciar la escena después de 2 segundos
-    this.time.delayedCall(2000, () => {
-      this.lives = 3;
-      this.scene.restart();
-    }, null, this);
-
+    this.showGameOverScreen();
   } else {
-    // El jugador pierde una vida, pero no regresa a la posición inicial
-    this.cameras.main.shake(200, 0.02);
-
-    // Activar un efecto de invulnerabilidad temporal
-    this.player.setAlpha(0.5); // Cambia la transparencia del jugador
-    this.player.body.setEnable(false); // Desactiva colisiones
-
-    // Después de 1 segundo, restaurar al jugador
-    this.time.delayedCall(1000, () => {
-      this.player.setAlpha(1); // Restaurar la transparencia
-      this.player.body.setEnable(true); // Reactivar colisiones
-    }, null, this);
+    this.handlePlayerDamage();
   }
 };
 
+gameScene.showGameOverScreen = function () {
+  this.physics.pause();
+  this.cameras.main.stopFollow();
+
+  // Mostrar mensaje de Game Over
+  let background = this.add.rectangle(
+    this.cameras.main.midPoint.x,
+    this.cameras.main.midPoint.y,
+    this.cameras.main.width,
+    this.cameras.main.height,
+    0x000000
+  ).setOrigin(0.5).setDepth(1);
+
+  let textStyle = { font: "64px Karantina", fill: "#FFFFFF", align: "center" };
+  let text = this.add.text(
+    this.cameras.main.midPoint.x,
+    this.cameras.main.midPoint.y,
+    "Game Over!",
+    textStyle
+  ).setOrigin(0.5).setDepth(2);
+
+  this.time.delayedCall(2000, () => {
+    this.lives = 3;
+    this.scene.restart();
+  }, null, this);
+};
+
+gameScene.handlePlayerDamage = function () {
+  this.cameras.main.shake(200, 0.02);
+  this.player.setAlpha(0.5);
+  this.player.body.setEnable(false);
+
+  this.time.delayedCall(1000, () => {
+    this.player.setAlpha(1);
+    this.player.body.setEnable(true);
+  }, null, this);
+};
 
 // Función para manejar el movimiento de los enemigos
 gameScene.updateEnemyMovement = function (enemy) {
-  // Cambiar dirección si choca con los límites
   if (enemy.body.blocked.left || enemy.body.blocked.right) {
-    enemy.patrolDirection *= -1; // Cambia la dirección
+    enemy.patrolDirection *= -1;
   }
-
-  // Mover el enemigo
   enemy.body.setVelocityX(enemy.patrolDirection * enemy.patrolSpeed);
-  enemy.setFlipX(enemy.patrolDirection === 1); // Voltear según la dirección
+  enemy.setFlipX(enemy.patrolDirection === 1);
 
-  // Limitar el patrullaje
   if (enemy.x > enemy.startX + enemy.patrolDistance) {
-    enemy.patrolDirection = -1; // Cambia a la izquierda
+    enemy.patrolDirection = -1;
   } else if (enemy.x < enemy.startX - enemy.patrolDistance) {
-    enemy.patrolDirection = 1; // Cambia a la derecha
+    enemy.patrolDirection = 1;
   }
 };
 
-
-// Función para actualizar, realiza movimientos del personaje, patrullaje
-gameScene.update = function () {
-  if (!this.cursors) return;
-
-  // Movimiento horizontal del jugador
+// Función para manejar el movimiento del jugador
+gameScene.handlePlayerMovement = function () {
   if (this.cursors.left.isDown) {
     this.player.body.setVelocityX(-this.playerSpeed);
     this.player.flipX = true;
@@ -316,66 +320,65 @@ gameScene.update = function () {
     this.player.body.setVelocityX(0);
   }
 
-  // Saltar
   if (
     (this.cursors.up.isDown || this.cursors.space.isDown) &&
     this.player.body.onFloor()
   ) {
     this.player.body.setVelocityY(this.playerJump);
   }
+};
 
-  // Manejar eventos de movimiento del joystick
-this.joystick.on('move', (evt, data) => {
-  if (data.direction) {
-    const angle = data.angle.degree;
-    const power = data.distance;
+// Función para manejar el joystick
+gameScene.handleJoystickMovement = function () {
+  // Manejo de movimiento
+  this.joystick.on('move', (evt, data) => {
+    if (data.direction) {
+      const angle = data.angle.degree;
+      const power = data.distance;
 
-    // Convertir la dirección en movimiento
-    const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 5; // Ajustar la velocidad
+      // Calcular la velocidad en X
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 5;
 
-    // Mover tu personaje
-    this.player.setVelocityX(vx);
+      // Aplicar la velocidad al jugador
+      this.player.setVelocityX(vx);
+      this.player.flipX = vx < 0;
 
-    // Cambiar la rotación del personaje según la dirección
-    if (vx > 0) {
-      this.player.flipX = false; // Mirar a la derecha
-    } else if (vx < 0) {
-      this.player.flipX = true; // Mirar a la izquierda
+      // Saltar si se presiona el joystick hacia arriba
+      if (data.direction.angle < 45 || data.direction.angle > 315) {
+        // Ajusta este ángulo según sea necesario
+        if (this.player.body.onFloor()) {
+          this.player.setVelocityY(this.playerJump);
+        }
+      }
+    } else {
+      this.player.setVelocityX(0);
     }
-
-    // Umbral para el salto
-    if (data.direction.y && this.player.body.onFloor()) { // Ajusta el umbral según sea necesario
-      this.player.body.setVelocityY(this.playerJump); // Ajusta la fuerza del salto
-    }
-  }
-});
-
-
-  // Detener el movimiento cuando se suelta el joystick
-  this.joystick.on('end', () => {
-    this.player.setVelocityX(0); // Detener el movimiento horizontal
   });
 
-
-
-  // Marcar límites del personaje
-  this.player.x = Phaser.Math.Clamp(
-    this.player.x,
-    0,
-    this.physics.world.bounds.width
-  );
-
-  // Lógica de patrullaje para los enemigos
-  this.enemiesGroup.getChildren().forEach((enemy) => {
-    this.updateEnemyMovement(enemy); // Actualizar el movimiento del enemigo
+  // Manejar el fin del movimiento del joystick
+  this.joystick.on('end', () => {
+    this.player.setVelocityX(0);
   });
 };
+
+
+// Función de actualización del juego
+gameScene.update = function () {
+  this.handlePlayerMovement();
+  this.handleJoystickMovement();
+  this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
+};
+
 
 // Configuración del juego
 let config = {
   type: Phaser.CANVAS,
   width: window.innerWidth,
   height: window.innerHeight,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   scene: gameScene,
   title: "Sword Of Destiny - video_game",
   physics: {
