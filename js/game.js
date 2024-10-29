@@ -339,19 +339,16 @@ gameScene.handleJoystickMovement = function () {
       // Calcular la velocidad en X
       const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 5;
 
-      // Aplicar la velocidad al jugador
+      // Aplicar la velocidad al jugador en X
       this.player.setVelocityX(vx);
       this.player.flipX = vx < 0;
 
-      // Saltar si se presiona el joystick hacia arriba
-      if (data.direction.angle < 45 || data.direction.angle > 315) {
-        // Ajusta este ángulo según sea necesario
-        if (this.player.body.onFloor()) {
-          this.player.setVelocityY(this.playerJump);
-        }
+      // Saltar si el joystick se mueve hacia arriba y el jugador está en el suelo
+      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
+        this.player.setVelocityY(this.playerJump);
       }
     } else {
-      this.player.setVelocityX(0);
+      this.player.setVelocityX(0); // Detener al jugador si no hay movimiento en el joystick
     }
   });
 
@@ -360,6 +357,7 @@ gameScene.handleJoystickMovement = function () {
     this.player.setVelocityX(0);
   });
 };
+
 
 
 // Función de actualización del juego
