@@ -103,7 +103,10 @@ gameScene.initPlayer = function (fondo) {
     fondo.height - 200,
     "player"
   ).setCollideWorldBounds(true);
+
+  this.physics.world.setBoundsCollision(true, true, true, false);
 };
+
 
 // Función para inicializar el grupo de suelos
 gameScene.initGrounds = function (fondo) {
@@ -243,8 +246,14 @@ gameScene.create = function () {
   this.cursors = this.input.keyboard.createCursorKeys();
 };
 
+// Variable para indicar si el juego está en modo "Game Over"
+gameScene.isGameOver = false;
+
 // Función para manejar la pérdida del juego
 gameScene.handleGameOver = function () {
+  if (this.isGameOver) return; // Evita múltiples pantallas de Game Over
+  this.isGameOver = true;
+
   this.lives--;
   this.livesText.setText('Lives: ' + this.lives);
 
@@ -252,6 +261,7 @@ gameScene.handleGameOver = function () {
     this.showGameOverScreen();
   } else {
     this.handlePlayerDamage();
+    this.isGameOver = false; // Permitir nuevos "Game Over" después del daño
   }
 };
 
@@ -276,12 +286,13 @@ gameScene.showGameOverScreen = function () {
     textStyle
   ).setOrigin(0.5).setDepth(2);
 
+  // Reiniciar el juego después de 2 segundos
   this.time.delayedCall(2000, () => {
-    this.lives = 3;
-    this.scene.restart();
+    this.lives = 3; // Reiniciar las vidas
+    this.isGameOver = false; // Permitir que el juego siga después del reinicio
+    this.scene.restart(); // Reiniciar la escena
   }, null, this);
 };
-
 gameScene.handlePlayerDamage = function () {
   this.cameras.main.shake(200, 0.02);
   this.player.setAlpha(0.5);
@@ -337,7 +348,7 @@ gameScene.handleJoystickMovement = function () {
       const power = data.distance;
 
       // Calcular la velocidad en X
-      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 5;
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
 
       // Aplicar la velocidad al jugador en X
       this.player.setVelocityX(vx);
@@ -359,13 +370,19 @@ gameScene.handleJoystickMovement = function () {
 };
 
 
+let falling = false;
 
-// Función de actualización del juego
 gameScene.update = function () {
   this.handlePlayerMovement();
   this.handleJoystickMovement();
   this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
+
+  // Verificar si el jugador ha caído fuera del límite inferior del mapa
+  if (this.player.y > this.physics.world.bounds.height) {
+    this.handleGameOver();
+  }
 };
+
 
 
 // Configuración del juego
