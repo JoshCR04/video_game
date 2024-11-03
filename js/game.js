@@ -194,6 +194,7 @@ gameScene.collectItem = function (player, item) {
 
 // Función para crear el joystick
 gameScene.createJoystick = function () {
+  if (!isMobile()) return; //maneja que solo sea activado cuando esta en un celular
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
@@ -243,6 +244,7 @@ gameScene.create = function () {
   this.initGameObjects(this.background);
   this.setupCamera();
   this.setupCollisions();
+
   this.cursors = this.input.keyboard.createCursorKeys();
 };
 
@@ -338,32 +340,31 @@ gameScene.handlePlayerMovement = function () {
     this.player.body.setVelocityY(this.playerJump);
   }
 };
-
+function isMobile() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
 // Función para manejar el joystick
 gameScene.handleJoystickMovement = function () {
   // Manejo de movimiento
+  if (!this.joystick) return;
+
   this.joystick.on('move', (evt, data) => {
     if (data.direction) {
       const angle = data.angle.degree;
       const power = data.distance;
-
-      // Calcular la velocidad en X
       const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
-
-      // Aplicar la velocidad al jugador en X
       this.player.setVelocityX(vx);
       this.player.flipX = vx < 0;
 
-      // Saltar si el joystick se mueve hacia arriba y el jugador está en el suelo
       if (data.direction.angle === 'up' && this.player.body.onFloor()) {
         this.player.setVelocityY(this.playerJump);
       }
     } else {
-      this.player.setVelocityX(0); // Detener al jugador si no hay movimiento en el joystick
+      this.player.setVelocityX(0);
     }
   });
 
-  // Manejar el fin del movimiento del joystick
+  // Detener movimiento al finalizar joystick
   this.joystick.on('end', () => {
     this.player.setVelocityX(0);
   });
@@ -385,11 +386,11 @@ gameScene.update = function () {
 
 
 
-// Configuración del juego
 let config = {
   type: Phaser.CANVAS,
   width: window.innerWidth,
   height: window.innerHeight,
+  resolution: isMobile() ? 2 : 1, // Aumenta la resolución en móviles
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
@@ -404,7 +405,3 @@ let config = {
     },
   },
 };
-
-
-// Creación del juego
-let game = new Phaser.Game(config);
