@@ -393,8 +393,6 @@ gameScene.update = function () {
 
 
 
-// Creación del juego
-let game = new Phaser.Game(config);
 
 let config = {
   type: Phaser.CANVAS,
@@ -415,3 +413,5 @@ let config = {
     },
   },
 };
+// Creación del juego
+let game = new Phaser.Game(config);
