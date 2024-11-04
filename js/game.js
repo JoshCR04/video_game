@@ -229,18 +229,18 @@ gameScene.setupCollisions = function () {
 
 // Función para configurar la cámara
 
-  gameScene.setupCamera = function () {
-    const worldWidth = 5760;
-    const worldHeight = this.background.height;
-    this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
-    this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-  
-    // Configura el zoom basado en el dispositivo
-    const defaultZoom = config.height / worldHeight;
-    this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.5 : defaultZoom); // 10% más de zoom en móviles
-  };
-  
+gameScene.setupCamera = function () {
+  const worldWidth = 5760;
+  const worldHeight = this.background.height;
+  this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
+  this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+  this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+
+  // Configura el zoom basado en el dispositivo
+  const defaultZoom = config.height / worldHeight;
+  this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.5 : defaultZoom); // 10% más de zoom en móviles
+};
+
 
 // Función para crear los elementos del juego
 gameScene.create = function () {
@@ -276,19 +276,24 @@ gameScene.showGameOverScreen = function () {
   this.physics.pause();
   this.cameras.main.stopFollow();
 
-  // Mostrar mensaje de Game Over
+  // Obtener las dimensiones de la cámara principal
+  const camera = this.cameras.main;
+  const { width, height, midPoint } = camera;
+
+  // Crear un rectángulo de fondo que cubra toda la pantalla
   let background = this.add.rectangle(
-    this.cameras.main.midPoint.x,
-    this.cameras.main.midPoint.y,
-    this.cameras.main.width,
-    this.cameras.main.height,
-    0x000000
+    midPoint.x, // Posicionar en el centro de la cámara
+    midPoint.y,
+    width, // Ancho de la cámara para cubrir toda la pantalla
+    height, // Alto de la cámara para cubrir toda la pantalla
+    0x000000 // Color negro de fondo
   ).setOrigin(0.5).setDepth(1);
 
+  // Crear el texto de "Game Over"
   let textStyle = { font: "64px Karantina", fill: "#FFFFFF", align: "center" };
   let text = this.add.text(
-    this.cameras.main.midPoint.x,
-    this.cameras.main.midPoint.y,
+    midPoint.x, // Centrar en el medio de la cámara
+    midPoint.y,
     "Game Over!",
     textStyle
   ).setOrigin(0.5).setDepth(2);
@@ -300,6 +305,7 @@ gameScene.showGameOverScreen = function () {
     this.scene.restart(); // Reiniciar la escena
   }, null, this);
 };
+
 gameScene.handlePlayerDamage = function () {
   this.cameras.main.shake(200, 0.02);
   this.player.setAlpha(0.5);
@@ -398,9 +404,8 @@ let config = {
   type: Phaser.CANVAS,
   width: window.innerWidth,
   height: window.innerHeight,
-  resolution: isMobile() ? 20 : 20, // Aumenta la resolución en móviles
   scale: {
-    mode: Phaser.Scale.ENVELOP,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   scene: gameScene,
