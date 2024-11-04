@@ -398,7 +398,7 @@ let config = {
   type: Phaser.CANVAS,
   width: window.innerWidth,
   height: window.innerHeight,
-  resolution: isMobile() ? 2 : 1, // Aumenta la resolución en móviles
+  resolution: isMobile() ? 5 : 4, // Aumenta la resolución en móviles
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
