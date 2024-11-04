@@ -228,14 +228,19 @@ gameScene.setupCollisions = function () {
 };
 
 // Función para configurar la cámara
-gameScene.setupCamera = function () {
-  const worldWidth = 5760;
-  const worldHeight = this.background.height;
-  this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
-  this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-  this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-  this.cameras.main.setZoom(config.height / worldHeight);
-};
+
+  gameScene.setupCamera = function () {
+    const worldWidth = 5760;
+    const worldHeight = this.background.height;
+    this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
+    this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+  
+    // Configura el zoom basado en el dispositivo
+    const defaultZoom = config.height / worldHeight;
+    this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.1 : defaultZoom); // 10% más de zoom en móviles
+  };
+  
 
 // Función para crear los elementos del juego
 gameScene.create = function () {
@@ -385,6 +390,11 @@ gameScene.update = function () {
 };
 
 
+
+
+
+// Creación del juego
+let game = new Phaser.Game(config);
 
 let config = {
   type: Phaser.CANVAS,
