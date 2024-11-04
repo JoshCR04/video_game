@@ -238,7 +238,7 @@ gameScene.setupCollisions = function () {
   
     // Configura el zoom basado en el dispositivo
     const defaultZoom = config.height / worldHeight;
-    this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.1 : defaultZoom); // 10% más de zoom en móviles
+    this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.5 : defaultZoom); // 10% más de zoom en móviles
   };
   
 
@@ -398,9 +398,9 @@ let config = {
   type: Phaser.CANVAS,
   width: window.innerWidth,
   height: window.innerHeight,
-  resolution: isMobile() ? 5 : 4, // Aumenta la resolución en móviles
+  resolution: isMobile() ? 20 : 20, // Aumenta la resolución en móviles
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.ENVELOP,
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   scene: gameScene,
