@@ -5,6 +5,7 @@
   top: 16px;
   right: 16px;
   z-index: 1000;
+  pointer-events: none;
   cursor: pointer;
 
   img {
@@ -22,9 +23,10 @@
   width: 100%;
   height: 100%;
   background-color: rgba($clr-black, 0.8);
-  z-index: 999;
+  z-index: 1004;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 
   div {
     text-align: center;
@@ -51,6 +53,7 @@
     font-weight: $fw-bold;
     margin-top: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    pointer-events: none;
 
     &:hover {
       background-color: $clr-black;
@@ -70,6 +73,7 @@
     font-family: $ff-text;
     font-weight: $fw-bold;
     transition: background-color 0.3s ease, color 0.3s ease;
+    pointer-events: none;
 
     &:hover {
       background-color: $clr-black;
@@ -86,7 +90,8 @@
   position: absolute;
   top: 5px;
   left: 16px;
-  z-index: 1000;
+  z-index: 1001;
+  pointer-events: none;
 }
 
 #game-over-background {
@@ -95,9 +100,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: $clr-black; 
-  z-index: 1001; /* Asegúrate de que el fondo esté debajo del texto */
+  background-color: $clr-black;
+  z-index: 1002; /* Asegúrate de que el fondo esté debajo del texto */
   display: none; /* Inicialmente oculto */
+  pointer-events: none;
 }
 
 #game-over-text {
@@ -108,6 +114,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1002;
+  z-index: 1003;
+  pointer-events: none;
   display: none; /* Inicialmente oculto */
 }

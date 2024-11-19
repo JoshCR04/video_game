@@ -225,7 +225,7 @@ gameScene.collectItem = function (player, item) {
 
 // Función para crear el joystick
 gameScene.createJoystick = function () {
-
+  if (!isMobile()) return; // Solo se activa en dispositivos móviles
 
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
