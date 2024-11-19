@@ -1144,7 +1144,6 @@ tr:nth-child(even) {
   top: 16px;
   right: 16px;
   z-index: 1000;
-  pointer-events: none;
   cursor: pointer;
 }
 #pause-button img {
@@ -1163,7 +1162,6 @@ tr:nth-child(even) {
   z-index: 1004;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
 }
 #pause-panel div {
   text-align: center;
@@ -1187,7 +1185,6 @@ tr:nth-child(even) {
   font-weight: 700;
   margin-top: 10px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  pointer-events: none;
 }
 #pause-panel #menu-button:hover {
   background-color: hsl(0, 0%, 0%);
@@ -1204,7 +1201,6 @@ tr:nth-child(even) {
   font-family: "Neuton", serif;
   font-weight: 700;
   transition: background-color 0.3s ease, color 0.3s ease;
-  pointer-events: none;
 }
 #pause-panel #resume-button:hover {
   background-color: hsl(0, 0%, 0%);
@@ -1220,7 +1216,6 @@ tr:nth-child(even) {
   top: 5px;
   left: 16px;
   z-index: 1001;
-  pointer-events: none;
 }
 
 #game-over-background {
@@ -1232,7 +1227,6 @@ tr:nth-child(even) {
   background-color: hsl(0, 0%, 0%);
   z-index: 1002; /* Asegúrate de que el fondo esté debajo del texto */
   display: none; /* Inicialmente oculto */
-  pointer-events: none;
 }
 
 #game-over-text {
@@ -1244,7 +1238,6 @@ tr:nth-child(even) {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1003;
-  pointer-events: none;
   display: none; /* Inicialmente oculto */
 }
 
