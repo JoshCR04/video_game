@@ -20,6 +20,11 @@ button:focus {
   outline: none;
 }
 
+.icon-small {
+  width: 29.8px;
+  height: 40.1px;
+}
+
 .title {
   font-family: "Federant", serif;
   font-size: 3.125rem;
@@ -1137,6 +1142,17 @@ th {
 
 tr:nth-child(even) {
   background-color: hsl(193, 13%, 38%);
+}
+
+/* Estilos para el área del joystick */
+#joystick-area {
+  position: absolute;
+  bottom: 20px; /* Ajusta la posición del joystick desde el fondo */
+  left: 20px; /* Ajusta la posición del joystick desde la izquierda */
+  width: 100px; /* Tamaño del joystick */
+  height: 100px; /* Tamaño del joystick */
+  z-index: 2000; /* Asegura que esté por encima de otros elementos */
+  pointer-events: auto; /* Asegura que el joystick sea interactuable */
 }
 
 #pause-button {

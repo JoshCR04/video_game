@@ -193,6 +193,7 @@ gameScene.initGameItems = function (fondo) {
   });
 };
 
+// Función para crear un objeto
 gameScene.createGameItem = function (item, fondo) {
   let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
   newItem.type = item.type;
@@ -225,25 +226,20 @@ gameScene.collectItem = function (player, item) {
 
 // Función para crear el joystick
 gameScene.createJoystick = function () {
-  if (!isMobile()) return; // Solo se activa en dispositivos móviles
-
+  if (!isMobile()) return; // Solo activar cuando se está en un celular
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
 
-  // Asegúrate de que el joystick esté encima de otros elementos
-  joystickArea.style.position = 'absolute';  // Establecer posición absoluta
-  joystickArea.style.zIndex = 9999;  // Asegurarse de que esté encima de otros elementos
-
-  // Crear el joystick
+  // Crear el joystick con nipplejs
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
-    color: 'gray',
-    size: 100,
-    threshold: 0.5,
+    color: 'gray', // Color del joystick
+    size: 100, // Tamaño del joystick
+    threshold: 0.5, // Sensibilidad
   });
 };
 
@@ -265,7 +261,6 @@ gameScene.setupCollisions = function () {
 };
 
 // Función para configurar la cámara
-
 gameScene.setupCamera = function () {
   const worldWidth = 5760;
   const worldHeight = this.background.height;
@@ -279,17 +274,18 @@ gameScene.setupCamera = function () {
 };
 
 
+
 // Función para crear los elementos del juego
 gameScene.create = function () {
-  this.createJoystick();
-  this.initBackground();
-  this.initGameObjects(this.background);
-  this.setupCamera();
-  this.setupCollisions();
-  this.cursors = this.input.keyboard.createCursorKeys();
+  this.createJoystick(); // Crear el joystick
+  this.initBackground(); // Inicializar el fondo
+  this.initGameObjects(this.background); // Inicializar los objetos del juego
+  this.setupCamera(); // Configurar la cámara
+  this.setupCollisions(); // Configurar las colisiones
+  this.cursors = this.input.keyboard.createCursorKeys(); // Configurar las teclas
   this.isPaused = false;
 
-  this.createPauseFunctionality();
+  this.createPauseFunctionality(); // Crear la funcionalidad de pausa
 };
 
 
@@ -312,6 +308,7 @@ gameScene.handleGameOver = function () {
   }
 };
 
+// Función para mostrar el fondo negro y el mensaje de "Game Over"
 gameScene.showGameOverScreen = function () {
   this.physics.pause();
   this.cameras.main.stopFollow();
@@ -340,7 +337,7 @@ gameScene.showGameOverScreen = function () {
 };
 
 
-
+// Función para manejar el daño al jugador
 gameScene.handlePlayerDamage = function () {
   this.cameras.main.shake(200, 0.02);
   this.player.setAlpha(0.5);
@@ -386,36 +383,39 @@ gameScene.handlePlayerMovement = function () {
     this.player.body.setVelocityY(this.playerJump);
   }
 };
+
+
 function isMobile() {
   return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
-// Función para manejar el joystick
+// Función para manejar el movimiento del joystick
 gameScene.handleJoystickMovement = function () {
-  // Manejo de movimiento
   if (!this.joystick) return;
 
+  // Evento cuando el joystick se mueve
   this.joystick.on('move', (evt, data) => {
     if (data.direction) {
       const angle = data.angle.degree;
       const power = data.distance;
       const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
-      this.player.setVelocityX(vx);
-      this.player.flipX = vx < 0;
+      this.player.setVelocityX(vx); // Movimiento horizontal
+
+      // Si se mueve hacia arriba y el jugador está en el suelo, saltar
+      this.player.flipX = vx < 0; // Cambiar la dirección del personaje
 
       if (data.direction.angle === 'up' && this.player.body.onFloor()) {
-        this.player.setVelocityY(this.playerJump);
+        this.player.setVelocityY(this.playerJump); // Salto
       }
     } else {
-      this.player.setVelocityX(0);
+      this.player.setVelocityX(0); // Detener el movimiento horizontal si no se está moviendo
     }
   });
 
-  // Detener movimiento al finalizar joystick
+  // Detener el movimiento cuando el joystick se suelta
   this.joystick.on('end', () => {
     this.player.setVelocityX(0);
   });
 };
-
 let falling = false;
 gameScene.update = function () {
   this.handlePlayerMovement();
