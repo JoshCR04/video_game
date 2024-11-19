@@ -102,6 +102,8 @@ gameScene.initPlayer = function (fondo) {
 
   this.physics.world.setBoundsCollision(true, true, true, false);
 };
+
+// Función para crear la funcionalidad de pausa
 gameScene.createPauseFunctionality = function () {
   const pauseButton = document.getElementById('pause-button');
   const pausePanel = document.getElementById('pause-panel');
@@ -154,6 +156,8 @@ gameScene.initEnemies = function (fondo) {
   });
 };
 
+
+// Función para crear un enemigo
 gameScene.createEnemy = function (enemy, fondo) {
   let newEnemy = this.enemiesGroup.create(
     enemy.x,
@@ -204,12 +208,11 @@ gameScene.initGameObjects = function (fondo) {
   this.initPlatforms(fondo);
   this.initGameItems(fondo);
 
-  // Inicializar el texto de vidas
-  this.livesText = this.add.text(16, 16, 'Lives: ' + this.lives, {
-    fontSize: '32px',
-    fill: '#FFFFFF'
-  });
+  // Inicializar el texto de vidas en el HTML
+  this.livesTextElement = document.getElementById('lives-text');
+  this.livesTextElement.textContent = 'Lives: ' + this.lives;
 };
+
 
 // Función para manejar la recogida de un objeto
 gameScene.collectItem = function (player, item) {
@@ -222,19 +225,25 @@ gameScene.collectItem = function (player, item) {
 
 // Función para crear el joystick
 gameScene.createJoystick = function () {
-  if (!isMobile()) return; //maneja que solo sea activado cuando esta en un celular
+
+
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
 
+  // Asegúrate de que el joystick esté encima de otros elementos
+  joystickArea.style.position = 'absolute';  // Establecer posición absoluta
+  joystickArea.style.zIndex = 9999;  // Asegurarse de que esté encima de otros elementos
+
+  // Crear el joystick
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
     color: 'gray',
     size: 100,
-    threshold: 0.5
+    threshold: 0.5,
   });
 };
 
@@ -293,7 +302,7 @@ gameScene.handleGameOver = function () {
   this.isGameOver = true;
 
   this.lives--;
-  this.livesText.setText('Lives: ' + this.lives);
+  this.livesTextElement.textContent = 'Lives: ' + this.lives;
 
   if (this.lives <= 0) {
     this.showGameOverScreen();
@@ -307,35 +316,30 @@ gameScene.showGameOverScreen = function () {
   this.physics.pause();
   this.cameras.main.stopFollow();
 
-  // Obtener las dimensiones de la cámara principal
-  const camera = this.cameras.main;
-  const { width, height, midPoint } = camera;
+  // Mostrar el fondo negro
+  const gameOverBackground = document.getElementById('game-over-background');
+  gameOverBackground.style.display = 'block'; // Mostrar el fondo negro
 
-  // Crear un rectángulo de fondo que cubra toda la pantalla
-  let background = this.add.rectangle(
-    midPoint.x, // Posicionar en el centro de la cámara
-    midPoint.y,
-    width, // Ancho de la cámara para cubrir toda la pantalla
-    height, // Alto de la cámara para cubrir toda la pantalla
-    0x000000 // Color negro de fondo
-  ).setOrigin(0.5).setDepth(1);
-
-  // Crear el texto de "Game Over"
-  let textStyle = { font: "64px Karantina", fill: "#FFFFFF", align: "center" };
-  let text = this.add.text(
-    midPoint.x, // Centrar en el medio de la cámara
-    midPoint.y,
-    "Game Over!",
-    textStyle
-  ).setOrigin(0.5).setDepth(2);
+  // Crear y mostrar el mensaje de "Game Over"
+  const gameOverTextElement = document.getElementById('game-over-text');
+  gameOverTextElement.textContent = 'Game Over!';
+  gameOverTextElement.style.display = 'block'; // Mostrar el mensaje
 
   // Reiniciar el juego después de 2 segundos
   this.time.delayedCall(2000, () => {
     this.lives = 3; // Reiniciar las vidas
     this.isGameOver = false; // Permitir que el juego siga después del reinicio
-    this.scene.restart(); // Reiniciar la escena
+
+    // Ocultar el fondo negro y el mensaje de "Game Over"
+    gameOverBackground.style.display = 'none'; // Ocultar el fondo negro
+    gameOverTextElement.style.display = 'none'; // Ocultar el mensaje de "Game Over"
+
+    // Reiniciar la escena
+    this.scene.restart();
   }, null, this);
 };
+
+
 
 gameScene.handlePlayerDamage = function () {
   this.cameras.main.shake(200, 0.02);

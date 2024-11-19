@@ -77,3 +77,37 @@
     }
   }
 }
+
+/* vidas y game over */
+#lives-text {
+  font-size: $fs-xxmd;
+  color: $clr-white;
+  font-family: $ff-text;
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  z-index: 1000;
+}
+
+#game-over-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $clr-black; 
+  z-index: 1001; /* Asegúrate de que el fondo esté debajo del texto */
+  display: none; /* Inicialmente oculto */
+}
+
+#game-over-text {
+  font-size: $fs-xxl;
+  color: $clr-white;
+  font-family: $ff-primary;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1002;
+  display: none; /* Inicialmente oculto */
+}

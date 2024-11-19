@@ -1,3 +1,4 @@
+@charset "UTF-8";
 #pause-button {
   position: absolute;
   top: 16px;
@@ -64,6 +65,40 @@
 #pause-panel #resume-button:hover {
   background-color: hsl(0, 0%, 0%);
   color: hsl(0, 0%, 100%);
+}
+
+/* vidas y game over */
+#lives-text {
+  font-size: 3.125rem;
+  color: hsl(0, 0%, 100%);
+  font-family: "Neuton", serif;
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  z-index: 1000;
+}
+
+#game-over-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(0, 0%, 0%);
+  z-index: 1001; /* Asegúrate de que el fondo esté debajo del texto */
+  display: none; /* Inicialmente oculto */
+}
+
+#game-over-text {
+  font-size: 5rem;
+  color: hsl(0, 0%, 100%);
+  font-family: "Karantina", system-ui;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1002;
+  display: none; /* Inicialmente oculto */
 }
 
 /*# sourceMappingURL=game.css.map */
