@@ -1,0 +1,79 @@
+@use "../abstracts/variables" as *;
+// Botón de pausa
+#pause-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  cursor: pointer;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+// Panel de pausa
+#pause-panel {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($clr-black, 0.8);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    text-align: center;
+    color: $clr-white;
+    font-family: $ff-primary;
+  }
+
+  h1 {
+    font-size: $fs-lg; // Tamaño grande para "Game Paused"
+    margin-bottom: 20px;
+    font-weight: $fw-bold;
+  }
+
+  // Botón de ir al menú principal
+  #menu-button {
+    padding: 15px 30px;
+    font-size: $fs-m; // Tamaño mediano para el botón
+    cursor: pointer;
+    background-color: $clr-white;
+    border: 2px solid $clr-black;
+    border-radius: 10px;
+    color: $clr-black;
+    font-family: $ff-text;
+    font-weight: $fw-bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: $clr-black;
+      color: $clr-white;
+    }
+  }
+
+  // Botón de reanudar
+  #resume-button {
+    padding: 15px 30px;
+    font-size: $fs-m; // Tamaño mediano para el botón
+    cursor: pointer;
+    background-color: $clr-white;
+    border: 2px solid $clr-black;
+    border-radius: 10px;
+    color: $clr-black;
+    font-family: $ff-text;
+    font-weight: $fw-bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: $clr-black;
+      color: $clr-white;
+    }
+  }
+}

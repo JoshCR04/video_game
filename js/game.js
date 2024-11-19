@@ -4,7 +4,6 @@ let gameScene = new Phaser.Scene("Game");
 gameScene.lives = 3; // Inicializa el número de vidas
 gameScene.livesText = null; // Inicializa la variable para el texto de vidas
 
-
 // Parámetros iniciales del juego
 gameScene.init = function () {
   this.playerSpeed = 300;
@@ -93,9 +92,6 @@ gameScene.preload = function () {
   this.load.image("goblin", "../img/assets/duende.png");
 };
 
-
-
-
 // Función para inicializar el jugador
 gameScene.initPlayer = function (fondo) {
   this.player = this.physics.add.sprite(
@@ -106,6 +102,38 @@ gameScene.initPlayer = function (fondo) {
 
   this.physics.world.setBoundsCollision(true, true, true, false);
 };
+gameScene.createPauseFunctionality = function () {
+  const pauseButton = document.getElementById('pause-button');
+  const pausePanel = document.getElementById('pause-panel');
+  const resumeButton = document.getElementById('resume-button');
+
+  // Evento para pausar el juego
+  pauseButton.addEventListener('click', () => {
+    if (!this.isPaused) {
+      this.isPaused = true;
+      this.physics.pause(); // Pausa el juego
+      this.cameras.main.setAlpha(0.5); // Efecto de transparencia
+      pausePanel.style.display = 'flex'; // Muestra el panel de pausa
+    }
+  });
+
+  // Evento para reanudar el juego
+  resumeButton.addEventListener('click', () => {
+    if (this.isPaused) {
+      this.isPaused = false;
+      this.physics.resume(); // Reanuda el juego
+      this.cameras.main.setAlpha(1); // Elimina el efecto de transparencia
+      pausePanel.style.display = 'none'; // Oculta el panel de pausa
+    }
+  });
+};
+document.getElementById("menu-button").addEventListener("click", () => {
+  // Redirige al menú principal
+  window.location.href = "menu.html";
+});
+
+
+
 
 
 // Función para inicializar el grupo de suelos
@@ -249,9 +277,12 @@ gameScene.create = function () {
   this.initGameObjects(this.background);
   this.setupCamera();
   this.setupCollisions();
-
   this.cursors = this.input.keyboard.createCursorKeys();
+  this.isPaused = false;
+
+  this.createPauseFunctionality();
 };
+
 
 // Variable para indicar si el juego está en modo "Game Over"
 gameScene.isGameOver = false;
@@ -381,9 +412,7 @@ gameScene.handleJoystickMovement = function () {
   });
 };
 
-
 let falling = false;
-
 gameScene.update = function () {
   this.handlePlayerMovement();
   this.handleJoystickMovement();
@@ -393,11 +422,8 @@ gameScene.update = function () {
   if (this.player.y > this.physics.world.bounds.height) {
     this.handleGameOver();
   }
+
 };
-
-
-
-
 
 
 let config = {
