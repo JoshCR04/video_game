@@ -38,7 +38,6 @@ gameScene.init = function () {
     { type: "key", x: 5400, y: -180 },
     { type: "crow", x: 2960, y: -510 },
     { type: "goblin", x: 1249, y: -331 },
-    { type: "sword", x: 40, y: -500 },
     { type: "bread", x: 1105, y: -175 },
   ];
 
@@ -90,6 +89,7 @@ gameScene.preload = function () {
   this.load.image("sword", "../img/assets/espada_con_luz.png");
   this.load.image("crow", "../img/assets/cuervo.png");
   this.load.image("goblin", "../img/assets/duende.png");
+  this.load.image("magic_stone", "../img/assets/alma_petra.png");
 };
 
 // Función para inicializar el jugador
@@ -109,26 +109,37 @@ gameScene.createPauseFunctionality = function () {
   const pausePanel = document.getElementById('pause-panel');
   const resumeButton = document.getElementById('resume-button');
 
-  // Evento para pausar el juego
-  pauseButton.addEventListener('click', () => {
-    if (!this.isPaused) {
-      this.isPaused = true;
-      this.physics.pause(); // Pausa el juego
-      this.cameras.main.setAlpha(0.5); // Efecto de transparencia
-      pausePanel.style.display = 'flex'; // Muestra el panel de pausa
-    }
+  // Evento para pausar el juego usando el botón
+  pauseButton.addEventListener('click', () => this.togglePause());
+
+  // Evento para reanudar el juego usando el botón
+  resumeButton.addEventListener('click', () => this.togglePause());
+
+  // Evento para el botón del menú principal
+  document.getElementById("menu-button").addEventListener("click", () => {
+    // Redirige al menú principal
+    window.location.href = "menu.html";
   });
 
-  // Evento para reanudar el juego
-  resumeButton.addEventListener('click', () => {
-    if (this.isPaused) {
-      this.isPaused = false;
-      this.physics.resume(); // Reanuda el juego
-      this.cameras.main.setAlpha(1); // Elimina el efecto de transparencia
-      pausePanel.style.display = 'none'; // Oculta el panel de pausa
-    }
-  });
+  // Evento para la tecla ESC
+  this.input.keyboard.on('keydown-ESC', () => this.togglePause());
 };
+
+// Función para alternar pausa/reanudación
+gameScene.togglePause = function () {
+  if (!this.isPaused) {
+    this.isPaused = true;
+    this.physics.pause(); // Pausa el juego
+    this.cameras.main.setAlpha(0.5); // Efecto de transparencia
+    document.getElementById('pause-panel').style.display = 'flex'; // Muestra el panel de pausa
+  } else {
+    this.isPaused = false;
+    this.physics.resume(); // Reanuda el juego
+    this.cameras.main.setAlpha(1); // Elimina el efecto de transparencia
+    document.getElementById('pause-panel').style.display = 'none'; // Oculta el panel de pausa
+  }
+};
+
 document.getElementById("menu-button").addEventListener("click", () => {
   // Redirige al menú principal
   window.location.href = "menu.html";
@@ -219,10 +230,13 @@ gameScene.initGameObjects = function (fondo) {
 gameScene.collectItem = function (player, item) {
   if (item.type === 'bread') {
     this.lives++;
-    this.livesText.setText('Lives: ' + this.lives);
+    this.livesTextElement.textContent = 'Lives: ' + this.lives; // Actualiza el texto del HTML
+    item.destroy();
   }
-  item.destroy(); // Eliminar el objeto recolectado
+
 };
+
+
 
 // Función para crear el joystick
 gameScene.createJoystick = function () {
@@ -256,9 +270,10 @@ gameScene.setupCollisions = function () {
   this.physics.add.collider(this.player, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.grounds);
-  this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this);
-  this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this);
+  this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this); 
+  this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this); 
 };
+
 
 // Función para configurar la cámara
 gameScene.setupCamera = function () {
@@ -283,6 +298,13 @@ gameScene.create = function () {
   this.setupCamera(); // Configurar la cámara
   this.setupCollisions(); // Configurar las colisiones
   this.cursors = this.input.keyboard.createCursorKeys(); // Configurar las teclas
+  this.keys = this.input.keyboard.addKeys({
+    W: Phaser.Input.Keyboard.KeyCodes.W,
+    A: Phaser.Input.Keyboard.KeyCodes.A,
+    S: Phaser.Input.Keyboard.KeyCodes.S,
+    D: Phaser.Input.Keyboard.KeyCodes.D,
+  });
+
   this.isPaused = false;
 
   this.createPauseFunctionality(); // Crear la funcionalidad de pausa
@@ -366,18 +388,24 @@ gameScene.updateEnemyMovement = function (enemy) {
 
 // Función para manejar el movimiento del jugador
 gameScene.handlePlayerMovement = function () {
-  if (this.cursors.left.isDown) {
+  // Movimiento hacia la izquierda
+  if (this.cursors.left.isDown || this.keys.A.isDown) {
     this.player.body.setVelocityX(-this.playerSpeed);
     this.player.flipX = true;
-  } else if (this.cursors.right.isDown) {
+  }
+  // Movimiento hacia la derecha
+  else if (this.cursors.right.isDown || this.keys.D.isDown) {
     this.player.body.setVelocityX(this.playerSpeed);
     this.player.flipX = false;
-  } else {
+  }
+  // Sin movimiento horizontal
+  else {
     this.player.body.setVelocityX(0);
   }
 
+  // Salto
   if (
-    (this.cursors.up.isDown || this.cursors.space.isDown) &&
+    (this.cursors.up.isDown || this.cursors.space.isDown || this.keys.W.isDown) &&
     this.player.body.onFloor()
   ) {
     this.player.body.setVelocityY(this.playerJump);

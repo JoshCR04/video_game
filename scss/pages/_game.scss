@@ -11,8 +11,6 @@
   pointer-events: auto; /* Asegura que el joystick sea interactuable */
 }
 
-
-
 // Botón de pausa
 #pause-button {
   position: absolute;
@@ -92,15 +90,30 @@
   }
 }
 
-/* vidas y game over */
-#lives-text {
-  font-size: $fs-xxmd;
-  color: $clr-white;
-  font-family: $ff-text;
+/* vidas y game over y puntaje */
+#info-container {
   position: absolute;
   top: 5px;
   left: 16px;
   z-index: 1001;
+  display: flex;
+  align-items: center; 
+}
+
+/* Estilo para el texto de las vidas */
+#lives-text {
+  font-size: $fs-xxmd;
+  color: $clr-white;
+  font-family: $ff-text;
+  margin-right: 90px; 
+}
+
+/* Estilo para el texto de la puntuación */
+#score-text {
+  font-size: $fs-xxmd;
+  font-family: $ff-text;
+  color: $clr-white;
+  text-shadow: 2px 2px 5px $clr-black(0, 0, 0, 0.5);
 }
 
 #game-over-background {
