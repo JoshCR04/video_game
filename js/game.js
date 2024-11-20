@@ -3,6 +3,7 @@ let gameScene = new Phaser.Scene("Game");
 // Definir variables para las vidas
 gameScene.lives = 3; // Inicializa el número de vidas
 gameScene.livesText = null; // Inicializa la variable para el texto de vidas
+gameScene.score = 0;
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
@@ -223,6 +224,9 @@ gameScene.initGameObjects = function (fondo) {
   // Inicializar el texto de vidas en el HTML
   this.livesTextElement = document.getElementById('lives-text');
   this.livesTextElement.textContent = 'Lives: ' + this.lives;
+  this.scoreTextElement = document.getElementById('score-text');
+  this.scoreTextElement.textContent = 'Score: ' + this.score;
+
 };
 
 
@@ -230,11 +234,15 @@ gameScene.initGameObjects = function (fondo) {
 gameScene.collectItem = function (player, item) {
   if (item.type === 'bread') {
     this.lives++;
-    this.livesTextElement.textContent = 'Lives: ' + this.lives; // Actualiza el texto del HTML
-    item.destroy();
+    this.livesTextElement.textContent = 'Lives: ' + this.lives; // Actualiza el texto de vidas en HTML
+    item.destroy(); // Eliminar el pan después de la recolección
+  } else if (item.type === 'goblin') {
+    this.score++;  // Aumentar el puntaje en 1
+    this.scoreTextElement.textContent = 'Score: ' + this.score; // Actualizar el texto de puntaje en HTML
+    item.destroy(); // Eliminar el goblin después de ser recolectado
   }
-
 };
+
 
 
 
@@ -270,8 +278,8 @@ gameScene.setupCollisions = function () {
   this.physics.add.collider(this.player, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.platformGroup);
   this.physics.add.collider(this.enemiesGroup, this.grounds);
-  this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this); 
-  this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this); 
+  this.physics.add.overlap(this.player, this.gameItemsGroup, this.collectItem, null, this);
+  this.physics.add.overlap(this.player, this.enemiesGroup, this.handleGameOver, null, this);
 };
 
 
@@ -347,6 +355,7 @@ gameScene.showGameOverScreen = function () {
   // Reiniciar el juego después de 2 segundos
   this.time.delayedCall(2000, () => {
     this.lives = 3; // Reiniciar las vidas
+    this.score = 0;
     this.isGameOver = false; // Permitir que el juego siga después del reinicio
 
     // Ocultar el fondo negro y el mensaje de "Game Over"
@@ -370,6 +379,7 @@ gameScene.handlePlayerDamage = function () {
     this.player.body.setEnable(true);
   }, null, this);
 };
+
 
 // Función para manejar el movimiento de los enemigos
 gameScene.updateEnemyMovement = function (enemy) {
@@ -444,16 +454,19 @@ gameScene.handleJoystickMovement = function () {
     this.player.setVelocityX(0);
   });
 };
-let falling = false;
+// Función para verificar si el jugador ha caído fuera del límite
+gameScene.checkPlayerFall = function () {
+  if (this.player.y > this.physics.world.bounds.height) {
+    this.handleGameOver();
+
+  }
+};
+
 gameScene.update = function () {
   this.handlePlayerMovement();
   this.handleJoystickMovement();
   this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
-
-  // Verificar si el jugador ha caído fuera del límite inferior del mapa
-  if (this.player.y > this.physics.world.bounds.height) {
-    this.handleGameOver();
-  }
+  this.checkPlayerFall();
 
 };
 
