@@ -1,42 +1,132 @@
 {
-   "world": {
-      "width": 1900,
-      "height": 1000
-   },
-   "player": {
-      "x": 190,
-      "y": 535
-   },
-   "platforms": [
-      {
-         "x": 72,
-         "y": 450,
-         "tiles": 6,
-         "key": "block"
-      },
-      {
-         "x": 0,
-         "y": 330,
-         "tiles": 8,
-         "key": "block"
-      },
-      {
-         "x": 200,
-         "y": 210,
-         "tiles": 8,
-         "key": "block"
-      },
-      {
-         "x": 0,
-         "y": 90,
-         "tiles": 7,
-         "key": "block"
-      },
-      {
-         "x": 0,
-         "y": 565,
-         "tiles": 1,
-         "key": "ground"
-      }
-   ]
- }
+  "playerSpeed": 300,
+  "playerJump": -440,
+  "playerObject": [{ "type": "player", "x": 100, "y": 0 }],
+  "gameObjects": [
+    { "type": "ground_1", "x": 390, "y": -65 },
+    { "type": "ground_2", "x": 1485, "y": -65 },
+    { "type": "ground_3", "x": 2648, "y": -65 },
+    { "type": "ground_4", "x": 3937, "y": -72 },
+    { "type": "ground_4", "x": 5408, "y": -72 }
+  ],
+  "enemiesObjects": [
+    {
+      "type": "flying_bug",
+      "x": 920,
+      "y": -600,
+      "patrolDistance": 290,
+      "patrolSpeed": 200
+    },
+    {
+      "type": "flying_bug",
+      "x": 790,
+      "y": -300,
+      "patrolDistance": 200,
+      "patrolSpeed": 200
+    },
+    {
+      "type": "flying_bug",
+      "x": 3500,
+      "y": -250,
+      "patrolDistance": 200,
+      "patrolSpeed": 200
+    },
+    {
+      "type": "witch",
+      "x": 2600,
+      "y": -350,
+      "patrolDistance": 280,
+      "patrolSpeed": 100
+    },
+    {
+      "type": "monster",
+      "x": 4050,
+      "y": -300,
+      "patrolDistance": 200,
+      "patrolSpeed": 100
+    }
+  ],
+  "gameItems": [
+    { "type": "mushroom", "x": 4000, "y": -190 },
+    { "type": "key", "x": 5400, "y": -180 },
+    { "type": "crow", "x": 2960, "y": -510 },
+    { "type": "goblin", "x": 1249, "y": -331 },
+    { "type": "bread", "x": 1105, "y": -175 },
+   
+  
+    { "type": "magic_stone", "x": 247, "y": -360 },
+    { "type": "magic_stone", "x": 347, "y": -360 },
+    { "type": "magic_stone", "x": 447, "y": -390 },
+    { "type": "magic_stone", "x": 647, "y": -265 },
+    { "type": "magic_stone", "x": 247, "y": -600},
+    { "type": "magic_stone", "x": 147, "y": -430 },
+    { "type": "magic_stone", "x": 47, "y": -500 },
+    { "type": "magic_stone", "x": 547, "y": -460 },
+    { "type": "magic_stone", "x": 920, "y": -380 },
+    { "type": "magic_stone", "x": 1105, "y": -450 },
+    { "type": "magic_stone", "x": 1290, "y": -480 },
+    { "type": "magic_stone", "x": 1105, "y": -300 },
+    { "type": "magic_stone", "x": 1290, "y": -200 },
+    { "type": "magic_stone", "x": 1290, "y": -300 },
+    { "type": "magic_stone", "x": 1890, "y": -200 },
+    { "type": "magic_stone", "x": 2110, "y": -200 },
+    { "type": "magic_stone", "x": 3200, "y": -300 },
+    { "type": "magic_stone", "x": 3400, "y": -400 },
+    { "type": "magic_stone", "x": 2800, "y": -500 },
+    { "type": "magic_stone", "x": 2500, "y": -500 },
+    { "type": "magic_stone", "x": 2000, "y": -500 },
+    { "type": "magic_stone", "x": 1700, "y": -500 },
+    { "type": "magic_stone", "x": 2250, "y": -600 },
+    { "type": "magic_stone", "x": 3100, "y": -600 },
+    { "type": "magic_stone", "x": 3600, "y": -500 },
+    { "type": "magic_stone", "x": 3400, "y": -600 },
+    { "type": "magic_stone", "x": 3800, "y": -500 },
+    { "type": "magic_stone", "x": 3410, "y": -300 },
+    { "type": "magic_stone", "x": 4510, "y": -300 },
+    { "type": "magic_stone", "x": 4810, "y": -300 },
+
+    { "type": "magic_stone", "x": 97, "y": -500 },
+    { "type": "magic_stone", "x": 247, "y": -400 },
+    { "type": "magic_stone", "x": 920, "y": -500 },
+    { "type": "magic_stone", "x": 1300, "y": -200 },
+    { "type": "magic_stone", "x": 1890, "y": -200 },
+    { "type": "magic_stone", "x": 2250, "y": -600 },
+    { "type": "magic_stone", "x": 3100, "y": -500 },
+    { "type": "magic_stone", "x": 3800, "y": -600 }
+
+  ],
+  "platforms": [
+    { "type": "platform_1", "x": 47, "y": -310 },
+    { "type": "platform_1", "x": 147, "y": -310 },
+    { "type": "platform_1", "x": 247, "y": -310 },
+    { "type": "platform_1", "x": 347, "y": -310 },
+    { "type": "platform_1", "x": 447, "y": -310 },
+    { "type": "platform_1", "x": 647, "y": -215 },
+    { "type": "platform_1", "x": 247, "y": -510 },
+    { "type": "platform_1", "x": 147, "y": -380 },
+    { "type": "platform_1", "x": 47, "y": -450 },
+    { "type": "platform_1", "x": 547, "y": -510 },
+    { "type": "platform_1", "x": 920, "y": -330 },
+    { "type": "platform_1", "x": 1105, "y": -400 },
+    { "type": "platform_1", "x": 1290, "y": -530 },
+    { "type": "platform_1", "x": 1105, "y": -130 },
+    { "type": "platform_1", "x": 1290, "y": -130 },
+    { "type": "platform_1", "x": 1290, "y": -310 },
+    { "type": "platform_1", "x": 1890, "y": -100 },
+    { "type": "platform_1", "x": 2110, "y": -190 },
+    { "type": "platform_1", "x": 3200, "y": -200 },
+    { "type": "platform_1", "x": 3400, "y": -300 },
+    { "type": "platform_1", "x": 2800, "y": -400 },
+    { "type": "platform_1", "x": 2500, "y": -400 },
+    { "type": "platform_1", "x": 2000, "y": -400 },
+    { "type": "platform_1", "x": 1700, "y": -400 },
+    { "type": "platform_1", "x": 2250, "y": -500 },
+    { "type": "platform_1", "x": 3100, "y": -500 },
+    { "type": "platform_1", "x": 3600, "y": -400 },
+    { "type": "platform_1", "x": 3400, "y": -500 },
+    { "type": "platform_1", "x": 3800, "y": -400 },
+    { "type": "platform_2", "x": 3410, "y": -100 },
+    { "type": "platform_2", "x": 4510, "y": -140 },
+    { "type": "platform_2", "x": 4810, "y": -140 }
+  ]
+}

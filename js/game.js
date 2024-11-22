@@ -7,66 +7,25 @@ gameScene.score = 0;
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
-  this.playerSpeed = 300;
-  this.playerJump = -440;
+  fetch('../data/levelData.json')
+    .then((response) => response.json())
+    .then((data) => {
+      // Asignar los valores del JSON a las propiedades del juego
+      this.playerSpeed = data.playerSpeed;
+      this.playerJump = data.playerJump;
+      this.playerObject = data.playerObject;
+      this.gameObjects = data.gameObjects;
+      this.enemiesObjects = data.enemiesObjects;
+      this.gameItems = data.gameItems;
+      this.platforms = data.platforms;
 
-
-  // Datos del personaje
-  this.playerObject = [{ type: "player", x: 100, y: 0 }];
-
-  // Datos del suelo
-  this.gameObjects = [
-    { type: "ground_1", x: 390, y: -65 },
-    { type: "ground_2", x: 1485, y: -65 },
-    { type: "ground_3", x: 2648, y: -65 },
-    { type: "ground_4", x: 3937, y: -72 },
-    { type: "ground_4", x: 5408, y: -72 },
-  ];
-
-  // Datos de enemigos
-  this.enemiesObjects = [
-    { type: "flying_bug", x: 920, y: -600, patrolDistance: 290, patrolSpeed: 200 },
-    { type: "flying_bug", x: 790, y: -300, patrolDistance: 200, patrolSpeed: 200 },
-    { type: "flying_bug", x: 3500, y: -250, patrolDistance: 200, patrolSpeed: 200 },
-    { type: "witch", x: 2600, y: -350, patrolDistance: 280, patrolSpeed: 100 },
-    { type: "monster", x: 4050, y: -300, patrolDistance: 200, patrolSpeed: 100 },
-  ];
-
-
-  // Assets
-  this.gameItems = [
-    { type: "mushroom", x: 4000, y: -190 },
-    { type: "key", x: 5400, y: -180 },
-    { type: "crow", x: 2960, y: -510 },
-    { type: "goblin", x: 1249, y: -331 },
-    { type: "bread", x: 1105, y: -175 },
-  ];
-
-  // Datos de plataformas
-  this.platforms = [
-    { type: "platform_1", x: 47, y: -310 },
-    { type: "platform_1", x: 147, y: -310 },
-    { type: "platform_1", x: 247, y: -310 },
-    { type: "platform_1", x: 347, y: -310 },
-    { type: "platform_1", x: 447, y: -310 },
-    { type: "platform_1", x: 647, y: -215 },
-    { type: "platform_1", x: 247, y: -510 },
-    { type: "platform_1", x: 147, y: -380 },
-    { type: "platform_1", x: 47, y: -450 },
-    { type: "platform_1", x: 547, y: -510 },
-    { type: "platform_1", x: 920, y: -330 },
-    { type: "platform_1", x: 1020, y: -360 },
-    { type: "platform_1", x: 1105, y: -430 },
-    { type: "platform_1", x: 1290, y: -530 },
-    { type: "platform_1", x: 1105, y: -130 },
-    { type: "platform_1", x: 1290, y: -310 },
-    { type: "platform_1", x: 1890, y: -100 },
-    { type: "platform_1", x: 2110, y: -190 },
-    { type: "platform_1", x: 3200, y: -200 },
-    { type: "platform_2", x: 3410, y: -100 },
-    { type: "platform_2", x: 4510, y: -140 },
-    { type: "platform_2", x: 4810, y: -140 },
-  ];
+      console.log('Datos del juego cargados:', data); // Depuración
+    })
+    .catch((error) => {
+      console.error('Error cargando el archivo JSON:', error);
+    });
+  this.isAttacking = false; // Indica si el jugador está atacando
+  this.attackDuration = 500; // Duración del ataque en milisegundos
 };
 
 // Se cargan las imágenes
@@ -230,18 +189,28 @@ gameScene.initGameObjects = function (fondo) {
 };
 
 
-// Función para manejar la recogida de un objeto
 gameScene.collectItem = function (player, item) {
   if (item.type === 'bread') {
     this.lives++;
     this.livesTextElement.textContent = 'Lives: ' + this.lives; // Actualiza el texto de vidas en HTML
     item.destroy(); // Eliminar el pan después de la recolección
-  } else if (item.type === 'goblin') {
+  } else if (item.type === 'magic_stone') {
     this.score++;  // Aumentar el puntaje en 1
     this.scoreTextElement.textContent = 'Score: ' + this.score; // Actualizar el texto de puntaje en HTML
-    item.destroy(); // Eliminar el goblin después de ser recolectado
+    item.destroy(); // Eliminar la piedra mágica después de ser recolectada
+  } else if (item.type === 'mushroom') {
+    this.player.body.setEnable(false);
+   
+    item.destroy(); // Eliminar el hongo después de la recolección
+
+    // Desactivar la invulnerabilidad después de 5 segundos
+    this.time.delayedCall(5000, function() {
+      this.player.body.setEnable(true);
+ 
+    }, [], this);
   }
 };
+
 
 
 
