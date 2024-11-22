@@ -2,13 +2,13 @@
 $phone: "(max-width: 480px)";
 
 // Móviles pequeños en modo paisaje
-$phone-landscape: "(min-width: 481px) and (max-width: 767px)";
+$phone-landscape: "(min-width: 481px) and (max-width: 767px) and (orientation: landscape)";
 
 // Tabletas en modo retrato
-$tablet: "(min-width: 768px) and (max-width: 1024px)";
+$tablet: "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)";
 
 // Tabletas en modo paisaje
-$tablet-landscape: "(min-width: 768px) and (max-width: 1024px)";
+$tablet-landscape: "(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)";
 
 // Portátiles y pantallas pequeñas de escritorio
 $laptop: "(min-width: 1025px) and (max-width: 1366px)";

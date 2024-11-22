@@ -109,7 +109,7 @@ button:focus {
     margin-bottom: 1rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .instructions-title {
     padding: 1.25rem;
     margin-bottom: 1.25rem;
@@ -131,7 +131,7 @@ button:focus {
     padding: 0 1rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .instructions-cards {
     display: flex;
     flex-direction: column;
@@ -171,7 +171,7 @@ button:focus {
     padding-bottom: 4rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .instruction-card {
     display: flex;
     flex-direction: column;
@@ -208,7 +208,7 @@ button:focus {
     padding: 1rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .img-cards {
     max-width: 85%;
     height: auto;
@@ -246,7 +246,7 @@ button:focus {
     white-space: normal;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .text-box {
     background-color: hsl(195, 15%, 22%);
     border: 0.0625rem solid hsl(0, 0%, 47%);
@@ -288,7 +288,7 @@ button:focus {
     font-weight: 700;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .title-tarjeta {
     font-size: 1.5625rem;
     font-weight: 700;
@@ -309,7 +309,7 @@ button:focus {
     justify-content: center;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .image-container {
     margin-top: 1.5rem;
     display: flex;
@@ -329,7 +329,7 @@ button:focus {
     align-items: center;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -350,7 +350,7 @@ button:focus {
     padding: 0;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .card {
     background-color: transparent;
     width: 100%;
@@ -372,7 +372,7 @@ button:focus {
     margin: 2rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .card-title {
     margin: 2.5rem;
   }
@@ -396,7 +396,7 @@ button:focus {
     padding: 1rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .card-content {
     margin: 2rem;
     padding: 1.5rem;
@@ -430,7 +430,7 @@ button:focus {
   background-color: hsl(189, 7%, 19%);
   padding: 1rem 2rem;
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .icons-footer .header {
     padding: 1rem;
     flex-direction: row;
@@ -446,7 +446,7 @@ button:focus {
   display: block;
   cursor: pointer;
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .icons-footer .menu-icon {
     display: block;
     z-index: 1000;
@@ -486,7 +486,7 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .instructions-section {
     text-align: center;
     margin: 5rem 0;
@@ -511,7 +511,7 @@ input[type=password] {
     text-align: center;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .header {
     margin: auto;
     text-align: center;
@@ -553,7 +553,7 @@ input[type=password] {
     padding: 1rem 0;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .footer {
     margin: auto;
     display: flex;
@@ -576,7 +576,7 @@ input[type=password] {
     margin-left: 0.5rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .logo-footer {
     max-width: 5rem;
     margin-top: 1.5rem;
@@ -625,7 +625,7 @@ input[type=password] {
     margin-right: 2rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .menu-icon {
     display: block;
     z-index: 1000;
@@ -698,7 +698,7 @@ input[type=password] {
     height: 1.5rem;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .nav-links {
     display: none;
     flex-direction: column;
@@ -826,7 +826,7 @@ input[type=password] {
     object-fit: cover;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .banner-image {
     width: 100%;
     height: 50vh;
@@ -871,7 +871,7 @@ input[type=password] {
     margin-right: auto;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .history-section {
     background-color: hsl(191, 18%, 30%);
     padding: 0;
@@ -907,7 +907,7 @@ input[type=password] {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .history-container {
     font-family: "Neuton", serif;
     font-size: 1rem;
@@ -946,7 +946,7 @@ input[type=password] {
     height: auto;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .pj-container {
     max-width: 75%;
     margin: 3rem auto;
@@ -980,7 +980,7 @@ input[type=password] {
   margin: 13rem auto 4rem;
   width: 80%;
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .logo_menu {
     margin: 1rem auto 1rem;
     width: 50%;
@@ -1014,7 +1014,7 @@ input[type=password] {
   font-size: 2.5rem;
   padding: 0.5rem 1rem;
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .buttons a {
     margin-top: 0;
     font-size: 1.5625rem;
@@ -1048,7 +1048,7 @@ input[type=password] {
     z-index: 1000;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .logo_menu,
   .menu-section,
   .buttons {
@@ -1074,7 +1074,7 @@ input[type=password] {
     z-index: 1000;
   }
 }
-@media only screen and (min-width: 481px) and (max-width: 767px) {
+@media only screen and (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
   .logo_menu,
   .menu-section,
   .buttons {
@@ -1084,7 +1084,7 @@ input[type=password] {
     display: none;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .logo_menu,
   .menu-section,
   .buttons {
@@ -1291,7 +1291,7 @@ tr:nth-child(even) {
     box-sizing: border-box;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .Log_Ran_Cred {
     height: auto;
     padding: 1.5rem;
