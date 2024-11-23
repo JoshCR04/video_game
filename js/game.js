@@ -178,14 +178,13 @@ gameScene.create = function () {
 
 // Configuración del joystick para dispositivos móviles
 gameScene.createJoystick = function () {
-  if (!isMobile()) return; // Solo activar cuando se está en un celular
+  if (!isMobile()) return;
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
 
-  // Crear el joystick con nipplejs
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
@@ -194,33 +193,27 @@ gameScene.createJoystick = function () {
     threshold: 0.5,
   });
 
-  // Variables para almacenar el movimiento
-  this.joystickVelocity = { x: 0, y: 0 };
-
   this.joystick.on('move', (evt, data) => {
-    if (data && data.angle) {
-      const angle = data.angle.degree;
-      const power = Math.min(data.distance / data.position.radius, 1); // Normaliza entre 0 y 1
+    if (data && data.direction) {
+      const angle = data.angle.degree; // Grados de inclinación
+      const power = data.distance; // Distancia del joystick desde el centro
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
 
-      // Convertir la dirección en componentes x, y
-      this.joystickVelocity.x = Math.cos(Phaser.Math.DegToRad(angle)) * power;
-      this.joystickVelocity.y = Math.sin(Phaser.Math.DegToRad(angle)) * power;
+      // Movimiento horizontal
+      this.player.setVelocityX(vx);
+      this.player.flipX = vx < 0; // Cambiar la dirección del personaje
+
+      // Salto si se mueve hacia arriba
+      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
+        this.player.setVelocityY(this.playerJump);
+      }
+    } else {
+      this.player.setVelocityX(0); // Detener el movimiento si no se está moviendo
     }
   });
 
   this.joystick.on('end', () => {
-    // Detener movimiento cuando se suelta el joystick
-    this.joystickVelocity.x = 0;
-    this.joystickVelocity.y = 0;
-  });
-
-  // Iniciar un temporizador para aplicar el movimiento del joystick
-  this.time.addEvent({
-    delay: 10, // Cada 10 ms
-    loop: true,
-    callback: () => {
-      this.applyJoystickMovement();
-    },
+    this.player.setVelocityX(0); // Detener al jugador al soltar el joystick
   });
 };
 
@@ -269,18 +262,7 @@ gameScene.handlePlayerMovement = function () {
     this.player.body.setVelocityY(this.playerJump);
   }
 };
-gameScene.applyJoystickMovement = function () {
-  if (!this.player || !this.joystick) return;
 
-  // Movimiento horizontal
-  this.player.setVelocityX(this.joystickVelocity.x * 200); // Ajusta el factor de velocidad
-  this.player.flipX = this.joystickVelocity.x < 0; // Girar sprite si se mueve a la izquierda
-
-  // Salto cuando el joystick apunta hacia arriba
-  if (this.joystickVelocity.y < -0.5 && this.player.body.onFloor()) {
-    this.player.setVelocityY(-300); // Ajusta el valor para el salto
-  }
-};
 
 
 //creacion de objetos y enemigos////////////////////////////////
@@ -406,7 +388,7 @@ gameScene.handlePlayerDamage = function () {
 // Actualización del juego
 gameScene.update = function () {
   this.handlePlayerMovement();
-  this.createJoystick(); 
+  this.createJoystick();
   this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
   this.checkPlayerFall();
 };
