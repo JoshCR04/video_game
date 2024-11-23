@@ -177,7 +177,6 @@ gameScene.create = function () {
 };
 
 // Configuración del joystick para dispositivos móviles
-// Función para crear el joystick
 gameScene.createJoystick = function () {
   if (!isMobile()) return; // Solo activar cuando se está en un celular
   const joystickArea = document.getElementById('joystick-area');
@@ -193,7 +192,26 @@ gameScene.createJoystick = function () {
     size: 100, // Tamaño del joystick
     threshold: 0.5, // Sensibilidad
   });
+
+  // Variables para almacenar el movimiento
+  this.joystickVelocity = { x: 0, y: 0 };
+
+  this.joystick.on('move', (evt, data) => {
+    const angle = data.angle.degree;
+    const power = data.distance / data.position.radius; // Normalizar distancia
+
+    // Convertir la dirección del joystick en componentes X e Y
+    this.joystickVelocity.x = Math.cos(Phaser.Math.DegToRad(angle)) * power;
+    this.joystickVelocity.y = Math.sin(Phaser.Math.DegToRad(angle)) * power;
+  });
+
+  this.joystick.on('end', () => {
+    // Detener movimiento cuando se suelta el joystick
+    this.joystickVelocity.x = 0;
+    this.joystickVelocity.y = 0;
+  });
 };
+
 //pausa////////////////////////////////
 gameScene.createPauseFunctionality = function () {
   const pauseButton = document.getElementById('pause-button');
@@ -240,22 +258,23 @@ gameScene.handlePlayerMovement = function () {
   }
 };
 
-// Evento cuando el joystick se mueve
-this.joystick.on('move', (evt, data) => {
-  if (data.direction) {
-    const angle = data.angle.degree;
-    const power = data.distance;
-    const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
-    this.player.setVelocityX(vx); // Movimiento horizontal
-    // Si se mueve hacia arriba y el jugador está en el suelo, saltar
-    this.player.flipX = vx < 0; // Cambiar la dirección del personaje
-    if (data.direction.angle === 'up' && this.player.body.onFloor()) {
-      this.player.setVelocityY(this.playerJump); // Salto
-    }
-  } else {
-    this.player.setVelocityX(0); // Detener el movimiento horizontal si no se está moviendo
+gameScene.handleJoystickMovement = function () {
+  if (!this.joystick) return;
+
+  const vx = this.joystickVelocity.x * this.playerSpeed;
+  this.player.setVelocityX(vx);
+
+  // Invertir la dirección del sprite según el movimiento
+  if (vx !== 0) {
+    this.player.flipX = vx < 0;
   }
-});
+
+  // Saltar solo si el joystick apunta hacia arriba y el jugador está en el suelo
+  if (this.joystickVelocity.y < -0.5 && this.player.body.onFloor()) {
+    this.player.setVelocityY(this.playerJump);
+  }
+};
+
 
 //creacion de objetos y enemigos////////////////////////////////
 gameScene.createGameItem = function (item, fondo) {
