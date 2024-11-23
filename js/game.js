@@ -177,23 +177,23 @@ gameScene.create = function () {
 };
 
 // Configuración del joystick para dispositivos móviles
+// Función para crear el joystick
 gameScene.createJoystick = function () {
-  if (!isMobile()) return;
+  if (!isMobile()) return; // Solo activar cuando se está en un celular
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
-
+  // Crear el joystick con nipplejs
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
-    color: 'gray',
-    size: 100,
-    threshold: 0.5,
+    color: 'gray', // Color del joystick
+    size: 100, // Tamaño del joystick
+    threshold: 0.5, // Sensibilidad
   });
 };
-
 //pausa////////////////////////////////
 gameScene.createPauseFunctionality = function () {
   const pauseButton = document.getElementById('pause-button');
@@ -240,27 +240,22 @@ gameScene.handlePlayerMovement = function () {
   }
 };
 
-gameScene.handleJoystickMovement = function () {
-  if (!this.joystick) return;
-
-  this.joystick.on('move', (evt, data) => {
+// Evento cuando el joystick se mueve
+this.joystick.on('move', (evt, data) => {
+  if (data.direction) {
     const angle = data.angle.degree;
     const power = data.distance;
     const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
-
-    this.player.setVelocityX(vx);
-    this.player.flipX = vx < 0;
-
+    this.player.setVelocityX(vx); // Movimiento horizontal
+    // Si se mueve hacia arriba y el jugador está en el suelo, saltar
+    this.player.flipX = vx < 0; // Cambiar la dirección del personaje
     if (data.direction.angle === 'up' && this.player.body.onFloor()) {
-      this.player.setVelocityY(this.playerJump);
+      this.player.setVelocityY(this.playerJump); // Salto
     }
-  });
-
-  this.joystick.on('end', () => {
-    this.player.setVelocityX(0);
-  });
-};
-
+  } else {
+    this.player.setVelocityX(0); // Detener el movimiento horizontal si no se está moviendo
+  }
+});
 
 //creacion de objetos y enemigos////////////////////////////////
 gameScene.createGameItem = function (item, fondo) {
