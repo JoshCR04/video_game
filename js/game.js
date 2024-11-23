@@ -277,7 +277,7 @@ gameScene.handleJoystickMovement = function () {
     this.joystickVelocity.x = 0;
     this.joystickVelocity.y = 0;
   });
-
+}
 
 
   //creacion de objetos y enemigos////////////////////////////////
