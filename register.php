@@ -1,3 +1,53 @@
+<?php
+// Incluir el archivo de la clase Config
+require_once 'config.php';
+
+
+// Procesar datos del formulario
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    // Validar campos
+    if (empty($username) || empty($email) || empty($password)) {
+        die("Por favor, completa todos los campos.");
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Correo inválido.");
+    }
+
+    // Encriptar contraseña
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+    // Obtener la conexión PDO usando la clase Config
+    $pdo = config::getConnection();
+
+    // Insertar usuario en la base de datos
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (:username, :email, :password_hash)");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password_hash', $password_hash);
+
+        if ($stmt->execute()) {
+            echo "Registro exitoso. ¡Bienvenido, $username!";
+        } else {
+            echo "Error al registrar el usuario.";
+        }
+    } catch (PDOException $e) {
+        if ($e->getCode() == 23000) { // Código de error para duplicados
+            echo "El nombre de usuario o correo ya está en uso.";
+        } else {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -57,15 +107,20 @@
             <div class="card">
                 <h2 class="card-title">Welcome</h2>
                 <div class="card-content">
-                    <form action="#">
-                        <label for="username">User</label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username">
-                        <br><br>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password">
-                        <br><br>
-                        <button type="submit" class="login-button">Register</button>
+                    <form action="register.php" method="POST">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" name="username" placeholder="Escribe tu usuario" required>
+
+                        <label for="email">Correo</label>
+                        <input type="email" id="email" name="email" placeholder="Escribe tu correo" required>
+
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Escribe tu contraseña"
+                            required>
+
+                        <button type="submit">Registrarse</button>
                     </form>
+
                     <a href="login.html" class="register-link">Login</a>
                 </div>
             </div>
