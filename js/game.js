@@ -176,61 +176,24 @@ gameScene.create = function () {
   this.createPauseFunctionality(); // Crear funcionalidad de pausa
 };
 
-// Configuración del joystick para dispositivos móviles
-gameScene.createJoystick = function () {
-  if (!isMobile()) return;
 
+// Función para crear el joystick
+gameScene.createJoystick = function () {
+  if (!isMobile()) return; // Solo activar cuando se está en un celular
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
-
-  // Configuración del joystick con nipplejs
+  // Crear el joystick con nipplejs
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
-    color: '#00bfff',   // Color azul elegante
-    size: 80,           // Tamaño del joystick más compacto
-    restOpacity: 0.6,   // Opacidad cuando no está activo
-    threshold: 0.3,     // Sensibilidad del movimiento
-  });
-
-  // Velocidad y fuerza del jugador (definidas aquí, no en create)
-  const playerSpeed = 200;  // Velocidad base del jugador
-  const playerJump = 300;   // Fuerza del salto
-
-  // Eventos del joystick
-  this.joystick.on('move', (evt, data) => {
-    if (data && data.angle) {
-      const angle = data.angle.degree;
-      const power = Math.min(data.distance / data.position.radius, 1); // Normalizar entre 0 y 1
-
-      // Calcular velocidades
-      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * playerSpeed;
-      const vy = Math.sin(Phaser.Math.DegToRad(angle)) * power * playerSpeed;
-
-      // Movimiento horizontal del jugador
-      this.player.setVelocityX(vx);
-
-      // Ajustar la dirección del personaje
-      if (vx !== 0) {
-        this.player.flipX = vx < 0;
-      }
-
-      // Salto si apunta hacia arriba
-      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
-        this.player.setVelocityY(-playerJump);
-      }
-    }
-  });
-
-  // Evento cuando se suelta el joystick
-  this.joystick.on('end', () => {
-    this.player.setVelocityX(0); // Detener movimiento horizontal
+    color: 'gray', // Color del joystick
+    size: 100, // Tamaño del joystick
+    threshold: 0.5, // Sensibilidad
   });
 };
-
 
 //pausa////////////////////////////////
 gameScene.createPauseFunctionality = function () {
@@ -278,161 +241,181 @@ gameScene.handlePlayerMovement = function () {
   }
 };
 
+gameScene.handleJoystickMovement = function () {
+  if (!this.joystick) return;
 
 
-//creacion de objetos y enemigos////////////////////////////////
-gameScene.createGameItem = function (item, fondo) {
-  let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
-  newItem.type = item.type;
-  newItem.setImmovable(true);
-  newItem.body.setAllowGravity(false);
-};
-
-gameScene.createEnemy = function (enemy, fondo) {
-  let newEnemy = this.enemiesGroup.create(
-    enemy.x,
-    fondo.height + enemy.y,
-    enemy.type
-  );
-  newEnemy.body.setAllowGravity(enemy.type !== "flying_bug");
-  newEnemy.setCollideWorldBounds(true);
-  newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
-
-  newEnemy.startX = newEnemy.x;
-  newEnemy.patrolDistance = enemy.patrolDistance || 100;
-  newEnemy.patrolDirection = enemy.patrolDirection || 1;
-  newEnemy.patrolSpeed = enemy.patrolSpeed || 150;
-};
-
-gameScene.updateEnemyMovement = function (enemy) {
-  if (enemy.body.blocked.left || enemy.body.blocked.right) {
-    enemy.patrolDirection *= -1;
-  }
-  enemy.body.setVelocityX(enemy.patrolDirection * enemy.patrolSpeed);
-  enemy.setFlipX(enemy.patrolDirection === 1);
-
-  if (enemy.x > enemy.startX + enemy.patrolDistance) {
-    enemy.patrolDirection = -1;
-  } else if (enemy.x < enemy.startX - enemy.patrolDistance) {
-    enemy.patrolDirection = 1;
-  }
-};
-
-
-//recolecion////////////////////////////////
-gameScene.collectItem = function (player, item) {
-  if (item.type === 'bread') {
-    this.lives++;
-    this.livesTextElement.textContent = 'Lives: ' + this.lives;
-    item.destroy();
-  } else if (item.type === 'magic_stone') {
-    this.score++;
-    this.scoreTextElement.textContent = 'Score: ' + this.score;
-    item.destroy();
-  } else if (item.type === 'mushroom') {
-    this.player.body.setEnable(false);
-    item.destroy();
-
-    this.time.delayedCall(5000, function () {
-      this.player.body.setEnable(true);
-    }, [], this);
-  } else if (item.type === 'key') {
-    this.score += 5;
-    this.scoreTextElement.textContent = 'Score: ' + this.score;
-    item.destroy();
-  }
-};
-
-///eventos////////////////////////////////
-gameScene.checkPlayerFall = function () {
-  if (this.player.y > this.physics.world.bounds.height) {
-    this.handleGameOver();
-  }
-};
-
-gameScene.handleGameOver = function () {
-  if (this.isGameOver) return;
-  this.isGameOver = true;
-
-  this.lives--;
-  this.livesTextElement.textContent = 'Lives: ' + this.lives;
-
-  if (this.lives <= 0) {
-    this.showGameOverScreen();
-  } else {
-    this.handlePlayerDamage();
-    this.isGameOver = false;
-  }
-};
-
-gameScene.showGameOverScreen = function () {
-  this.physics.pause();
-  this.cameras.main.stopFollow();
-
-  const gameOverBackground = document.getElementById('game-over-background');
-  const gameOverTextElement = document.getElementById('game-over-text');
-
-  gameOverBackground.style.display = 'block';
-  gameOverTextElement.textContent = 'Game Over!';
-  gameOverTextElement.style.display = 'block';
-
-  this.time.delayedCall(2000, () => {
-    this.lives = 3;
-    this.score = 0;
-    this.isGameOver = false;
-
-    gameOverBackground.style.display = 'none';
-    gameOverTextElement.style.display = 'none';
-
-    this.scene.restart();
-  }, null, this);
-};
-
-gameScene.handlePlayerDamage = function () {
-  this.cameras.main.shake(200, 0.02);
-  this.player.setAlpha(0.5);
-  this.player.body.setEnable(false);
-
-  this.time.delayedCall(1000, () => {
-    this.player.setAlpha(1);
-    this.player.body.setEnable(true);
-  }, null, this);
-};
-
-
-// Actualización del juego
-gameScene.update = function () {
-  this.handlePlayerMovement();
-  this.createJoystick();
-  this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
-  this.checkPlayerFall();
-};
-
-
-// Configuración del juego
-let config = {
-  type: Phaser.CANVAS,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
-  },
-  scene: gameScene,
-  title: "Sword Of Destiny",
-  physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { y: 900 },
-      debug: false,
-    },
-  },
-};
-
-// Creación del juego
-let game = new Phaser.Game(config);
-
-// Función para detectar dispositivos móviles
-function isMobile() {
-  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  // Evento cuando el joystick se mueve
+  this.joystick.on('move', (evt, data) => {
+    if (data.direction) {
+      const angle = data.angle.degree;
+      const power = data.distance;
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
+      this.player.setVelocityX(vx); // Movimiento horizontal
+      // Si se mueve hacia arriba y el jugador está en el suelo, saltar
+      this.player.flipX = vx < 0; // Cambiar la dirección del personaje
+      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
+        this.player.setVelocityY(this.playerJump); // Salto
+      }
+    } else {
+      this.player.setVelocityX(0); // Detener el movimiento horizontal si no se está moviendo
+    }
+  });
 }
+
+  //creacion de objetos y enemigos////////////////////////////////
+  gameScene.createGameItem = function (item, fondo) {
+    let newItem = this.gameItemsGroup.create(item.x, fondo.height + item.y, item.type);
+    newItem.type = item.type;
+    newItem.setImmovable(true);
+    newItem.body.setAllowGravity(false);
+  };
+
+  gameScene.createEnemy = function (enemy, fondo) {
+    let newEnemy = this.enemiesGroup.create(
+      enemy.x,
+      fondo.height + enemy.y,
+      enemy.type
+    );
+    newEnemy.body.setAllowGravity(enemy.type !== "flying_bug");
+    newEnemy.setCollideWorldBounds(true);
+    newEnemy.body.setSize(newEnemy.width, newEnemy.height - 13, true);
+
+    newEnemy.startX = newEnemy.x;
+    newEnemy.patrolDistance = enemy.patrolDistance || 100;
+    newEnemy.patrolDirection = enemy.patrolDirection || 1;
+    newEnemy.patrolSpeed = enemy.patrolSpeed || 150;
+  };
+
+  gameScene.updateEnemyMovement = function (enemy) {
+    if (enemy.body.blocked.left || enemy.body.blocked.right) {
+      enemy.patrolDirection *= -1;
+    }
+    enemy.body.setVelocityX(enemy.patrolDirection * enemy.patrolSpeed);
+    enemy.setFlipX(enemy.patrolDirection === 1);
+
+    if (enemy.x > enemy.startX + enemy.patrolDistance) {
+      enemy.patrolDirection = -1;
+    } else if (enemy.x < enemy.startX - enemy.patrolDistance) {
+      enemy.patrolDirection = 1;
+    }
+  };
+
+
+  //recolecion////////////////////////////////
+  gameScene.collectItem = function (player, item) {
+    if (item.type === 'bread') {
+      this.lives++;
+      this.livesTextElement.textContent = 'Lives: ' + this.lives;
+      item.destroy();
+    } else if (item.type === 'magic_stone') {
+      this.score++;
+      this.scoreTextElement.textContent = 'Score: ' + this.score;
+      item.destroy();
+    } else if (item.type === 'mushroom') {
+      this.player.body.setEnable(false);
+      item.destroy();
+
+      this.time.delayedCall(5000, function () {
+        this.player.body.setEnable(true);
+      }, [], this);
+    } else if (item.type === 'key') {
+      this.score += 5;
+      this.scoreTextElement.textContent = 'Score: ' + this.score;
+      item.destroy();
+    }
+  };
+
+  ///eventos////////////////////////////////
+  gameScene.checkPlayerFall = function () {
+    if (this.player.y > this.physics.world.bounds.height) {
+      this.handleGameOver();
+    }
+  };
+
+  gameScene.handleGameOver = function () {
+    if (this.isGameOver) return;
+    this.isGameOver = true;
+
+    this.lives--;
+    this.livesTextElement.textContent = 'Lives: ' + this.lives;
+
+    if (this.lives <= 0) {
+      this.showGameOverScreen();
+    } else {
+      this.handlePlayerDamage();
+      this.isGameOver = false;
+    }
+  };
+
+  gameScene.showGameOverScreen = function () {
+    this.physics.pause();
+    this.cameras.main.stopFollow();
+
+    const gameOverBackground = document.getElementById('game-over-background');
+    const gameOverTextElement = document.getElementById('game-over-text');
+
+    gameOverBackground.style.display = 'block';
+    gameOverTextElement.textContent = 'Game Over!';
+    gameOverTextElement.style.display = 'block';
+
+    this.time.delayedCall(2000, () => {
+      this.lives = 3;
+      this.score = 0;
+      this.isGameOver = false;
+
+      gameOverBackground.style.display = 'none';
+      gameOverTextElement.style.display = 'none';
+
+      this.scene.restart();
+    }, null, this);
+  };
+
+  gameScene.handlePlayerDamage = function () {
+    this.cameras.main.shake(200, 0.02);
+    this.player.setAlpha(0.5);
+    this.player.body.setEnable(false);
+
+    this.time.delayedCall(1000, () => {
+      this.player.setAlpha(1);
+      this.player.body.setEnable(true);
+    }, null, this);
+  };
+
+
+  // Actualización del juego
+  gameScene.update = function () {
+    this.handlePlayerMovement();
+    this.handleJoystickMovement();
+    this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
+    this.checkPlayerFall();
+  };
+
+
+  // Configuración del juego
+  let config = {
+    type: Phaser.CANVAS,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: gameScene,
+    title: "Sword Of Destiny",
+    physics: {
+      default: "arcade",
+      arcade: {
+        gravity: { y: 900 },
+        debug: false,
+      },
+    },
+  };
+
+  // Creación del juego
+  let game = new Phaser.Game(config);
+
+  // Función para detectar dispositivos móviles
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
