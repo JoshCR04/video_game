@@ -179,43 +179,58 @@ gameScene.create = function () {
 // Configuración del joystick para dispositivos móviles
 gameScene.createJoystick = function () {
   if (!isMobile()) return;
+
   const joystickArea = document.getElementById('joystick-area');
   if (!joystickArea) {
     console.error("El contenedor del joystick no existe");
     return;
   }
 
+  // Configuración del joystick con nipplejs
   this.joystick = nipplejs.create({
     zone: joystickArea,
     mode: 'dynamic',
-    color: 'gray',
-    size: 100,
-    threshold: 0.5,
+    color: '#00bfff',   // Color azul elegante
+    size: 80,           // Tamaño del joystick más compacto
+    restOpacity: 0.6,   // Opacidad cuando no está activo
+    threshold: 0.3,     // Sensibilidad del movimiento
   });
 
+  // Velocidad y fuerza del jugador (definidas aquí, no en create)
+  const playerSpeed = 200;  // Velocidad base del jugador
+  const playerJump = 300;   // Fuerza del salto
+
+  // Eventos del joystick
   this.joystick.on('move', (evt, data) => {
-    if (data && data.direction) {
-      const angle = data.angle.degree; // Grados de inclinación
-      const power = data.distance; // Distancia del joystick desde el centro
-      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
+    if (data && data.angle) {
+      const angle = data.angle.degree;
+      const power = Math.min(data.distance / data.position.radius, 1); // Normalizar entre 0 y 1
 
-      // Movimiento horizontal
+      // Calcular velocidades
+      const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * playerSpeed;
+      const vy = Math.sin(Phaser.Math.DegToRad(angle)) * power * playerSpeed;
+
+      // Movimiento horizontal del jugador
       this.player.setVelocityX(vx);
-      this.player.flipX = vx < 0; // Cambiar la dirección del personaje
 
-      // Salto si se mueve hacia arriba
-      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
-        this.player.setVelocityY(this.playerJump);
+      // Ajustar la dirección del personaje
+      if (vx !== 0) {
+        this.player.flipX = vx < 0;
       }
-    } else {
-      this.player.setVelocityX(0); // Detener el movimiento si no se está moviendo
+
+      // Salto si apunta hacia arriba
+      if (data.direction.angle === 'up' && this.player.body.onFloor()) {
+        this.player.setVelocityY(-playerJump);
+      }
     }
   });
 
+  // Evento cuando se suelta el joystick
   this.joystick.on('end', () => {
-    this.player.setVelocityX(0); // Detener al jugador al soltar el joystick
+    this.player.setVelocityX(0); // Detener movimiento horizontal
   });
 };
+
 
 //pausa////////////////////////////////
 gameScene.createPauseFunctionality = function () {
