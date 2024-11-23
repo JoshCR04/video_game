@@ -261,18 +261,22 @@ gameScene.handlePlayerMovement = function () {
 gameScene.handleJoystickMovement = function () {
   if (!this.joystick) return;
 
-  const vx = this.joystickVelocity.x * this.playerSpeed;
-  this.player.setVelocityX(vx);
+  this.joystick.on('move', (evt, data) => {
+    const angle = data.angle.degree;
+    const power = data.distance;
+    const vx = Math.cos(Phaser.Math.DegToRad(angle)) * power * 10;
 
-  // Invertir la dirección del sprite según el movimiento
-  if (vx !== 0) {
+    this.player.setVelocityX(vx);
     this.player.flipX = vx < 0;
-  }
 
-  // Saltar solo si el joystick apunta hacia arriba y el jugador está en el suelo
-  if (this.joystickVelocity.y < -0.5 && this.player.body.onFloor()) {
-    this.player.setVelocityY(this.playerJump);
-  }
+    if (data.direction.angle === 'up' && this.player.body.onFloor()) {
+      this.player.setVelocityY(this.playerJump);
+    }
+  });
+
+  this.joystick.on('end', () => {
+    this.player.setVelocityX(0);
+  });
 };
 
 
