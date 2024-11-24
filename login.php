@@ -1,3 +1,39 @@
+<?php
+// Conexión a la base de datos
+require 'db.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Captura los datos enviados desde el formulario
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // Guardar el tiempo de inicio de sesión
+    $_SESSION["login_time"] = time(); // Marca el tiempo actual
+
+    // Validación de campos vacíos
+    if (empty($username) || empty($password)) {
+        die("Por favor, complete todos los campos.");
+    }
+
+    // Verifica si el usuario existe
+    $user = $database->get("users", "*", ["username" => $username]);
+
+    if ($user) {
+        // Compara directamente la contraseña ingresada con la de la base de datos
+        if ($password === $user["password_hash"]) { // Comparación en texto plano
+            session_start();
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["username"] = $user["username"];
+            header("Location: menu.php");
+            exit();
+        } else {
+            die("Contraseña incorrecta.");
+        }
+    }
+
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -18,7 +54,7 @@
     <link rel="icon" href="/img/logo_final_2.png" sizes="any" class="icon-small">
     <link rel="icon" href="/img/logo_final_2.png" type="image/svg+xml" class="icon-small">
     <link rel="apple-touch-icon" href="/img/logo_final_2.png" class="icon-small">
-    
+
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#fafafa">
 
@@ -45,8 +81,8 @@
 
         <nav class="nav-links" aria-label="Primary navigation">
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
-            <a href="login.html"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
-            <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
+            <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
+            <a href="menu.php"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
             <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
         </nav>
@@ -56,9 +92,9 @@
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Welcome</h2>
+                <h2 class="card-title">Login</h2>
                 <div class="card-content">
-                    <form action="#">
+                    <form action="login.php" method="POST">
                         <label for="username">User</label>
                         <input type="text" id="username" name="username" placeholder="Enter your username">
                         <br><br>
@@ -68,6 +104,8 @@
                         <button type="submit" class="login-button">Login</button>
                     </form>
                     <a href="register.php" class="register-link">Register</a>
+                    <a href="logout.php" class="register-link">Logout</a>
+
                 </div>
             </div>
         </div>

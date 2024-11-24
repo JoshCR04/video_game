@@ -1,51 +1,58 @@
 <?php
-// Incluir el archivo de la clase Config
-require_once 'config.php';
+require 'db.php'; // Asumo que aquí incluyes la conexión a la base de datos
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los datos de los campos del formulario
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-// Procesar datos del formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    // Validar campos
+    // Validar que los campos no estén vacíos
     if (empty($username) || empty($email) || empty($password)) {
-        die("Por favor, completa todos los campos.");
+        $error = "Todos los campos son obligatorios.";
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Correo inválido.");
+    // Verifica si el nombre de usuario o correo ya existen en la base de datos
+    if (empty($error)) {
+        $existingUser = $database->get("users", ["username"], ["username" => $username]);
+        $existingEmail = $database->get("users", ["email"], ["email" => $email]);
+
+        if ($existingUser) {
+            $error = "El nombre de usuario ya está en uso. Por favor, elige otro.";
+        }
+
+        if ($existingEmail) {
+            $error = "El correo electrónico ya está registrado. Por favor, usa otro.";
+        }
     }
 
-    // Encriptar contraseña
-    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    // Si no hubo errores, proceder a insertar el nuevo usuario
+    if (empty($error)) {
+        try {
+            // Hash de la contraseña
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Obtener la conexión PDO usando la clase Config
-    $pdo = config::getConnection();
+            // Insertar el nuevo usuario en la base de datos
+            $database->insert("users", [
+                "username" => $username,
+                "email" => $email,
+                "password_hash" => $passwordHash
+            ]);
 
-    // Insertar usuario en la base de datos
-    try {
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (:username, :email, :password_hash)");
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password_hash', $password_hash);
-
-        if ($stmt->execute()) {
-            echo "Registro exitoso. ¡Bienvenido, $username!";
-        } else {
-            echo "Error al registrar el usuario.";
+            echo "Usuario registrado exitosamente.";
+            header("Location: login.php");
+            exit();
+        } catch (PDOException $e) {
+            $error = "Error al registrar el usuario: " . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        if ($e->getCode() == 23000) { // Código de error para duplicados
-            echo "El nombre de usuario o correo ya está en uso.";
-        } else {
-            echo "Error: " . $e->getMessage();
-        }
+    }
+
+    // Si hubo un error, se muestra el mensaje
+    if (!empty($error)) {
+        echo "<div style='color: red;'>$error</div>";
     }
 }
 ?>
-
 
 
 <!doctype html>
@@ -94,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <nav class="nav-links" aria-label="Primary navigation">
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
-            <a href="login.html"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
+            <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
             <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
             <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
@@ -105,23 +112,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Welcome</h2>
+                <h2 class="card-title">Register</h2>
                 <div class="card-content">
+
+
+
                     <form action="register.php" method="POST">
-                        <label for="username">Usuario</label>
-                        <input type="text" id="username" name="username" placeholder="Escribe tu usuario" required>
-
-                        <label for="email">Correo</label>
-                        <input type="email" id="email" name="email" placeholder="Escribe tu correo" required>
-
-                        <label for="password">Contraseña</label>
-                        <input type="password" id="password" name="password" placeholder="Escribe tu contraseña"
-                            required>
-
-                        <button type="submit">Registrarse</button>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                        <br><br>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <br><br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <br><br>
+                        <button class="login-button" type="submit">Register</button>
                     </form>
 
-                    <a href="login.html" class="register-link">Login</a>
+
+
+                    <a href="login.php" class="register-link">Login</a>
                 </div>
             </div>
         </div>

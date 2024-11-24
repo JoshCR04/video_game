@@ -1,3 +1,37 @@
+<?php
+session_start();
+require 'db.php'; // Conexión a tu base de datos
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION["user_id"])) {
+  header("Location: login.php");
+  exit();
+}
+
+// Obtener tiempo acumulado del usuario
+$user = $database->get("users", "session_time", [
+  "id" => $_SESSION["user_id"]
+]);
+
+if ($user !== null) {
+  $session_time = $user;
+  echo "Bienvenido, " . $_SESSION["username"] . "!<br>";
+  echo "Tiempo total de sesión acumulado: " . gmdate("H:i:s", $session_time);
+} else {
+  echo "No se encontró información del usuario.";
+}
+
+
+if ($user) {
+  $session_time = $user["session_time"];
+  echo "Bienvenido, " . $_SESSION["username"] . "!<br>";
+  echo "Tiempo total de sesión acumulado: " . gmdate("H:i:s", $session_time);
+} else {
+  echo "No se encontró información del usuario.";
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -16,8 +50,8 @@
   <meta property="og:image:alt" content="Video game banner">
 
   <link rel="icon" href="/img/logo_final_2.png" sizes="any" class="icon-small">
-<link rel="icon" href="/img/logo_final_2.png" type="image/svg+xml" class="icon-small">
-<link rel="apple-touch-icon" href="/img/logo_final_2.png" class="icon-small">
+  <link rel="icon" href="/img/logo_final_2.png" type="image/svg+xml" class="icon-small">
+  <link rel="apple-touch-icon" href="/img/logo_final_2.png" class="icon-small">
 
   <meta name="theme-color" content="#fafafa">
 

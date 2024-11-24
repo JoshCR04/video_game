@@ -63,6 +63,7 @@ button:focus {
   color: hsl(0, 0%, 100%);
   text-align: center;
   text-decoration: none;
+  display: block;
 }
 .register-link:hover {
   text-shadow: 0 0 0.625rem hsla(184, 86%, 71%, 0.8), 0 0 1.25rem hsla(0, 0%, 100%, 0.6), 0 0 1.875rem hsla(0, 0%, 100%, 0.4);
@@ -464,7 +465,8 @@ nav a:hover .icons-footer {
 }
 
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=email] {
   width: 100%;
   padding: 0.75rem;
   margin: 0.75rem 0;
