@@ -1,38 +1,36 @@
 <?php
 // Conexión a la base de datos
 require 'db.php';
+session_start(); // Asegúrate de iniciar la sesión
+
+$message = ""; // Variable para almacenar mensajes
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Captura los datos enviados desde el formulario
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Guardar el tiempo de inicio de sesión
-    $_SESSION["login_time"] = time(); // Marca el tiempo actual
-
-    // Validación de campos vacíos
     if (empty($username) || empty($password)) {
-        die("Por favor, complete todos los campos.");
-    }
+        $message = "Por favor, complete todos los campos.";
+    } else {
+        $user = $database->get("users", "*", ["username" => $username]);
 
-    // Verifica si el usuario existe
-    $user = $database->get("users", "*", ["username" => $username]);
-
-    if ($user) {
-        // Compara directamente la contraseña ingresada con la de la base de datos
-        if ($password === $user["password_hash"]) { // Comparación en texto plano
-            session_start();
-            $_SESSION["user_id"] = $user["id"];
-            $_SESSION["username"] = $user["username"];
-            header("Location: menu.php");
-            exit();
+        if ($user) {
+            if ($password === $user["password_hash"]) { // Nota: La comparación debería usar hash seguro como password_verify()
+                $_SESSION["user_id"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
+                $_SESSION["login_time"] = time();
+                header("Location: menu.php");
+                exit();
+            } else {
+                $message = "Contraseña incorrecta.";
+            }
         } else {
-            die("Contraseña incorrecta.");
+            $message = "Usuario no encontrado.";
         }
     }
-
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -94,6 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="card">
                 <h2 class="card-title">Login</h2>
                 <div class="card-content">
+
+
+                    <!-- Muestra mensajes aquí -->
+                    <?php if (!empty($message)): ?>
+                        <div class="error">
+                            <?php echo htmlspecialchars($message); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <form action="login.php" method="POST">
                         <label for="username">User</label>
                         <input type="text" id="username" name="username" placeholder="Enter your username">
@@ -103,6 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <br><br>
                         <button type="submit" class="login-button">Login</button>
                     </form>
+
+
                     <a href="register.php" class="register-link">Register</a>
                     <a href="logout.php" class="register-link">Logout</a>
 

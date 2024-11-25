@@ -13,4 +13,11 @@ input[type="email"] {
   text-align: center;
 }
 
-
+.error {
+  color: $clr-error;
+  font-family: $ff-primary;
+  font-size: $fs-xmd;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}

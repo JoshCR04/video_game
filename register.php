@@ -1,58 +1,51 @@
 <?php
-require 'db.php'; // Asumo que aquí incluyes la conexión a la base de datos
+require 'db.php'; // Asegúrate de incluir correctamente la conexión a la base de datos
+
+$message = ""; // Variable para almacenar mensajes
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos de los campos del formulario
-    $username = $_POST['username'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $username = trim($_POST['username'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
 
-    // Validar que los campos no estén vacíos
-    if (empty($username) || empty($email) || empty($password)) {
-        $error = "Todos los campos son obligatorios.";
-    }
-
-    // Verifica si el nombre de usuario o correo ya existen en la base de datos
-    if (empty($error)) {
-        $existingUser = $database->get("users", ["username"], ["username" => $username]);
-        $existingEmail = $database->get("users", ["email"], ["email" => $email]);
-
-        if ($existingUser) {
-            $error = "El nombre de usuario ya está en uso. Por favor, elige otro.";
-        }
-
-        if ($existingEmail) {
-            $error = "El correo electrónico ya está registrado. Por favor, usa otro.";
-        }
-    }
-
-    // Si no hubo errores, proceder a insertar el nuevo usuario
-    if (empty($error)) {
+    // Validación de campos vacíos
+    if (empty($username)) {
+        $message = "El nombre de usuario es obligatorio.";
+    } elseif (empty($email)) {
+        $message = "El correo electrónico es obligatorio.";
+    } elseif (empty($password)) {
+        $message = "La contraseña es obligatoria.";
+    } else {
+        // Verifica si el nombre de usuario o correo ya existen
         try {
-            // Hash de la contraseña
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $existingUser = $database->get("users", ["username"], ["username" => $username]);
+            $existingEmail = $database->get("users", ["email"], ["email" => $email]);
 
-            // Insertar el nuevo usuario en la base de datos
-            $database->insert("users", [
-                "username" => $username,
-                "email" => $email,
-                "password_hash" => $passwordHash
-            ]);
+            if ($existingUser) {
+                $message = "El nombre de usuario ya está en uso.";
+            } elseif ($existingEmail) {
+                $message = "El correo electrónico ya está registrado.";
+            } else {
+                // Insertar nuevo usuario si no hay errores
+                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                $database->insert("users", [
+                    "username" => $username,
+                    "email" => $email,
+                    "password_hash" => $passwordHash
+                ]);
 
-            echo "Usuario registrado exitosamente.";
-            header("Location: login.php");
-            exit();
+                header("Location: login.php");
+                exit();
+            }
         } catch (PDOException $e) {
-            $error = "Error al registrar el usuario: " . $e->getMessage();
+            // Asigna un mensaje genérico en lugar de mostrar el error exacto
+            $message = "Ocurrió un error al registrar el usuario. Por favor, inténtalo más tarde.";
         }
-    }
-
-    // Si hubo un error, se muestra el mensaje
-    if (!empty($error)) {
-        echo "<div style='color: red;'>$error</div>";
     }
 }
 ?>
+
+
 
 
 <!doctype html>
@@ -117,18 +110,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+                    <!-- Muestra mensajes aquí -->
+                    <?php if (!empty($message)): ?>
+                        <div class="error">
+                            <?php echo htmlspecialchars($message); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <form action="register.php" method="POST">
+                        <!-- Campo de nombre de usuario -->
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
                         <br><br>
+
+                        <!-- Campo de correo electrónico -->
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
                         <br><br>
+
+                        <!-- Campo de contraseña -->
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
                         <br><br>
-                        <button class="login-button" type="submit">Register</button>
+
+                        <!-- Botón de registro -->
+                        <button type="submit" class="login-button">Register</button>
                     </form>
+
+
+
 
 
 

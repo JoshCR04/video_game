@@ -475,6 +475,15 @@ input[type=email] {
   text-align: center;
 }
 
+.error {
+  color: hsl(0, 100%, 26%);
+  font-family: "Karantina", system-ui;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
 .instructions-section {
   text-align: center;
   margin: 5rem 0;

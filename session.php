@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si la sesión está activa
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 
@@ -13,7 +13,7 @@ if (isset($_SESSION['start_time']) && (time() - $_SESSION['start_time']) > $inac
     // Cerrar sesión por inactividad
     session_unset();
     session_destroy();
-    header("Location: login.html?timeout=true");
+    header("Location: login.php?timeout=true");
     exit;
 }
 
