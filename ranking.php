@@ -1,3 +1,23 @@
+<?php
+// Habilitar la visualización de errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Conexión a la base de datos
+require 'db.php'; // Asegúrate de que este archivo existe y funciona correctamente
+
+try {
+    // Obtener el top 10 de jugadores ordenados por la columna 'score'
+    $ranking = $database->select("users", ["username", "score"], [
+        "ORDER" => ["score" => "DESC"],
+        "LIMIT" => 10
+    ]);
+} catch (Exception $e) {
+    die("Error en la base de datos: " . $e->getMessage());
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -18,7 +38,7 @@
     <link rel="icon" href="/img/logo_final_2.png" sizes="any" class="icon-small">
     <link rel="icon" href="/img/logo_final_2.png" type="image/svg+xml" class="icon-small">
     <link rel="apple-touch-icon" href="/img/logo_final_2.png" class="icon-small">
-    
+
     <meta name="theme-color" content="#fafafa">
 
     <!-- Google Fonts -->
@@ -62,68 +82,31 @@
                             <tr>
                                 <th>Rank</th>
                                 <th>User</th>
-                                <th>Points</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
-                        <tbody class="ranking-list">
-                            <tr>
-                                <td>1</td>
-                                <td>Usuario1</td>
-                                <td>1000 pts</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Usuario2</td>
-                                <td>950 pts</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Usuario3</td>
-                                <td>900 pts</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Usuario4</td>
-                                <td>850 pts</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Usuario5</td>
-                                <td>800 pts</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Usuario1</td>
-                                <td>700 pts</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Usuario2</td>
-                                <td>680 pts</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Usuario3</td>
-                                <td>548 pts</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Usuario4</td>
-                                <td>540 pts</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Usuario5</td>
-                                <td>500 pts</td>
-                            </tr>
+                        <tbody>
+                            <?php
+                            if (!empty($ranking)) {
+                                $rank = 1;
+                                foreach ($ranking as $player) {
+                                    echo "<tr>
+                                        <td>{$rank}</td>
+                                        <td>" . htmlspecialchars($player['username']) . "</td>
+                                        <td>{$player['score']}</td>
+                                    </tr>";
+                                    $rank++;
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No hay datos disponibles.</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
-
-
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />

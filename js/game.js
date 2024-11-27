@@ -3,7 +3,7 @@ let gameScene = new Phaser.Scene("Game");
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
-  fetch('../data/levelData.json')
+  fetch('./data/levelData.json')
     .then((response) => response.json())
     .then((data) => {
       // Asignar los valores del JSON a las propiedades del juego
@@ -31,32 +31,32 @@ gameScene.init = function () {
 //  Carga de assets
 gameScene.preload = function () {
   // Fondo
-  this.load.image("background_superior", "../img/assets/pasto_superior.png");
-  this.load.image("background", "../img/assets/fondo.png");
-  this.load.image("background_medium", "../img/assets/medio.png");
+  this.load.image("background_superior", "./img/assets/pasto_superior.png");
+  this.load.image("background", "./img/assets/fondo.png");
+  this.load.image("background_medium", "./img/assets/medio.png");
 
   // Jugador y plataformas
-  this.load.image("player", "../img/assets/pj.png");
-  this.load.image("ground_1", "../img/assets/suelo_piedra_1.png");
-  this.load.image("ground_2", "../img/assets/suelo_piedra_2.png");
-  this.load.image("ground_3", "../img/assets/suelo_piedra_3.png");
-  this.load.image("ground_4", "../img/assets/suelo_tierra.png");
-  this.load.image("platform_1", "../img/assets/plataforma_piedra.png");
-  this.load.image("platform_2", "../img/assets/plataforma_tierra.png");
+  this.load.image("player", "./img/assets/pj.png");
+  this.load.image("ground_1", "./img/assets/suelo_piedra_1.png");
+  this.load.image("ground_2", "./img/assets/suelo_piedra_2.png");
+  this.load.image("ground_3", "./img/assets/suelo_piedra_3.png");
+  this.load.image("ground_4", "./img/assets/suelo_tierra.png");
+  this.load.image("platform_1", "./img/assets/plataforma_piedra.png");
+  this.load.image("platform_2", "./img/assets/plataforma_tierra.png");
 
   // Enemigos
-  this.load.image("flying_bug", "../img/assets/bicho_volador.png");
-  this.load.image("witch", "../img/assets/bruja_mala.png");
-  this.load.image("monster", "../img/assets/monstruo.png");
-  this.load.image("crow", "../img/assets/cuervo.png");
-  this.load.image("goblin", "../img/assets/duende.png");
+  this.load.image("flying_bug", "./img/assets/bicho_volador.png");
+  this.load.image("witch", "./img/assets/bruja_mala.png");
+  this.load.image("monster", "./img/assets/monstruo.png");
+  this.load.image("crow", "./img/assets/cuervo.png");
+  this.load.image("goblin", "./img/assets/duende.png");
 
   // Ítems
-  this.load.image("mushroom", "../img/assets/hongo.png");
-  this.load.image("key", "../img/assets/llave.png");
-  this.load.image("bread", "../img/assets/pan.png");
-  this.load.image("sword", "../img/assets/espada_con_luz.png");
-  this.load.image("magic_stone", "../img/assets/alma_petra.png");
+  this.load.image("mushroom", "./img/assets/hongo.png");
+  this.load.image("key", "./img/assets/llave.png");
+  this.load.image("bread", "./img/assets/pan.png");
+  this.load.image("sword", "./img/assets/espada_con_luz.png");
+  this.load.image("magic_stone", "./img/assets/alma_petra.png");
 };
 
 // Inicialización del fondo
@@ -204,7 +204,7 @@ gameScene.createPauseFunctionality = function () {
   pauseButton.addEventListener('click', () => this.togglePause());
   resumeButton.addEventListener('click', () => this.togglePause());
   document.getElementById("menu-button").addEventListener("click", () => {
-    window.location.href = "menu.html";
+    window.location.href = "menu.php";
   });
 
   this.input.keyboard.on('keydown-ESC', () => this.togglePause());
@@ -310,6 +310,7 @@ gameScene.collectItem = function (player, item) {
     item.destroy();
   } else if (item.type === 'magic_stone') {
     this.score++;
+    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   } else if (item.type === 'mushroom') {
@@ -321,10 +322,36 @@ gameScene.collectItem = function (player, item) {
     }, [], this);
   } else if (item.type === 'key') {
     this.score += 5;
+    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   }
 };
+
+// Función para enviar el puntaje al servidor
+gameScene.updateScoreOnServer = function (score) {
+  const username = 'player1'; // Reemplaza esto con el nombre del jugador
+
+  fetch('update_score.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `username=${encodeURIComponent(username)}&score=${encodeURIComponent(score)}`
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Score updated successfully:', data.message);
+      } else {
+        console.error('Error updating score:', data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+};
+
 
 ///eventos////////////////////////////////
 gameScene.checkPlayerFall = function () {

@@ -29,6 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
+
+
 ?>
 
 
@@ -81,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
             <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
             <a href="menu.php"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
-            <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
+            <a href="ranking.php"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
         </nav>
     </header>
