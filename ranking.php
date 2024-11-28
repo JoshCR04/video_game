@@ -1,23 +1,21 @@
 <?php
-// Habilitar la visualización de errores
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require 'db.php'; // Incluye tu archivo de conexión con Medoo
 
-// Conexión a la base de datos
-require 'db.php'; // Asegúrate de que este archivo existe y funciona correctamente
+// Realizamos la consulta SQL personalizada para obtener los 10 mejores jugadores
+$sql = "SELECT username, score, session_time FROM users ORDER BY score DESC LIMIT 10";
+$top_players = $database->query($sql)->fetchAll();
 
-try {
-    // Obtener el top 10 de jugadores ordenados por la columna 'score'
-    $ranking = $database->select("users", ["username", "score"], [
-        "ORDER" => ["score" => "DESC"],
-        "LIMIT" => 10
-    ]);
-} catch (Exception $e) {
-    die("Error en la base de datos: " . $e->getMessage());
+// Función para convertir los segundos a formato H:M:S
+function formatTime($seconds)
+{
+    $hours = floor($seconds / 3600);
+    $minutes = floor(($seconds % 3600) / 60);
+    $seconds = $seconds % 60;
+
+    return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
-?>
 
+?>
 <!doctype html>
 <html lang="en">
 
@@ -83,25 +81,31 @@ try {
                                 <th>Rank</th>
                                 <th>User</th>
                                 <th>Score</th>
+                                <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($ranking)) {
+
+
+                            // Comprobamos si hay resultados
+                            if (!empty($top_players)) {
                                 $rank = 1;
-                                foreach ($ranking as $player) {
-                                    echo "<tr>
-                                        <td>{$rank}</td>
-                                        <td>" . htmlspecialchars($player['username']) . "</td>
-                                        <td>{$player['score']}</td>
-                                    </tr>";
-                                    $rank++;
+                                foreach ($top_players as $player) {
+                                    $formatted_time = formatTime($player['session_time']);
+                                    echo "<tr>";
+                                    echo "<td>" . $rank++ . "</td>";
+                                    echo "<td>" . htmlspecialchars($player['username']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($player['score']) . "</td>";
+                                    echo "<td>{$formatted_time}</td>";
+                                    echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='3'>No hay datos disponibles.</td></tr>";
+                                echo "<tr><td colspan='3'>No hay jugadores en el ranking.</td></tr>";
                             }
                             ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>
