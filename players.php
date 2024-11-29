@@ -1,28 +1,14 @@
 <?php
-session_start();
-require 'db.php'; // Incluye la conexión a la base de datos
+require './db.php'; // Asegúrate de que Medoo está correctamente configurado.
 
-// Verificar si la sesión está activa
-if (!isset($_SESSION["user_id"])) {
-    // Si no hay sesión activa, redirigir al login
-    header("Location: login.php");
-    exit();
-}
+$query = "SELECT player_name, player_score FROM tb_players"; // Consulta SQL personalizada
 
-// Consultar el usuario desde la base de datos
-$user = $database->get("users", "*", ["id" => $_SESSION["user_id"]]);
+// Usamos query() para ejecutar la consulta
+$players = $database->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
-// Verificar si el usuario existe
-if (!$user) {
-    // Si el usuario no existe en la base de datos, redirigir al login
-    session_destroy(); // Elimina la sesión actual por seguridad
-    header("Location: login.php");
-    exit();
-}
 
-// Consultar todos los usuarios desde la tabla "users"
-$users = $database->select("users", "*");
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -71,61 +57,56 @@ $users = $database->select("users", "*");
         <nav class="nav-links" aria-label="Primary navigation">
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
             <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
-            <a href="menu.php"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
-            <a href="ranking.php"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
+            <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
+            <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
         </nav>
     </header>
+
 
     <!-- Main Content Section -->
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Users</h2>
+                <h2 class="card-title">Players list</h2>
                 <div class="ranking-content">
-                    <!-- Tabla de usuarios -->
+
+                    <!-- Tabla de jugadores -->
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Actions</th>
+                                <th>Rank</th>
+                                <th>User</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($users)): ?>
-                                <?php foreach ($users as $user): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($user['id']); ?></td>
-                                        <td><?= htmlspecialchars($user['username']); ?></td>
-                                        <td><?= htmlspecialchars($user['email']); ?></td>
-                                        <td>
-                                            <a href="update_users.php?id=<?= htmlspecialchars($user['id']); ?>"
-                                                class="edit-button">Edit</a>
-                                            <a href="delete_users.php?delete=<?= htmlspecialchars($user['id']); ?>"
-                                                class="delete-button"
-                                                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="4">No hay usuarios registrados.</td>
-                                </tr>
-                            <?php endif; ?>
+                            <?php
+                            // Comprobamos si hay resultados
+                            if (!empty($players)) {
+                                $rank = 1;
+                                foreach ($players as $player) {
+                                    echo "<tr>";
+                                    echo "<td>" . $rank++ . "</td>"; // Mostrar el ranking
+                                    echo "<td>" . htmlspecialchars($player['player_name']) . "</td>"; // Mostrar el nombre del jugador
+                                    echo "<td>" . htmlspecialchars($player['player_score']) . "</td>"; // Mostrar el puntaje del jugador
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No hay jugadores en el ranking.</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
 
-
-                    <a class="register-link" href="dekstop.php">Back to dekstop</a>
-
+                </div>
+                <div class="table-card-footer">
+                    <a href="player.php">Back to player register</a>
                 </div>
             </div>
         </div>
     </main>
+
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />

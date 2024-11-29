@@ -18,7 +18,25 @@
   }
 }
 
-.login-button:hover {
+.other-button {
+  background-color: $clr-other-button;
+  color: $clr-white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: $fs-md;
+  font-family: $ff-primary;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+  @include respond-to($phone) {
+    padding: 0.5rem;
+    font-size: $fs-md;
+  }
+}
+
+.login-button:hover,
+.other-button:hover {
   background-color: lighten($clr-log-button, 10%);
 }
 

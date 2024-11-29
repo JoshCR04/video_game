@@ -1,29 +1,35 @@
 <?php
-session_start();
-require 'db.php'; // Incluye la conexión a la base de datos
+require 'db.php'; // Asegúrate de incluir correctamente la conexión a la base de datos
+$message = ""; // Variable para almacenar mensajes
 
-// Verificar si la sesión está activa
-if (!isset($_SESSION["user_id"])) {
-    // Si no hay sesión activa, redirigir al login
-    header("Location: login.php");
-    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $playerName = trim($_POST['player_name'] ?? '');
+    $score = (int) ($_POST['score'] ?? 0); // Convertir score a un valor numérico
+
+    // Validación de campos vacíos
+    if (empty($playerName)) {
+        $message = "El nombre del jugador es obligatorio.";
+    } elseif (empty($score) && $score !== 0) { // Verifica si el score está vacío o no es un número
+        $message = "El puntaje es obligatorio.";
+    } else {
+        // Inserta el nuevo jugador usando Medoo
+        try {
+            // Usamos el método insert de Medoo
+            $database->insert("tb_players", [
+                "player_name" => $playerName,
+                "player_score" => $score
+            ]);
+
+            // Redirige al ranking después de insertar los datos
+
+
+        } catch (Exception $e) {
+            // Asigna un mensaje genérico en lugar de mostrar el error exacto
+            $message = "Ocurrió un error al registrar al jugador. Por favor, inténtalo más tarde.";
+        }
+    }
 }
-
-// Consultar el usuario desde la base de datos
-$user = $database->get("users", "*", ["id" => $_SESSION["user_id"]]);
-
-// Verificar si el usuario existe
-if (!$user) {
-    // Si el usuario no existe en la base de datos, redirigir al login
-    session_destroy(); // Elimina la sesión actual por seguridad
-    header("Location: login.php");
-    exit();
-}
-
-// Consultar todos los usuarios desde la tabla "users"
-$users = $database->select("users", "*");
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -81,51 +87,41 @@ $users = $database->select("users", "*");
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Users</h2>
-                <div class="ranking-content">
-                    <!-- Tabla de usuarios -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (!empty($users)): ?>
-                                <?php foreach ($users as $user): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($user['id']); ?></td>
-                                        <td><?= htmlspecialchars($user['username']); ?></td>
-                                        <td><?= htmlspecialchars($user['email']); ?></td>
-                                        <td>
-                                            <a href="update_users.php?id=<?= htmlspecialchars($user['id']); ?>"
-                                                class="edit-button">Edit</a>
-                                            <a href="delete_users.php?delete=<?= htmlspecialchars($user['id']); ?>"
-                                                class="delete-button"
-                                                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="4">No hay usuarios registrados.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                <h2 class="card-title">Register Player</h2>
+                <div class="card-content">
 
+                    <!-- Muestra mensajes aquí -->
+                    <?php if (!empty($message)): ?>
+                        <div class="error">
+                            <?php echo htmlspecialchars($message); ?>
+                        </div>
+                    <?php endif; ?>
 
-                    <a class="register-link" href="dekstop.php">Back to dekstop</a>
+                    <form action="player.php" method="POST">
+                        <!-- Campo de nombre de jugador -->
+                        <label for="player_name">Player Name:</label>
+                        <input type="text" id="player_name" name="player_name" placeholder="Enter your player name"
+                            required>
+                        <br><br>
 
+                        <!-- Campo de puntaje -->
+                        <label for="score">Score:</label>
+                        <input type="number" id="score" name="score" placeholder="Enter your score" required>
+                        <br><br>
+
+                        <!-- Botón de registro -->
+                        <button type="submit" class="login-button">Register</button>
+                    </form>
+                    <button class="other-button" onclick="window.location.href='ranking.php';">Ranking</button>
+                    <button class="other-button" onclick="window.location.href='players.php';">Players list</button>
+                    <button class="other-button" onclick="window.location.href='player_update.php';">Players
+                        editor</button>
                 </div>
+                <a href="dekstop.php" class="register-link">Back to dekstop</a>
             </div>
         </div>
     </main>
+
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />
@@ -139,7 +135,7 @@ $users = $database->select("users", "*");
                     alt="Mail icon"></a>
         </nav>
     </footer>
+    <script src="./js/menu.js"></script>
 </body>
-<script src="./js/menu.js"></script>
 
 </html>

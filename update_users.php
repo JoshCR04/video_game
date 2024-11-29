@@ -119,12 +119,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <!-- Botón para actualizar -->
                         <button type="submit" class="login-button">Update User</button>
                     </form>
-
-
-                    <!-- Enlace para volver a la lista de usuarios -->
-                    <div class="table-card-footer">
-                        <a class="register-link" href="users.php">Back to Users List</a>
-                    </div>
+              
+                    <a href="dekstop.php" class="register-link">Back to dekstop</a>
+                
                 </div>
             </div>
         </div>

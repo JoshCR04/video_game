@@ -1,8 +1,8 @@
 <?php
 require 'db.php'; // Incluye tu archivo de conexión con Medoo
 
-// Realizamos la consulta SQL personalizada para obtener los 10 mejores jugadores
-$sql = "SELECT username, score, session_time FROM users ORDER BY score DESC LIMIT 10";
+// Realizamos la consulta SQL personalizada para obtener los 10 mejores jugadores desde tb_players
+$sql = "SELECT player_name, player_score FROM tb_players ORDER BY player_score DESC LIMIT 10";
 $top_players = $database->query($sql)->fetchAll();
 
 // Función para convertir los segundos a formato H:M:S
@@ -14,8 +14,8 @@ function formatTime($seconds)
 
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
-
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -81,23 +81,18 @@ function formatTime($seconds)
                                 <th>Rank</th>
                                 <th>User</th>
                                 <th>Score</th>
-                                <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-
-
                             // Comprobamos si hay resultados
                             if (!empty($top_players)) {
                                 $rank = 1;
                                 foreach ($top_players as $player) {
-                                    $formatted_time = formatTime($player['session_time']);
                                     echo "<tr>";
                                     echo "<td>" . $rank++ . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['username']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['score']) . "</td>";
-                                    echo "<td>{$formatted_time}</td>";
+                                    echo "<td>" . htmlspecialchars($player['player_name']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($player['player_score']) . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
@@ -105,12 +100,14 @@ function formatTime($seconds)
                             }
                             ?>
                         </tbody>
-
                     </table>
+
                 </div>
             </div>
         </div>
     </main>
+
+
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />

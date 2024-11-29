@@ -52,7 +52,27 @@ button:focus {
   }
 }
 
-.login-button:hover {
+.other-button {
+  background-color: hsl(195, 16%, 54%);
+  color: hsl(0, 0%, 100%);
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.875rem;
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+@media only screen and (max-width: 480px) {
+  .other-button {
+    padding: 0.5rem;
+    font-size: 1.875rem;
+  }
+}
+
+.login-button:hover,
+.other-button:hover {
   background-color: hsl(194, 23%, 72%);
 }
 
@@ -521,7 +541,8 @@ nav a:hover .icons-footer {
 
 input[type=text],
 input[type=password],
-input[type=email] {
+input[type=email],
+input[type=number] {
   width: 100%;
   padding: 0.75rem;
   margin: 0.75rem 0;

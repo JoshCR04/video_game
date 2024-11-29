@@ -1,11 +1,66 @@
 // Crea una nueva escena
 let gameScene = new Phaser.Scene("Game");
-let level = 1;
-let levelData;
+
+
+let timer;
+let length;
+
+
+
+
+gameScene.startTracking = function () {
+  length += 1;  // Incrementar 'length' cada vez que se llama
+  console.log("tracking ->" + length);  // Verificar el valor de 'length'
+}
+
+gameScene.startTimer = function () {
+  // Iniciar el seguimiento del tiempo
+  this.timer = this.time.addEvent({
+    delay: 1000,
+    loop: true,
+    callbackScope: this,
+    callback: this.startTracking  // Asegúrate de tener la función 'startTracking' definida
+  });
+}
+
+// Asegúrate de que 'length' tiene un valor antes de enviarlo
+function saveData(hasClosed, level) {
+  if (isNaN(length)) {
+    console.error("Invalid length value:", length);
+    length = 0;  // Asignar un valor predeterminado si 'length' no es válido
+  }
+
+  fetch('http://localhost/video_game/tracking.php', {
+    method: 'POST',
+    mode: 'same-origin',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "browser": navigator.userAgent,
+      "screen": screen.width + "x" + screen.height,
+      "length": length,  // Asegúrate de que 'length' sea un número válido
+      "level": level,
+      "closed": hasClosed
+    }),
+    keepalive: true
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);  // Mostrar la respuesta
+    })
+    .catch(error => {
+      console.error('Error:', error);  // Manejo de errores
+    });
+}
+
+
+
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
-  fetch('./data/level3Data.json')
+  fetch('http://localhost/video_game/editor/api.php?id=1')
     .then((response) => response.json())
     .then((data) => {
       // Asignar los valores del JSON a las propiedades del juego
@@ -22,21 +77,23 @@ gameScene.init = function () {
     .catch((error) => {
       console.error('Error cargando el archivo JSON:', error);
     });
-
+  timer = this.time.addEvent({
+    delay: 1000,
+    loop: true,
+    callbackScope: this,
+    callback: this.startTracking
+  });
   // Inicialización de estados
   this.lives = 3; // Inicializa el número de vidas
   this.score = 0; // Inicializa la puntuación
   this.isAttacking = false; // Indica si el jugador está atacando
   this.attackDuration = 500; // Duración del ataque en milisegundos
+
+  length = 0;
 };
 
 //  Carga de assets
 gameScene.preload = function () {
-  //cargar niveles
-  this.load.json("level1Data", "./data/level1Data.json");
-  this.load.json("level2Data", "./data/level2Data.json");
-  this.load.json("level3Data", "./data/level3Data.json");
-
   // Fondo
   this.load.image("background_superior", "./img/assets/pasto_superior.png");
   this.load.image("background", "./img/assets/fondo.png");
@@ -64,31 +121,6 @@ gameScene.preload = function () {
   this.load.image("bread", "./img/assets/pan.png");
   this.load.image("sword", "./img/assets/espada_con_luz.png");
   this.load.image("magic_stone", "./img/assets/alma_petra.png");
-};
-
-
-//cargar niveles para el juego
-gameScene.nextLevel = function () {
-  if (level === 1) {
-    this.levelData = this.cache.json.get('level1Data');
-  } else if (level === 2) {
-    this.levelData = this.cache.json.get('level2Data');
-  } else if (level === 3) {
-    this.levelData = this.cache.json.get('level3Data');
-  }else{
-    console.log('You Win!');
-  }
-};
-
-// Lógica para comprobar y avanzar de nivel
-gameScene.checkLevelProgress = function () {
-  if (this.score >= 10 && level === 1) {
-    this.nextLevel(); // Avanzar al siguiente nivel
-  } else if (this.score >= 20 && level === 2) {
-    this.nextLevel(); // Avanzar al siguiente nivel
-  } else if (this.score >= 30 && level === 3) {
-    this.nextLevel(); // Terminar el juego o reiniciar desde el nivel 1
-  }
 };
 
 // Inicialización del fondo
@@ -161,8 +193,6 @@ gameScene.initGameObjects = function (fondo) {
 };
 
 
-
-
 //configuración inicial////////////////////////////////
 
 // Configuración de colisiones
@@ -194,6 +224,7 @@ gameScene.create = function () {
   this.initGameObjects(this.background);
   this.setupCamera();
   this.setupCollisions();
+  this.startTimer();
 
   // Configuración de controles
   this.cursors = this.input.keyboard.createCursorKeys();
@@ -207,6 +238,8 @@ gameScene.create = function () {
   this.isPaused = false;
   this.createPauseFunctionality(); // Crear funcionalidad de pausa
 };
+
+
 
 
 // Función para crear el joystick
@@ -342,6 +375,7 @@ gameScene.collectItem = function (player, item) {
     item.destroy();
   } else if (item.type === 'magic_stone') {
     this.score++;
+    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   } else if (item.type === 'mushroom') {
@@ -353,19 +387,41 @@ gameScene.collectItem = function (player, item) {
     }, [], this);
   } else if (item.type === 'key') {
     this.score += 5;
+    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   }
 };
 
+// Función para enviar el puntaje al servidor
+gameScene.updateScoreOnServer = function (score) {
+  const username = 'player1'; // Reemplaza esto con el nombre del jugador
 
-
+  fetch('update_score.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `username=${encodeURIComponent(username)}&score=${encodeURIComponent(score)}`
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Score updated successfully:', data.message);
+      } else {
+        console.error('Error updating score:', data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+};
 
 
 ///eventos////////////////////////////////
 gameScene.checkPlayerFall = function () {
   if (this.player.y > this.physics.world.bounds.height) {
-    this.handleGameOver();
+    this.handleGameOver(); // Si cae fuera del mapa, se maneja la muerte
   }
 };
 
@@ -379,8 +435,14 @@ gameScene.handleGameOver = function () {
   if (this.lives <= 0) {
     this.showGameOverScreen();
   } else {
-    this.handlePlayerDamage();
+    this.handlePlayerDamage(); // Si el jugador tiene más vidas, se maneja el daño
     this.isGameOver = false;
+  }
+
+  // Ejecuta la función para rastrear la muerte del jugador
+  if (!this.hasFetched) {
+    this.hasFetched = true;
+    saveData("No", 1); // Comienza a rastrear el movimiento del jugador
   }
 };
 
@@ -395,6 +457,7 @@ gameScene.showGameOverScreen = function () {
   gameOverTextElement.textContent = 'Game Over!';
   gameOverTextElement.style.display = 'block';
 
+  // Al finalizar la animación de "Game Over", reiniciamos el juego
   this.time.delayedCall(2000, () => {
     this.lives = 3;
     this.score = 0;
@@ -405,6 +468,41 @@ gameScene.showGameOverScreen = function () {
 
     this.scene.restart();
   }, null, this);
+
+  // Ejecuta la función para rastrear la muerte del jugador
+  if (!this.hasFetched) {
+    this.hasFetched = true;
+    saveData("No", 1); // Comienza a rastrear el movimiento del jugador
+  }
+};
+
+gameScene.showGameWin = function () {
+  this.physics.pause();
+  this.cameras.main.stopFollow();
+
+  const gameOverBackground = document.getElementById('game-over-background');
+  const gameOverTextElement = document.getElementById('game-over-text');
+
+  gameOverBackground.style.display = 'block';
+  gameOverTextElement.textContent = 'You win!';
+  gameOverTextElement.style.display = 'block';
+
+  this.time.delayedCall(2000, () => {
+    this.lives = 3;
+    this.score = 0;
+    this.isGameOver = false;
+
+    gameOverBackground.style.display = 'none';
+    gameOverTextElement.style.display = 'none';
+
+    this.scene.restart();
+  }, null, this);
+
+  // Ejecuta la función para rastrear la muerte del jugador
+  if (!this.hasFetched) {
+    this.hasFetched = true;
+    saveData("No", 1); // Comienza a rastrear el movimiento del jugador
+  }
 };
 
 gameScene.handlePlayerDamage = function () {
@@ -416,8 +514,13 @@ gameScene.handlePlayerDamage = function () {
     this.player.setAlpha(1);
     this.player.body.setEnable(true);
   }, null, this);
-};
 
+  // Ejecuta la función para rastrear la muerte del jugador
+  if (!this.hasFetched) {
+    this.hasFetched = true;
+    saveData("No", 1); // Comienza a rastrear el movimiento del jugador
+  }
+};
 
 // Actualización del juego
 gameScene.update = function () {
@@ -425,6 +528,9 @@ gameScene.update = function () {
   this.handleJoystickMovement();
   this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
   this.checkPlayerFall();
+  if (this.score >= 10) {
+    this.showGameWin();
+  }
 };
 
 
