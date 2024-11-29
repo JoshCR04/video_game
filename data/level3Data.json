@@ -52,13 +52,12 @@
     { "type": "crow", "x": 2960, "y": -510 },
     { "type": "goblin", "x": 1249, "y": -331 },
     { "type": "bread", "x": 1105, "y": -175 },
-   
-  
+
     { "type": "magic_stone", "x": 247, "y": -360 },
     { "type": "magic_stone", "x": 347, "y": -360 },
     { "type": "magic_stone", "x": 447, "y": -390 },
     { "type": "magic_stone", "x": 647, "y": -265 },
-    { "type": "magic_stone", "x": 247, "y": -600},
+    { "type": "magic_stone", "x": 247, "y": -600 },
     { "type": "magic_stone", "x": 147, "y": -430 },
     { "type": "magic_stone", "x": 47, "y": -500 },
     { "type": "magic_stone", "x": 547, "y": -460 },
@@ -93,7 +92,6 @@
     { "type": "magic_stone", "x": 2250, "y": -600 },
     { "type": "magic_stone", "x": 3100, "y": -500 },
     { "type": "magic_stone", "x": 3800, "y": -600 }
-
   ],
   "platforms": [
     { "type": "platform_1", "x": 47, "y": -310 },

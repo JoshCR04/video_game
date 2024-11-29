@@ -1,21 +1,11 @@
 <?php
-require 'db.php'; // Incluye tu archivo de conexión con Medoo
+require 'db.php'; // Incluye la conexión a la base de datos
 
-// Realizamos la consulta SQL personalizada para obtener los 10 mejores jugadores
-$sql = "SELECT username, score, session_time FROM users ORDER BY score DESC LIMIT 10";
-$top_players = $database->query($sql)->fetchAll();
-
-// Función para convertir los segundos a formato H:M:S
-function formatTime($seconds)
-{
-    $hours = floor($seconds / 3600);
-    $minutes = floor(($seconds % 3600) / 60);
-    $seconds = $seconds % 60;
-
-    return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
-}
-
+// Consultar todos los usuarios desde la tabla "users"
+$users = $database->select("users", "*");
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -63,8 +53,8 @@ function formatTime($seconds)
         <nav class="nav-links" aria-label="Primary navigation">
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
             <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
-            <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
-            <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
+            <a href="menu.php"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
+            <a href="ranking.php"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
         </nav>
     </header>
@@ -73,40 +63,49 @@ function formatTime($seconds)
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Ranking</h2>
+                <h2 class="card-title">Users</h2>
                 <div class="ranking-content">
+                    <!-- Tabla de usuarios -->
                     <table>
                         <thead>
                             <tr>
-                                <th>Rank</th>
-                                <th>User</th>
-                                <th>Score</th>
-                                <th>Time</th>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-
-
-                            // Comprobamos si hay resultados
-                            if (!empty($top_players)) {
-                                $rank = 1;
-                                foreach ($top_players as $player) {
-                                    $formatted_time = formatTime($player['session_time']);
-                                    echo "<tr>";
-                                    echo "<td>" . $rank++ . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['username']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['score']) . "</td>";
-                                    echo "<td>{$formatted_time}</td>";
-                                    echo "</tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='3'>No hay jugadores en el ranking.</td></tr>";
-                            }
-                            ?>
+                            <?php if (!empty($users)): ?>
+                                <?php foreach ($users as $user): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($user['id']); ?></td>
+                                        <td><?= htmlspecialchars($user['username']); ?></td>
+                                        <td><?= htmlspecialchars($user['email']); ?></td>
+                                        <td>
+                                            <a href="update_users.php?id=<?= htmlspecialchars($user['id']); ?>"
+                                                class="edit-button">Edit</a>
+                                            <a href="delete_users.php?delete=<?= htmlspecialchars($user['id']); ?>"
+                                                class="delete-button"
+                                                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4">No hay usuarios registrados.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
-
                     </table>
+                    <div class="table-card-footer">
+                        <a class="register-link" href="login.php">Back to Login</a>
+                    </div>
+                    
+                    <button class="login-button" onclick="window.location.href='./editor';">Enter Editor</button>
+
                 </div>
             </div>
         </div>

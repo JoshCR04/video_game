@@ -1,21 +1,44 @@
 <?php
-require 'db.php'; // Incluye tu archivo de conexión con Medoo
+require 'db.php'; // Incluye la conexión a la base de datos
 
-// Realizamos la consulta SQL personalizada para obtener los 10 mejores jugadores
-$sql = "SELECT username, score, session_time FROM users ORDER BY score DESC LIMIT 10";
-$top_players = $database->query($sql)->fetchAll();
+// Verifica si el id del usuario está presente
+if (isset($_GET['id'])) {
+    $userId = $_GET['id'];
 
-// Función para convertir los segundos a formato H:M:S
-function formatTime($seconds)
-{
-    $hours = floor($seconds / 3600);
-    $minutes = floor(($seconds % 3600) / 60);
-    $seconds = $seconds % 60;
+    // Consultar los datos del usuario con ese ID
+    $user = $database->select("users", "*", ["id" => $userId]);
 
-    return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+    // Si el usuario no existe
+    if (empty($user)) {
+        die("Usuario no encontrado.");
+    }
+
+    // Obtiene los datos del usuario
+    $user = $user[0]; // Convertir el array en una única fila
+} else {
+    die("ID de usuario no proporcionado.");
 }
 
+// Manejo del formulario para actualizar los datos
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Recibir y sanitizar los datos
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+
+    // Actualizar los datos del usuario en la base de datos
+    $database->update("users", [
+        "username" => $username,
+        "email" => $email
+    ], [
+        "id" => $userId
+    ]);
+
+    // Redirigir a la lista de usuarios después de la actualización
+    header("Location: users.php");
+    exit;
+}
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -63,8 +86,8 @@ function formatTime($seconds)
         <nav class="nav-links" aria-label="Primary navigation">
             <a href="index.html"><img class="icons" src="./img/Home.png" alt="Home icon">Home</a>
             <a href="login.php"><img class="icons" src="./img/Login.png" alt="Login icon">Login</a>
-            <a href="menu.html"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
-            <a href="ranking.html"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
+            <a href="menu.php"><img class="icons" src="./img/Play_circle.png" alt="Play icon">Play</a>
+            <a href="ranking.php"><img class="icons" src="./img/Users.png" alt="Ranking icon">Ranking</a>
             <a href="credits.html"><img class="icons" src="./img/Info.png" alt="Credits icon">Credits</a>
         </nav>
     </header>
@@ -73,44 +96,40 @@ function formatTime($seconds)
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <h2 class="card-title">Ranking</h2>
+                <!-- Título -->
+                <h2 class="card-title">Edit Users</h2>
+
                 <div class="ranking-content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>User</th>
-                                <th>Score</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                    <!-- Formulario para editar usuarios -->
+                    <form method="POST">
+                        <!-- Campo para editar el nombre de usuario -->
+                        <div class="form-group">
+                            <label class="update-label" for="username">Username:</label>
+                            <input type="text" name="username" id="username"
+                                value="<?= htmlspecialchars($user['username']); ?>" required>
+                        </div>
 
+                        <!-- Campo para editar el email -->
+                        <div class="form-group">
+                            <label class="update-label" for="email">Email:</label>
+                            <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']); ?>"
+                                required>
+                        </div>
 
-                            // Comprobamos si hay resultados
-                            if (!empty($top_players)) {
-                                $rank = 1;
-                                foreach ($top_players as $player) {
-                                    $formatted_time = formatTime($player['session_time']);
-                                    echo "<tr>";
-                                    echo "<td>" . $rank++ . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['username']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($player['score']) . "</td>";
-                                    echo "<td>{$formatted_time}</td>";
-                                    echo "</tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='3'>No hay jugadores en el ranking.</td></tr>";
-                            }
-                            ?>
-                        </tbody>
+                        <!-- Botón para actualizar -->
+                        <button type="submit" class="edit-button">Update User</button>
+                    </form>
 
-                    </table>
+                    <!-- Enlace para volver a la lista de usuarios -->
+                    <div class="table-card-footer">
+                        <a class="register-link" href="users.php">Back to Users List</a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
+
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />

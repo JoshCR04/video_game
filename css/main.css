@@ -74,6 +74,21 @@ button:focus {
   }
 }
 
+.update-label {
+  font-family: "Karantina", system-ui;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+@media only screen and (max-width: 480px) {
+  .update-label {
+    font-size: 1.5625rem;
+  }
+}
+
 .back-button {
   position: absolute;
   left: 0;
@@ -94,6 +109,46 @@ button:focus {
 }
 .back-button:hover {
   text-shadow: 0 0 0.625rem hsla(184, 86%, 71%, 0.8), 0 0 1.25rem hsla(0, 0%, 100%, 0.6), 0 0 1.875rem hsla(0, 0%, 100%, 0.4);
+}
+
+.edit-button {
+  background-color: hsl(120, 58%, 27%);
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0.2rem;
+  border: none;
+  border-radius: 5px;
+  font-family: "Neuton", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.edit-button:hover {
+  background-color: hsl(120, 58%, 17%);
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: hsl(0, 100%, 26%);
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0.2rem;
+  border: none;
+  border-radius: 5px;
+  font-family: "Neuton", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.delete-button:hover {
+  background-color: hsl(0, 100%, 16%);
+  transform: scale(1.05);
 }
 
 .instructions-title {

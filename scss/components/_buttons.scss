@@ -38,6 +38,19 @@
     font-size: $fs-m;
   }
 }
+.update-label {
+  font-family: $ff-primary;
+  margin-top: 1rem;
+  font-size: $fs-xmd;
+  color: $clr-white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+
+  @include respond-to($phone) {
+    font-size: $fs-m;
+  }
+}
 
 //boton de back usado en controls
 .back-button {
@@ -61,5 +74,49 @@
   &:hover {
     text-shadow: 0 0 0.625rem $clr-shadow-1, 0 0 1.25rem $clr-shadow-2,
       0 0 1.875rem $clr-shadow-3;
+  }
+}
+
+// Botón de editar
+.edit-button {
+  background-color: $clr-green; // Asegúrate de definir $clr-log-button
+  color: $clr-white; // Letra blanca
+  text-decoration: none; // Sin subrayado
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0.2rem;
+  border: none; // Sin bordes
+  border-radius: 5px; // Bordes redondeados
+  font-family: $ff-text; // Tipografía primaria
+  font-size: $fs-sm; // Tamaño de texto
+  font-weight: $fw-regular;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: darken($clr-green, 10%); // Oscurecer en hover
+    transform: scale(1.05); // Ligero aumento de tamaño
+  }
+}
+
+// Botón de eliminar
+.delete-button {
+  background-color: $clr-error; // Asegúrate de definir $clr-error
+  color: $clr-white; // Letra blanca
+  text-decoration: none; // Sin subrayado
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0.2rem;
+  border: none; // Sin bordes
+  border-radius: 5px; // Bordes redondeados
+  font-family: $ff-text; // Tipografía primaria
+  font-size: $fs-sm; // Tamaño de texto
+  font-weight: $fw-regular;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: darken($clr-error, 10%); // Oscurecer en hover
+    transform: scale(1.05); // Ligero aumento de tamaño
   }
 }

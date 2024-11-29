@@ -10,32 +10,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST['password'] ?? '';
 
     if (empty($username) || empty($password)) {
-        $message = "Por favor, complete todos los campos.";
+        $message = "Please complete all fields";
     } else {
+        // Buscar usuario en la base de datos
         $user = $database->get("users", "*", ["username" => $username]);
 
         if ($user) {
-            if ($password === $user["password_hash"]) { // Nota: La comparación debería usar hash seguro como password_verify()
-
-                // Guarda el username en la sesión o en el sessionStorage
-                echo "<script>sessionStorage.setItem('username', '" . $user['username'] . "');</script>";
+            // Verificar credenciales específicas para administrador
+            if ($username === "administrador" && $password === "123") {
                 $_SESSION["user_id"] = $user["id"];
                 $_SESSION["username"] = $user["username"];
-                $_SESSION["login_time"] = time();
+                header("Location: users.php");
+                exit();
+            }
+
+            // Verificar contraseña del usuario normal (usa password_verify para contraseñas encriptadas)
+            if (password_verify($password, $user["password_hash"])) {
+                $_SESSION["user_id"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
                 header("Location: menu.php");
                 exit();
-
-
             } else {
-                $message = "Contraseña incorrecta.";
+                $message = "Password incorrect";
             }
         } else {
-            $message = "Usuario no encontrado.";
+            $message = "User not found";
         }
     }
 }
-
-
 ?>
 
 

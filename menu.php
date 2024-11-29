@@ -8,19 +8,16 @@ if (!isset($_SESSION["user_id"])) {
   exit();
 }
 
-// Obtener tiempo acumulado del usuario
-$user = $database->get("users", "session_time", [
+// Obtener información del usuario
+$user = $database->get("users", "*", [
   "id" => $_SESSION["user_id"]
 ]);
 
 if ($user !== null) {
-  $session_time = $user;
-  echo "Bienvenido, " . $_SESSION["username"] . "!<br>";
-  echo "Tiempo total de sesión acumulado: " . gmdate("H:i:s", $session_time);
+  echo "Bienvenido, " . $_SESSION["username"] . "!";
 } else {
   echo "No se encontró información del usuario.";
 }
-
 ?>
 
 

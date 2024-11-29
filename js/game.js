@@ -1,5 +1,7 @@
 // Crea una nueva escena
 let gameScene = new Phaser.Scene("Game");
+let level = 1;
+let levelData;
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
@@ -30,6 +32,11 @@ gameScene.init = function () {
 
 //  Carga de assets
 gameScene.preload = function () {
+  //cargar niveles
+  this.load.json("level1Data", "./data/level1Data.json");
+  this.load.json("level2Data", "./data/level2Data.json");
+  this.load.json("level3Data", "./data/level3Data.json");
+
   // Fondo
   this.load.image("background_superior", "./img/assets/pasto_superior.png");
   this.load.image("background", "./img/assets/fondo.png");
@@ -57,6 +64,31 @@ gameScene.preload = function () {
   this.load.image("bread", "./img/assets/pan.png");
   this.load.image("sword", "./img/assets/espada_con_luz.png");
   this.load.image("magic_stone", "./img/assets/alma_petra.png");
+};
+
+
+//cargar niveles para el juego
+gameScene.nextLevel = function () {
+  if (level === 1) {
+    this.levelData = this.cache.json.get('level1Data');
+  } else if (level === 2) {
+    this.levelData = this.cache.json.get('level2Data');
+  } else if (level === 3) {
+    this.levelData = this.cache.json.get('level3Data');
+  }else{
+    console.log('You Win!');
+  }
+};
+
+// Lógica para comprobar y avanzar de nivel
+gameScene.checkLevelProgress = function () {
+  if (this.score >= 10 && level === 1) {
+    this.nextLevel(); // Avanzar al siguiente nivel
+  } else if (this.score >= 20 && level === 2) {
+    this.nextLevel(); // Avanzar al siguiente nivel
+  } else if (this.score >= 30 && level === 3) {
+    this.nextLevel(); // Terminar el juego o reiniciar desde el nivel 1
+  }
 };
 
 // Inicialización del fondo
