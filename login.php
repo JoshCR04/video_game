@@ -16,11 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($user) {
             if ($password === $user["password_hash"]) { // Nota: La comparación debería usar hash seguro como password_verify()
+
+                // Guarda el username en la sesión o en el sessionStorage
+                echo "<script>sessionStorage.setItem('username', '" . $user['username'] . "');</script>";
                 $_SESSION["user_id"] = $user["id"];
                 $_SESSION["username"] = $user["username"];
                 $_SESSION["login_time"] = time();
                 header("Location: menu.php");
                 exit();
+
+
             } else {
                 $message = "Contraseña incorrecta.";
             }

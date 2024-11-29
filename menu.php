@@ -21,14 +21,6 @@ if ($user !== null) {
   echo "No se encontró información del usuario.";
 }
 
-
-if ($user) {
-  $session_time = $user["session_time"];
-  echo "Bienvenido, " . $_SESSION["username"] . "!<br>";
-  echo "Tiempo total de sesión acumulado: " . gmdate("H:i:s", $session_time);
-} else {
-  echo "No se encontró información del usuario.";
-}
 ?>
 
 
