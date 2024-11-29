@@ -78,7 +78,7 @@ $configs = $database->select("tb_game_config", "*");
         }
         ?>
 
-        <a href="../users.php">Back</a>
+        <a href="../dekstop.php">Back</a>
 
 
 

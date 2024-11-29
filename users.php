@@ -2,20 +2,21 @@
 session_start();
 require 'db.php'; // Incluye la conexión a la base de datos
 
-// Verificar si la sesión está activa y si el usuario es el administrador
+// Verificar si la sesión está activa
 if (!isset($_SESSION["user_id"])) {
-    // Si no hay sesión, redirigir al login
+    // Si no hay sesión activa, redirigir al login
     header("Location: login.php");
     exit();
 }
 
-// Consultar el usuario desde la base de datos para verificar si es administrador
+// Consultar el usuario desde la base de datos
 $user = $database->get("users", "*", ["id" => $_SESSION["user_id"]]);
 
-// Verificar si el usuario es administrador
-if ($user['username'] !== 'administrador') {
-    // Si el usuario no es el administrador, redirigir o mostrar un mensaje
-    echo "No tienes permisos para acceder a esta página.";
+// Verificar si el usuario existe
+if (!$user) {
+    // Si el usuario no existe en la base de datos, redirigir al login
+    session_destroy(); // Elimina la sesión actual por seguridad
+    header("Location: login.php");
     exit();
 }
 
@@ -118,10 +119,11 @@ $users = $database->select("users", "*");
                         </tbody>
                     </table>
                     <div class="table-card-footer">
-                        <a class="register-link" href="login.php">Back to Login</a>
+                        <button class="login-button" onclick="window.location.href='./editor';">Enter Editor</button>
+
                     </div>
 
-                    <button class="login-button" onclick="window.location.href='./editor';">Enter Editor</button>
+                    <a class="register-link" href="dekstop.php">Back to dekstop</a>
 
                 </div>
             </div>

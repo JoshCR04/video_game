@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($username === "administrador" && $password === "123") {
                 $_SESSION["user_id"] = $user["id"];
                 $_SESSION["username"] = $user["username"];
-                header("Location: users.php");
+                header("Location: dekstop.php");
                 exit();
             }
 

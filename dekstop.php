@@ -1,43 +1,28 @@
 <?php
+session_start();
 require 'db.php'; // Incluye la conexión a la base de datos
 
-// Verifica si el id del usuario está presente
-if (isset($_GET['id'])) {
-    $userId = $_GET['id'];
-
-    // Consultar los datos del usuario con ese ID
-    $user = $database->select("users", "*", ["id" => $userId]);
-
-    // Si el usuario no existe
-    if (empty($user)) {
-        die("Usuario no encontrado.");
-    }
-
-    // Obtiene los datos del usuario
-    $user = $user[0]; // Convertir el array en una única fila
-} else {
-    die("ID de usuario no proporcionado.");
+// Verificar si la sesión está activa
+if (!isset($_SESSION["user_id"])) {
+    // Si no hay sesión activa, redirigir al login
+    header("Location: login.php");
+    exit();
 }
 
-// Manejo del formulario para actualizar los datos
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recibir y sanitizar los datos
-    $username = htmlspecialchars($_POST['username']);
-    $email = htmlspecialchars($_POST['email']);
+// Consultar el usuario desde la base de datos
+$user = $database->get("users", "*", ["id" => $_SESSION["user_id"]]);
 
-    // Actualizar los datos del usuario en la base de datos
-    $database->update("users", [
-        "username" => $username,
-        "email" => $email
-    ], [
-        "id" => $userId
-    ]);
-
-    // Redirigir a la lista de usuarios después de la actualización
-    header("Location: users.php");
-    exit;
+// Verificar si el usuario existe y si es administrador
+if (!$user || $user['username'] !== 'administrador') {
+    // Si no es administrador, destruir la sesión y redirigir al login
+    session_destroy(); // Elimina la sesión actual
+    header("Location: login.php");
+    exit();
 }
+
+// Si pasa las validaciones, puede continuar en la página
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -96,41 +81,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main class="Log_Ran_Cred content">
         <div class="container">
             <div class="card">
-                <!-- Título -->
-                <h2 class="card-title">Edit Users</h2>
+                <h2 class="card-title">Admin Dekstop</h2>
+                <div class="ranking-content">
 
-                <div class="card-content">
-                    <!-- Formulario para editar usuarios -->
-                    <form method="POST">
-                        <!-- Campo para editar el nombre de usuario -->
-
-                        <label for="username">Username:</label>
-                        <input type="text" name="username" id="username"
-                            value="<?= htmlspecialchars($user['username']); ?>" required>
-                        <br><br>
-
-                        <!-- Campo para editar el email -->
-
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']); ?>"
-                            required>
-                        <br><br>
-
-                        <!-- Botón para actualizar -->
-                        <button type="submit" class="login-button">Update User</button>
-                    </form>
-
-
-                    <!-- Enlace para volver a la lista de usuarios -->
                     <div class="table-card-footer">
-                        <a class="register-link" href="users.php">Back to Users List</a>
+                        <button class="login-button" onclick="window.location.href='./editor';">Enter JSON
+                            editor</button>
                     </div>
+                    <div class="table-card-footer">
+                        <button class="login-button" onclick="window.location.href='users.php';">Enter users
+                            editor</button>
+                    </div>
+                    <div class="table-card-footer">
+                        <button class="login-button" onclick="window.location.href='player.php';">Enter player
+                            editor</button>
+                    </div>
+
+                    <a class="register-link" href="index.html">Back to home</a>
+
                 </div>
             </div>
         </div>
     </main>
-
-
     <!-- Footer Section -->
     <footer class="footer">
         <img src="./img/logo_final_2.png" alt="Game logo" class="logo-footer" />
