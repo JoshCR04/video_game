@@ -1,10 +1,27 @@
 <?php
+session_start();
 require 'db.php'; // Incluye la conexión a la base de datos
+
+// Verificar si la sesión está activa y si el usuario es el administrador
+if (!isset($_SESSION["user_id"])) {
+    // Si no hay sesión, redirigir al login
+    header("Location: login.php");
+    exit();
+}
+
+// Consultar el usuario desde la base de datos para verificar si es administrador
+$user = $database->get("users", "*", ["id" => $_SESSION["user_id"]]);
+
+// Verificar si el usuario es administrador
+if ($user['username'] !== 'administrador') {
+    // Si el usuario no es el administrador, redirigir o mostrar un mensaje
+    echo "No tienes permisos para acceder a esta página.";
+    exit();
+}
 
 // Consultar todos los usuarios desde la tabla "users"
 $users = $database->select("users", "*");
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -103,7 +120,7 @@ $users = $database->select("users", "*");
                     <div class="table-card-footer">
                         <a class="register-link" href="login.php">Back to Login</a>
                     </div>
-                    
+
                     <button class="login-button" onclick="window.location.href='./editor';">Enter Editor</button>
 
                 </div>

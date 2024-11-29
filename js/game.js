@@ -2,10 +2,12 @@
 let gameScene = new Phaser.Scene("Game");
 let level = 1;
 let levelData;
+let timer;
+let lenght;
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
-  fetch('./data/level3Data.json')
+  fetch('http://localhost/video_game/editor/api.php?id=1')
     .then((response) => response.json())
     .then((data) => {
       // Asignar los valores del JSON a las propiedades del juego
@@ -29,6 +31,34 @@ gameScene.init = function () {
   this.isAttacking = false; // Indica si el jugador está atacando
   this.attackDuration = 500; // Duración del ataque en milisegundos
 };
+
+
+function saveData(hasClosed, level) {
+  fetch('http://phpinter.test/tracking.php', {
+    method: 'POST',
+    mode: 'same-origin',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "browser": navigator.userAgent,
+      "screen": screen.width + "x" + screen.height,
+      "length": gameScene.length, // El tiempo que ha jugado el usuario
+      "level": level,
+      "closed": hasClosed // Cambiar esto a "Yes" cuando el usuario cierre el navegador
+    }),
+    keepalive: true // Esto garantiza que los datos se envíen incluso si el navegador se cierra rápido
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Para depurar la respuesta
+    });
+}
+// Detectar cuando el usuario intenta salir de la página
+window.addEventListener('beforeunload', function (event) {
+  saveData("Yes", gameScene.levelData.level); // Enviar datos con "Yes" indicando que el usuario cerró la sesión
+});
 
 //  Carga de assets
 gameScene.preload = function () {
@@ -75,7 +105,7 @@ gameScene.nextLevel = function () {
     this.levelData = this.cache.json.get('level2Data');
   } else if (level === 3) {
     this.levelData = this.cache.json.get('level3Data');
-  }else{
+  } else {
     console.log('You Win!');
   }
 };
@@ -188,12 +218,55 @@ gameScene.setupCamera = function () {
   this.cameras.main.setZoom(isMobile() ? defaultZoom * 1.5 : defaultZoom);
 };
 
+gameScene.setupTracking = function () {
+  // Inicializar la variable 'length'
+  this.length = 0;
+
+  // Cargar los datos JSON
+  this.levelData = this.cache.json.get('levelData');
+
+  // Comenzar el seguimiento de tiempo
+  this.timer = this.time.addEvent({
+    delay: 1000,
+    loop: true,
+    callbackScope: this,
+    callback: this.startTracking
+  });
+};
+gameScene.startTracking = function () {
+  // Incrementar el tiempo de seguimiento
+  this.length += 1;
+  console.log("tracking -> " + this.length);
+};
+
+
+// Función para reiniciar el juego
+gameScene.restartGame = function () {
+  console.log("restart game ");
+
+  // Desvanecer la cámara antes de reiniciar
+  this.cameras.main.fade(1000);
+
+  // Cuando termine el fade, reiniciar el juego
+  this.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
+    this.scene.restart();
+
+    // Enviar los datos al servidor antes de reiniciar
+    if (!this.hasFetched) {
+      this.hasFetched = true;
+      // Asegúrate de enviar los datos de tracking antes de que el juego se reinicie
+      saveData("No", 1); // "No" indica que no se ha cerrado el navegador
+    }
+  }, this);
+};
+
 gameScene.create = function () {
   this.createJoystick();
   this.initBackground();
   this.initGameObjects(this.background);
   this.setupCamera();
   this.setupCollisions();
+  this.setupTracking();
 
   // Configuración de controles
   this.cursors = this.input.keyboard.createCursorKeys();
