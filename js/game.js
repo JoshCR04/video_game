@@ -60,7 +60,7 @@ function saveData(hasClosed, level) {
 
 // Parámetros iniciales del juego
 gameScene.init = function () {
-  fetch('http://localhost/video_game/editor/api.php?id=1')
+  fetch('http://localhost/video_game/editor/api.php?id=3')
     .then((response) => response.json())
     .then((data) => {
       // Asignar los valores del JSON a las propiedades del juego
@@ -375,7 +375,7 @@ gameScene.collectItem = function (player, item) {
     item.destroy();
   } else if (item.type === 'magic_stone') {
     this.score++;
-    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
+  
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   } else if (item.type === 'mushroom') {
@@ -387,35 +387,12 @@ gameScene.collectItem = function (player, item) {
     }, [], this);
   } else if (item.type === 'key') {
     this.score += 5;
-    this.updateScoreOnServer(this.score); // Guardar puntaje en el servidor
+   
     this.scoreTextElement.textContent = 'Score: ' + this.score;
     item.destroy();
   }
 };
 
-// Función para enviar el puntaje al servidor
-gameScene.updateScoreOnServer = function (score) {
-  const username = 'player1'; // Reemplaza esto con el nombre del jugador
-
-  fetch('update_score.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: `username=${encodeURIComponent(username)}&score=${encodeURIComponent(score)}`
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        console.log('Score updated successfully:', data.message);
-      } else {
-        console.error('Error updating score:', data.message);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-};
 
 
 ///eventos////////////////////////////////
@@ -528,7 +505,7 @@ gameScene.update = function () {
   this.handleJoystickMovement();
   this.enemiesGroup.children.each((enemy) => this.updateEnemyMovement(enemy));
   this.checkPlayerFall();
-  if (this.score >= 10) {
+  if (this.score >= 40) {
     this.showGameWin();
   }
 };
