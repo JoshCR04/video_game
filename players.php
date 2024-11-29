@@ -98,11 +98,11 @@ $players = $database->query($query)->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                         </tbody>
                     </table>
-
+                    <button class="login-button" onclick="window.location.href='player.php';">Back to player register</button>
                 </div>
-                <div class="table-card-footer">
-                    <a href="player.php">Back to player register</a>
-                </div>
+             
+                
+               
             </div>
         </div>
     </main>

@@ -89,6 +89,9 @@ if (!$user || $user['username'] !== 'administrador') {
                             editor</button>
                     </div>
                     <div class="table-card-footer">
+                        <button class="login-button" onclick="window.location.href='top10.php';">Top 10 JSON</button>
+                    </div>
+                    <div class="table-card-footer">
                         <button class="login-button" onclick="window.location.href='users.php';">Enter users
                             editor</button>
                     </div>

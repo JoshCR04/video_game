@@ -80,6 +80,8 @@ $configs = $database->select("tb_game_config", "*");
 
         <a href="../dekstop.php">Back</a>
 
+       
+
 
 
 </body>
